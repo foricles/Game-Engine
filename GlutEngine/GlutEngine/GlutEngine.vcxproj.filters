@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{8a70eee9-e3c5-46d1-b351-a5156f856cb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core">
+      <UniqueIdentifier>{f58eed2d-c3ba-430d-85a2-7821acaa8b78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\settings">
+      <UniqueIdentifier>{d2893b5f-b058-44cd-8ab3-83f0e2f966e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\engine">
+      <UniqueIdentifier>{d59cf91b-1a9b-4acf-b2d7-b2796f0ad8c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\baseobj">
+      <UniqueIdentifier>{8a6c3745-e874-4c15-a556-cffd6e71949b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\GRAPHICS">
+      <UniqueIdentifier>{7505c26a-6e90-460f-809c-997520653fcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\GRAPHICS\vertexarray">
+      <UniqueIdentifier>{8fd418e4-c891-473c-b910-0241775e73a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\GRAPHICS\rendershape">
+      <UniqueIdentifier>{5bab36d9-07f7-4307-9a1a-c98486596ad6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\GRAPHICS\color">
+      <UniqueIdentifier>{18f1e085-5f07-4972-8143-91eea39c892d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\GRAPHICS\createshape">
+      <UniqueIdentifier>{7c1b3ea5-1508-4e47-8f3b-8946620c2708}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\GRAPHICS\renderable">
+      <UniqueIdentifier>{9e9878e3-266c-4675-aa5e-2c6eb9fb9525}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\GRAPHICS\GUI">
+      <UniqueIdentifier>{c5510100-0604-43b7-9084-9ba1f87d4360}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\SYSTEMS">
+      <UniqueIdentifier>{997dca55-238a-49d4-8e2f-091a0d488cb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\SYSTEMS\system">
+      <UniqueIdentifier>{50f6b170-9501-4089-aada-f98a47053078}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\SYSTEMS\input">
+      <UniqueIdentifier>{413aad14-c348-4de6-a325-00a81abc57b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\SYSTEMS\window">
+      <UniqueIdentifier>{d44c5212-59e9-487c-ac76-d1d626841b8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\SYSTEMS\render">
+      <UniqueIdentifier>{635ac2a9-e5fd-4966-abb8-1ae1e39a4f66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\SYSTEMS\timer">
+      <UniqueIdentifier>{f229c932-c7a7-4746-b565-6530e4fc226f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\MATH">
+      <UniqueIdentifier>{59bf6928-fd90-4fde-bf63-7482ce5e0092}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\MATH\Vector2">
+      <UniqueIdentifier>{ee8b70d1-ad82-4252-bd62-b8968de23e01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\GRAPHICS\GUI\ui">
+      <UniqueIdentifier>{f762cf77-f9ec-4ea7-877d-f4f670cc15f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ENUMS">
+      <UniqueIdentifier>{d46ae36a-b68f-4ced-b9e0-9171e590b515}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\GRAPHICS\GUI\recttransform">
+      <UniqueIdentifier>{9b6bea4c-7920-430a-8511-8645546f60f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\GRAPHICS\transform">
+      <UniqueIdentifier>{717d9b3d-23fc-4390-8f19-cb77adffba64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\core\SYSTEMS\guiproc">
+      <UniqueIdentifier>{b287dab8-9db9-4627-affa-f82b28e37b88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\kursach">
+      <UniqueIdentifier>{d4e97398-0c42-49a3-900e-468aa59bd3ac}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Vector2.h">
+      <Filter>src\MATH\Vector2</Filter>
+    </ClInclude>
+    <ClInclude Include="math_help_funk.h">
+      <Filter>src\MATH</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseObj.h">
+      <Filter>src\core\baseobj</Filter>
+    </ClInclude>
+    <ClInclude Include="System.h">
+      <Filter>src\core\SYSTEMS\system</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>src\core\SYSTEMS\input</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>src\core\SYSTEMS\window</Filter>
+    </ClInclude>
+    <ClInclude Include="Settings.h">
+      <Filter>src\core\settings</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexArray.h">
+      <Filter>src\core\GRAPHICS\vertexarray</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderShape.h">
+      <Filter>src\core\GRAPHICS\rendershape</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>src\core\GRAPHICS\color</Filter>
+    </ClInclude>
+    <ClInclude Include="CreateShape.h">
+      <Filter>src\core\GRAPHICS\createshape</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>src\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>src\core\GRAPHICS\transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Render.h">
+      <Filter>src\core\SYSTEMS\render</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>src\core\SYSTEMS\timer</Filter>
+    </ClInclude>
+    <ClInclude Include="GlutEngine.h">
+      <Filter>src\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="RectTransform.h">
+      <Filter>src\core\GRAPHICS\GUI\recttransform</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderable.h">
+      <Filter>src\core\GRAPHICS\renderable</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>src\core\GRAPHICS\GUI\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="EngSys.h">
+      <Filter>src\ENUMS</Filter>
+    </ClInclude>
+    <ClInclude Include="Colors.h">
+      <Filter>src\ENUMS</Filter>
+    </ClInclude>
+    <ClInclude Include="Tags.h">
+      <Filter>src\ENUMS</Filter>
+    </ClInclude>
+    <ClInclude Include="GUIProc.h">
+      <Filter>src\core\SYSTEMS\guiproc</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Vector2.cpp">
+      <Filter>src\MATH\Vector2</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseObj.cpp">
+      <Filter>src\core\baseobj</Filter>
+    </ClCompile>
+    <ClCompile Include="System.cpp">
+      <Filter>src\core\SYSTEMS\system</Filter>
+    </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>src\core\SYSTEMS\input</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>src\core\SYSTEMS\window</Filter>
+    </ClCompile>
+    <ClCompile Include="Settings.cpp">
+      <Filter>src\core\settings</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexArray.cpp">
+      <Filter>src\core\GRAPHICS\vertexarray</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderShape.cpp">
+      <Filter>src\core\GRAPHICS\rendershape</Filter>
+    </ClCompile>
+    <ClCompile Include="Color.cpp">
+      <Filter>src\core\GRAPHICS\color</Filter>
+    </ClCompile>
+    <ClCompile Include="CreateShape.cpp">
+      <Filter>src\core\GRAPHICS\createshape</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine.cpp">
+      <Filter>src\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>src\core\GRAPHICS\transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Render.cpp">
+      <Filter>src\core\SYSTEMS\render</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>src\core\SYSTEMS\timer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderable.cpp">
+      <Filter>src\core\GRAPHICS\renderable</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>src\core\GRAPHICS\GUI\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="RectTransform.cpp">
+      <Filter>src\core\GRAPHICS\GUI\recttransform</Filter>
+    </ClCompile>
+    <ClCompile Include="GUIProc.cpp">
+      <Filter>src\core\SYSTEMS\guiproc</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
+</Project>

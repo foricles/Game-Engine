@@ -8,10 +8,51 @@
     <Filter Include="src">
       <UniqueIdentifier>{8a70eee9-e3c5-46d1-b351-a5156f856cb8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\header">
+      <UniqueIdentifier>{61eff591-280e-4617-95f4-6e11613ff84b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\source">
+      <UniqueIdentifier>{a5e715bc-3b37-438d-aa78-6e853db87b04}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="application.cpp">
+      <Filter>src\source</Filter>
+    </ClCompile>
+    <ClCompile Include="Logger.cpp">
+      <Filter>src\source</Filter>
+    </ClCompile>
+    <ClCompile Include="window.cpp">
+      <Filter>src\source</Filter>
+    </ClCompile>
+    <ClCompile Include="glprogram.cpp">
+      <Filter>src\source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MainGame.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="application.h">
+      <Filter>src\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
+      <Filter>src\header</Filter>
+    </ClInclude>
+    <ClInclude Include="window.h">
+      <Filter>src\header</Filter>
+    </ClInclude>
+    <ClInclude Include="opengl.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="utils.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="glprogram.h">
+      <Filter>src\header</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

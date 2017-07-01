@@ -1,11 +1,7 @@
-#include <iostream>
-#include <time.h>
-#include <linearalgebra.h>
-
-using namespace std;
+#include "application.h"
 
 int main(int argc, char **argv)
 {
-	
+	Application app(argc, argv);
 	return 0;
 }

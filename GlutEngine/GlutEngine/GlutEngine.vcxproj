@@ -19,18 +19,30 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="algebra\matrices.cpp" />
+    <ClCompile Include="algebra\vectors.cpp" />
     <ClCompile Include="application.cpp" />
     <ClCompile Include="glprogram.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="mesh.cpp" />
+    <ClCompile Include="meshloader.cpp" />
+    <ClCompile Include="transform.cpp" />
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="algebra\definedtype.h" />
+    <ClInclude Include="algebra\matrices.h" />
+    <ClInclude Include="algebra\vectors.h" />
     <ClInclude Include="application.h" />
     <ClInclude Include="glprogram.h" />
+    <ClInclude Include="interfaces.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="MainGame.h" />
+    <ClInclude Include="mesh.h" />
+    <ClInclude Include="meshloader.h" />
     <ClInclude Include="opengl.h" />
+    <ClInclude Include="transform.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="window.h" />
   </ItemGroup>
@@ -85,11 +97,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)deps\Assimp\include;$(SolutionDir)deps;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)GlutEngine\algebra;$(SolutionDir)deps\Assimp\include;$(SolutionDir)deps;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)deps\Assimp;$(SolutionDir)deps\GLEW\;$(SolutionDir)deps\GLFW\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)deps\Assimp\include;$(SolutionDir)deps;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)GlutEngine\algebra;$(SolutionDir)deps\Assimp\include;$(SolutionDir)deps;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)deps\Assimp;$(SolutionDir)deps\GLEW\;$(SolutionDir)deps\GLFW\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -99,6 +111,8 @@
       <SDLCheck>true</SDLCheck>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <PreprocessorDefinitions>WIN32;GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
+      <AssemblerListingLocation>C:\Users\foricles\Desktop\glutengasm\</AssemblerListingLocation>
     </ClCompile>
     <Link>
       <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -126,6 +140,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
+      <AssemblerListingLocation>C:\Users\foricles\Desktop\glutengasm\</AssemblerListingLocation>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

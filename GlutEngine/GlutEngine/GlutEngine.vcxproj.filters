@@ -14,6 +14,9 @@
     <Filter Include="src\source">
       <UniqueIdentifier>{a5e715bc-3b37-438d-aa78-6e853db87b04}</UniqueIdentifier>
     </Filter>
+    <Filter Include="algebra">
+      <UniqueIdentifier>{7812d40e-c4b5-4e52-bd49-99019d5ca5d6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -29,6 +32,21 @@
       <Filter>src\source</Filter>
     </ClCompile>
     <ClCompile Include="glprogram.cpp">
+      <Filter>src\source</Filter>
+    </ClCompile>
+    <ClCompile Include="algebra\matrices.cpp">
+      <Filter>algebra</Filter>
+    </ClCompile>
+    <ClCompile Include="algebra\vectors.cpp">
+      <Filter>algebra</Filter>
+    </ClCompile>
+    <ClCompile Include="mesh.cpp">
+      <Filter>src\source</Filter>
+    </ClCompile>
+    <ClCompile Include="meshloader.cpp">
+      <Filter>src\source</Filter>
+    </ClCompile>
+    <ClCompile Include="transform.cpp">
       <Filter>src\source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -52,6 +70,27 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="glprogram.h">
+      <Filter>src\header</Filter>
+    </ClInclude>
+    <ClInclude Include="algebra\definedtype.h">
+      <Filter>algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="algebra\matrices.h">
+      <Filter>algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="algebra\vectors.h">
+      <Filter>algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="mesh.h">
+      <Filter>src\header</Filter>
+    </ClInclude>
+    <ClInclude Include="meshloader.h">
+      <Filter>src\header</Filter>
+    </ClInclude>
+    <ClInclude Include="interfaces.h">
+      <Filter>src\header</Filter>
+    </ClInclude>
+    <ClInclude Include="transform.h">
       <Filter>src\header</Filter>
     </ClInclude>
   </ItemGroup>

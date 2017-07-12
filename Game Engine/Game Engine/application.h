@@ -12,7 +12,6 @@
 class Application
 {
 private:
-	GameObject *church;
 	GLProgram *prog;
 
 	int oArgc;

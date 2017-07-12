@@ -5,8 +5,9 @@
 
 namespace kmu
 {
-	struct vec2
+	class vec2
 	{
+	public:
 		float x;
 		float y;
 
@@ -14,7 +15,7 @@ namespace kmu
 		vec2(float _x, float _y);
 		vec2(float _x, float _y, float _x1, float _y1);
 		vec2(const vec2 &vec);
-		virtual ~vec2();
+		~vec2();
 
 		float magnitude();
 		float sqrMagnitude();
@@ -36,8 +37,9 @@ namespace kmu
 		vec2 operator/(float n);
 	};
 
-	struct vec3
+	class vec3
 	{
+	public:
 		float x;
 		float y;
 		float z;
@@ -46,7 +48,7 @@ namespace kmu
 		vec3(float X, float Y, float Z);
 		vec3(const vec2 &vec, float Z);
 		vec3(const vec3 &vec);
-		virtual ~vec3();
+		~vec3();
 
 		float magnitude();
 		float sqrMagnitude();
@@ -67,8 +69,9 @@ namespace kmu
 		vec3 operator/(float n);
 	};
 
-	struct vec4
+	class vec4
 	{
+	public:
 		float x;
 		float y;
 		float z;
@@ -80,7 +83,7 @@ namespace kmu
 		vec4(const vec3 &vec, float W);
 		vec4(const vec2 &vec_1, const vec2 &vec_2);
 		vec4(const vec4 &vec);
-		virtual ~vec4();
+		~vec4();
 
 		float dot(const vec4 &vec);
 		float magnitude();
@@ -99,8 +102,9 @@ namespace kmu
 		vec4 operator/(float n);
 	};
 
-	struct quaternion : public vec4
+	class quaternion : public vec4
 	{
+	public:
 		quaternion();
 		quaternion(float X, float Y, float Z, float W);
 		quaternion(const vec2 &vec, float Z, float W);

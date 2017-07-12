@@ -1,0 +1,19 @@
+#version 330
+layout (location = 0) in vec3 Position;
+layout (location = 1) in vec3 Normal;
+layout (location = 2) in vec4 Color;
+
+out vec2 pixPos;
+out vec4 pixCol;
+
+uniform mat4 selfMatrix;
+//uniform mat4 maincamMatrix;
+uniform mat4 worldMatrix;
+
+void main()
+{
+	vec4 np = (/*maincamMatrix * */ worldMatrix * selfMatrix) * vec4(Position, 1.0);
+	gl_Position = np;
+	pixCol = Color;
+	pixPos = Position.xy;
+}

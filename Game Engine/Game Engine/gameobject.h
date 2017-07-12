@@ -3,6 +3,7 @@
 
 #include "mesh.h"
 #include "transform.h"
+#include "utils.h"
 
 #include <GLEW\glew.h>
 
@@ -15,9 +16,9 @@ public:
 	void bind();
 	void unbind();
 	void draw();
-	void setData(Mesh mesh);
+	void loadModel(const char* filepath);
 
-	const Transform &transform() { return oTransform; }
+	Transform &transform() { return oTransform; }
 	kmu::mat4 transMatrix() { return oTransform.transMatrix(); }
 private:
 	GLuint oVBO;

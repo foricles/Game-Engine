@@ -31,24 +31,21 @@ namespace utils
 			return text;
 		}
 
-		inline std::vector<Mesh*> loadModel(const char* filename)
+		inline std::vector<Mesh> loadModel(const char* filename)
 		{
-			std::vector<Mesh*> oMeshes;
+			std::vector<Mesh> oMeshes;
 			Assimp::Importer importer;
 
-			auto set = aiProcess_Triangulate 
-					 | aiProcess_CalcTangentSpace 
-					 | aiProcess_GenNormals;
+			auto set = aiProcess_Triangulate | aiProcess_CalcTangentSpace | aiProcess_GenNormals;
 			register const aiScene *scene = importer.ReadFile(filename, set);
 			if (scene)
 			{
-				oMeshes.resize(scene->mNumMeshes);
 				for (register size_t i(0); i < scene->mNumMeshes; ++i)
 				{
 					const aiMesh* paiMesh = scene->mMeshes[i];
 
 					//Load vertexes
-					Mesh *mesh = new Mesh(paiMesh->mNumVertices, paiMesh->mNumFaces * 3);
+					Mesh mesh;
 					for (register size_t j = 0; j < paiMesh->mNumVertices; j++)
 					{
 						const aiVector3D* pPos = &(paiMesh->mVertices[j]);
@@ -56,25 +53,25 @@ namespace utils
 
 						vertex vtx;
 					//set coordinates
-						vtx.point = kmu::vec3(pPos->x, pPos->y, pPos->z);
+						vtx.pPos = kmu::vec3(pPos->x, pPos->y, pPos->z);
 					//set colors
-						vtx.color = kmu::vec4(1.0f, 0.0f, 1.0f, 1.0f);
+						vtx.pCol = kmu::vec4((rand()%100)/100.0, 0.0f, 1.0f, 1.0f);
 					//set normals
-						vtx.normal = kmu::vec3(pNor->x, pNor->y, pNor->z);
+						vtx.pNor = kmu::vec3(pNor->x, pNor->y, pNor->z);
 
-						mesh->addVertexes(vtx);
+						mesh.oVertexes.push_back(vtx);
 					}
 
 					//Load indexes
 					for (register size_t j = 0; j < paiMesh->mNumFaces; j++)
 					{
 						const aiFace& Face = paiMesh->mFaces[j];
-						mesh->addIndexes(Face.mIndices[0]);
-						mesh->addIndexes(Face.mIndices[1]);
-						mesh->addIndexes(Face.mIndices[2]);
+						mesh.oIndexes.push_back(Face.mIndices[0]);
+						mesh.oIndexes.push_back(Face.mIndices[1]);
+						mesh.oIndexes.push_back(Face.mIndices[2]);
 					}
 
-					oMeshes[i] = mesh;
+					oMeshes.push_back(mesh);
 				}
 			}
 			else

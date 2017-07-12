@@ -12,26 +12,53 @@ GameObject::GameObject()
 
 GameObject::~GameObject()
 {
+	glDeleteBuffers(1, &oVBO);
+	glDeleteBuffers(1, &oIBO);
 }
 
-void GameObject::setData(Mesh mesh)
+void GameObject::loadModel(const char* filepath)
 {
-	oDrawQuant = mesh.iQuant();
-	this->bind();
-	glBufferData(GL_VERTEX_ARRAY, sizeof(vertex) * mesh.vQuant(), mesh.getVertexes(), GL_STATIC_DRAW);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(size_t) * mesh.iQuant(), mesh.getIndexes(), GL_STATIC_DRAW);
-	
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)offsetof(vertex, point));
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)offsetof(vertex, normal));
-	glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)offsetof(vertex, color));
-	
-	this->unbind();
+	std::vector<Mesh> pModel = utils::file::loadModel(filepath);
+	bool isSingle{ pModel.size() == 1 };
+	Mesh singleModel;
+
+	if (!isSingle)
+	{
+
+	}
+	else
+	{
+		singleModel = pModel[0];
+	}
+	oDrawQuant = singleModel.oIndexes.size();
+
+	glBindBuffer(GL_ARRAY_BUFFER, oVBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, oIBO);
+
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertex)*singleModel.oVertexes.size(), &singleModel.oVertexes[0], GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(size_t)*singleModel.oIndexes.size(), &singleModel.oIndexes[0], GL_STATIC_DRAW);
+
+	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(1);
+	glEnableVertexAttribArray(2);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)offsetof(vertex, pPos));
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)offsetof(vertex, pNor));
+	glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)offsetof(vertex, pCol));
+
+	glDisableVertexAttribArray(2);
+	glDisableVertexAttribArray(1);
+	glDisableVertexAttribArray(0);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 void GameObject::bind()
 {
-	glBindBuffer(GL_VERTEX_ARRAY, oVBO);
+	glBindBuffer(GL_ARRAY_BUFFER, oVBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, oIBO);
+
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 	glEnableVertexAttribArray(2);
@@ -41,15 +68,14 @@ void GameObject::unbind()
 	glDisableVertexAttribArray(2);
 	glDisableVertexAttribArray(1);
 	glDisableVertexAttribArray(0);
+
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	glBindBuffer(GL_VERTEX_ARRAY, 0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 void GameObject::draw()
 {
-	this->bind();
-
+	bind();
 	glDrawElements(GL_TRIANGLES, oDrawQuant, GL_UNSIGNED_INT, nullptr);
-
-	this->unbind();
+	unbind();
 }

@@ -15,27 +15,27 @@ kmu::vec2::vec2(const vec2 & vec) : vec2(vec.x, vec.y)
 kmu::vec2::~vec2()
 {
 }
-inline float kmu::vec2::magnitude()
+float kmu::vec2::magnitude()
 {
 	return sqrtf(this->sqrMagnitude());
 }
-inline float kmu::vec2::sqrMagnitude()
+float kmu::vec2::sqrMagnitude()
 {
 	return (x*x + y*y);
 }
-inline float kmu::vec2::angle()
+float kmu::vec2::angle()
 {
 	return atan2f(y, x);
 }
-inline float kmu::vec2::dot(const vec2 & vec)
+float kmu::vec2::dot(const vec2 & vec)
 {
 	return (x*vec.x + y*vec.y);
 }
-inline float kmu::vec2::cross(const vec2 & vec)
+float kmu::vec2::cross(const vec2 & vec)
 {
 	return (x*vec.y - vec.x*y);
 }
-inline kmu::vec2 & kmu::vec2::normalize()
+kmu::vec2 & kmu::vec2::normalize()
 {
 	float len = this->magnitude();
 	if (len != 0)
@@ -45,14 +45,14 @@ inline kmu::vec2 & kmu::vec2::normalize()
 	}
 	return *this;
 }
-inline kmu::vec2 kmu::vec2::normalized()
+kmu::vec2 kmu::vec2::normalized()
 {
 	float len = this->magnitude();
 	if (len != 0)
 		len = 0.000001f;
 	return vec2(x/len, y/len);
 }
-inline std::string kmu::vec2::toString()
+std::string kmu::vec2::toString()
 {
 	return std::string('(' + std::to_string(x) + ", " + std::to_string(y) + ')');
 }
@@ -124,25 +124,25 @@ kmu::vec3::vec3(const vec3 & vec) : vec3(vec.x, vec.y, vec.z)
 kmu::vec3::~vec3()
 {
 }
-inline float kmu::vec3::magnitude()
+float kmu::vec3::magnitude()
 {
 	return sqrtf(this->sqrMagnitude());
 }
-inline float kmu::vec3::sqrMagnitude()
+float kmu::vec3::sqrMagnitude()
 {
 	return (x*x + y*y + z*z);
 }
-inline float kmu::vec3::dot(const vec3 & vec)
+float kmu::vec3::dot(const vec3 & vec)
 {
 	return (x*vec.x + y*vec.y + z*vec.z);
 }
-inline kmu::vec3 kmu::vec3::cross(const vec3 & vec)
+kmu::vec3 kmu::vec3::cross(const vec3 & vec)
 {
 	return vec3(y * vec.z - z * vec.y,
 				z * vec.x - x * vec.z,
 				x * vec.y - y * vec.x);
 }
-inline kmu::vec3 & kmu::vec3::normalize()
+kmu::vec3 & kmu::vec3::normalize()
 {
 	float len = this->magnitude();
 	if (len != 0)
@@ -153,14 +153,14 @@ inline kmu::vec3 & kmu::vec3::normalize()
 	}
 	return *this;
 }
-inline kmu::vec3 kmu::vec3::normalized()
+kmu::vec3 kmu::vec3::normalized()
 {
 	float len = this->magnitude();
 	if (len != 0)
 		len = 0.000001f;
 	return vec3(x / len, y / len, z / len);
 }
-inline std::string kmu::vec3::toString()
+std::string kmu::vec3::toString()
 {
 	return std::string('(' + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + ')');
 }
@@ -251,18 +251,18 @@ kmu::vec4::~vec4()
 {
 }
 
-inline float kmu::vec4::dot(const vec4 & vec)
+float kmu::vec4::dot(const vec4 & vec)
 {
 	return (x*vec.x
 		  + y*vec.y
 		  + z*vec.z
 		  + w*vec.w);
 }
-inline float kmu::vec4::magnitude()
+float kmu::vec4::magnitude()
 {
 	return sqrtf(x*x + y*y + z*z + w*w);
 }
-inline kmu::vec4 & kmu::vec4::normalize()
+kmu::vec4 & kmu::vec4::normalize()
 {
 	float l(this->magnitude());
 	l = (l == 0) ? 0.00001f : l;
@@ -272,13 +272,13 @@ inline kmu::vec4 & kmu::vec4::normalize()
 	w /= l;
 	return *this;
 }
-inline kmu::vec4 kmu::vec4::normalized()
+kmu::vec4 kmu::vec4::normalized()
 {
 	float l(this->magnitude());
 	l = (l == 0) ? 0.00001f : l;
 	return vec4(x / l, y / l, z / l, w / l);
 }
-inline std::string kmu::vec4::toString()
+std::string kmu::vec4::toString()
 {
 	return std::string('(' + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + ", " + std::to_string(w) + ')');
 }

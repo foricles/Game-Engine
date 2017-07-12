@@ -44,11 +44,11 @@ int Application::run()
 	//church = new GameObject();
 	//church->setData(*utils::file::loadModel("C:\\Users\\foricles\\Desktop\\Cathedral.fbx")[1]);
 
-	//prog = new GLProgram();
-	//prog->begin();
-	//prog->addShader(SHADER::VERTEX, "shader\\vrt.vrt");
-	//prog->addShader(SHADER::FRAGMENT, "shader\\frg.frg");
-	//prog->end();
+	prog = new GLProgram();
+	prog->begin();
+	prog->addShader(SHADER::VERTEX, "D:\\Work\\projects\\cpp\\Game-Engine\\Game Engine\\shader\\vrt.vrt");
+	prog->addShader(SHADER::FRAGMENT, "D:\\Work\\projects\\cpp\\Game-Engine\\Game Engine\\shader\\frg.frg");
+	prog->end();
 
 
 	mainLoop();
@@ -56,75 +56,33 @@ int Application::run()
 	return oWasError;
 }
 
-//#define VECT
-#define FLT
 
 void Application::mainLoop()
 {
+
+
 	if (oWasError == 0)
 	{
-#ifdef VECT
-		std::vector<vertex> data = {
-			vertex(kmu::vec3(-0.9f, -0.9f, 0.0f), kmu::vec3(), kmu::vec4()),
-			vertex(kmu::vec3( 0.9f, -0.9f, 0.0f), kmu::vec3(), kmu::vec4()),
-			vertex(kmu::vec3( 0.9f,  0.9f, 0.0f), kmu::vec3(), kmu::vec4()),
-			vertex(kmu::vec3(-0.9f,  0.9f, 0.0f), kmu::vec3(), kmu::vec4())
-		};
-		std::cout << sizeof(vertex) << std::endl;
-#endif // VECT
-#ifdef FLT
-		std::vector<float> data = {
-			-0.9f, -0.9f, 0.0f,
-			0.9f, -0.9f, 0.0f ,
-			0.9f,  0.9f, 0.0f ,
-			-0.9f,  0.9f, 0.0f
-		};	
-		std::cout << sizeof(float) << std::endl;
-#endif // FLT
-		std::cout << sizeof(kmu::vec2) << " " << sizeof(kmu::vec3) << " " << sizeof(kmu::vec4) << std::endl;
-		GLuint vbo;
-		glGenBuffers(1, &vbo);
-		glBindBuffer(GL_ARRAY_BUFFER, vbo);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertex)*data.size(), &data[0], GL_STATIC_DRAW);
-
-		std::vector<size_t> indices;
-		indices.push_back(0);
-		indices.push_back(1);
-		indices.push_back(2);
-		indices.push_back(0);
-		indices.push_back(2);
-		indices.push_back(3);
-		GLuint ibo;
-		glGenBuffers(1, &ibo);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(size_t), &indices[0], GL_STATIC_DRAW);
-
-		glEnableVertexAttribArray(0);
-#ifdef VECT
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)offsetof(vertex, point));
-#endif // VECT
-#ifdef FLT
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
-#endif // FLT
-		glDisableVertexAttribArray(0);
-
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+		kmu::mat4 world(kmu::mat4::Perspective(45, 400, 300, 0.03, 1000));
+		world *= kmu::mat4::Translation(0, 0, 5);
+		GameObject cube;
+		cube.loadModel("C:\\Users\\foricles\\Desktop\\cube.fbx");
+		float a(0);
+		prog->bind();
 		/* Loop until the user closes the window */
 		while (!oWindow->closed() && (oWasError == 0))
 		{
 			/* Render here */
-			glClear(GL_COLOR_BUFFER_BIT);
+			oWindow->clear();
 
-			glBindBuffer(GL_ARRAY_BUFFER, vbo);
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-			glEnableVertexAttribArray(0);
+			a = (a >= (MY_PI*12)) ? 0 : a + 0.002;
+			cube.transform().rotation(kmu::quaternion::euler(a, 1, 0, 1));
+			cube.transform().position(cos(a)*2, sin(a)*2, 0);
 
-			glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, nullptr);
-
-			glDisableVertexAttribArray(0);
-			glBindBuffer(GL_ARRAY_BUFFER, 0);
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+			glUniformMatrix4fv(prog->getUniform("worldMatrix"), 1, GL_TRUE, &world.element(0,0));
+			glUniformMatrix4fv(prog->getUniform("selfMatrix"), 1, GL_TRUE, &cube.transMatrix().element(0, 0));
+			glUniform1f(prog->getUniform("time"), a);
+			cube.draw();
 
 			/* Swap front and back buffers */
 			oWindow->update();

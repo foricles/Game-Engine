@@ -1,34 +1,49 @@
-﻿  window.cpp
-  transform.cpp
-  mesh.cpp
-  main.cpp
-c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\minwindef.h(130): warning C4005: 'APIENTRY': macro redefinition
-  d:\work\projects\cpp\game-engine\game engine\deps\glfw\glfw3.h(98): note: see previous definition of 'APIENTRY'
+﻿  mesh.cpp
 d:\work\projects\cpp\game-engine\game engine\game engine\utils.h(18): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(207): note: see declaration of 'fopen'
-d:\work\projects\cpp\game-engine\game engine\game engine\utils.h(58): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  Logger.cpp
-  glprogram.cpp
-d:\work\projects\cpp\game-engine\game engine\game engine\utils.h(18): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(207): note: see declaration of 'fopen'
-d:\work\projects\cpp\game-engine\game engine\game engine\utils.h(58): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\work\projects\cpp\game-engine\game engine\game engine\mesh.cpp(20): error C2440: 'initializing': cannot convert from 'std::vector<fff,std::allocator<_Ty>>' to 'std::vector<Mesh,std::allocator<_Ty>>'
+          with
+          [
+              _Ty=fff
+          ]
+          and
+          [
+              _Ty=Mesh
+          ]
+  d:\work\projects\cpp\game-engine\game engine\game engine\mesh.cpp(20): note: No constructor could take the source type, or constructor overload resolution was ambiguous
+d:\work\projects\cpp\game-engine\game engine\game engine\mesh.cpp(32): error C2039: 'oIndexes': is not a member of 'Mesh'
+  d:\work\projects\cpp\game-engine\game engine\game engine\mesh.h(8): note: see declaration of 'Mesh'
+d:\work\projects\cpp\game-engine\game engine\game engine\mesh.cpp(32): error C2228: left of '.size' must have class/struct/union
+d:\work\projects\cpp\game-engine\game engine\game engine\mesh.cpp(37): error C2039: 'oVertexes': is not a member of 'Mesh'
+  d:\work\projects\cpp\game-engine\game engine\game engine\mesh.h(8): note: see declaration of 'Mesh'
+d:\work\projects\cpp\game-engine\game engine\game engine\mesh.cpp(37): error C2228: left of '.size' must have class/struct/union
+d:\work\projects\cpp\game-engine\game engine\game engine\mesh.cpp(37): error C2198: 'PFNGLBUFFERDATAPROC': too few arguments for call
+d:\work\projects\cpp\game-engine\game engine\game engine\mesh.cpp(38): error C2039: 'oIndexes': is not a member of 'Mesh'
+  d:\work\projects\cpp\game-engine\game engine\game engine\mesh.h(8): note: see declaration of 'Mesh'
+d:\work\projects\cpp\game-engine\game engine\game engine\mesh.cpp(38): error C2228: left of '.size' must have class/struct/union
+d:\work\projects\cpp\game-engine\game engine\game engine\mesh.cpp(38): error C2198: 'PFNGLBUFFERDATAPROC': too few arguments for call
   gameobject.cpp
 d:\work\projects\cpp\game-engine\game engine\game engine\utils.h(18): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(207): note: see declaration of 'fopen'
-d:\work\projects\cpp\game-engine\game engine\game engine\utils.h(58): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   application.cpp
 c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\minwindef.h(130): warning C4005: 'APIENTRY': macro redefinition
   d:\work\projects\cpp\game-engine\game engine\deps\glfw\glfw3.h(98): note: see previous definition of 'APIENTRY'
 d:\work\projects\cpp\game-engine\game engine\game engine\utils.h(18): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(207): note: see declaration of 'fopen'
-d:\work\projects\cpp\game-engine\game engine\game engine\utils.h(58): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-d:\work\projects\cpp\game-engine\game engine\game engine\application.cpp(66): warning C4305: 'argument': truncation from 'double' to 'float'
-d:\work\projects\cpp\game-engine\game engine\game engine\application.cpp(78): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-  vectors.cpp
-  matrices.cpp
+d:\work\projects\cpp\game-engine\game engine\game engine\application.cpp(64): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\work\projects\cpp\game-engine\game engine\game engine\application.cpp(69): error C2039: 'loadModel': is not a member of 'GameObject'
+  d:\work\projects\cpp\game-engine\game engine\game engine\gameobject.h(8): note: see declaration of 'GameObject'
+d:\work\projects\cpp\game-engine\game engine\game engine\application.cpp(79): warning C4305: '+=': truncation from 'double' to 'float'
+d:\work\projects\cpp\game-engine\game engine\game engine\application.cpp(88): error C2039: 'draw': is not a member of 'GameObject'
+  d:\work\projects\cpp\game-engine\game engine\game engine\gameobject.h(8): note: see declaration of 'GameObject'
   Generating Code...
-LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
-LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
-glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'D:\Work\projects\cpp\Game-Engine\Game Engine\Debug\vc120.pdb'; linking object as if no debug info
-  Game Engine.vcxproj -> D:\Work\projects\cpp\Game-Engine\Game Engine\Debug\Game Engine.exe
-  Game Engine.vcxproj -> D:\Work\projects\cpp\Game-Engine\Game Engine\Debug\Game Engine.pdb (Partial PDB)
+  Compiling...
+  main.cpp
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\minwindef.h(130): warning C4005: 'APIENTRY': macro redefinition
+  d:\work\projects\cpp\game-engine\game engine\deps\glfw\glfw3.h(98): note: see previous definition of 'APIENTRY'
+d:\work\projects\cpp\game-engine\game engine\game engine\utils.h(18): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(207): note: see declaration of 'fopen'
+  glprogram.cpp
+d:\work\projects\cpp\game-engine\game engine\game engine\utils.h(18): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(207): note: see declaration of 'fopen'
+  Generating Code...

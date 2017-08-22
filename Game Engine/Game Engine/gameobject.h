@@ -1,30 +1,26 @@
 #ifndef _RENDERMODEL_H_
 #define _RENDERMODEL_H_
 
+#include <deque>
+
 #include "mesh.h"
 #include "transform.h"
-#include "utils.h"
-
-#include <GLEW\glew.h>
 
 class GameObject
 {
+	friend class ObjectManager;
 public:
 	GameObject();
 	virtual ~GameObject();
 
-	void bind();
-	void unbind();
-	void draw();
-	void loadModel(const char* filepath);
-
-	Transform &transform() { return oTransform; }
-	kmu::mat4 transMatrix() { return oTransform.transMatrix(); }
+	Transform &transform();
+	kmu::mat4 transMatrix();
 private:
-	GLuint oVBO;
-	GLuint oIBO;
+	size_t oId;
 	Transform oTransform;
-	size_t oDrawQuant;
+	Mesh oMesh;
+	GameObject *oParent;
+	std::deque <GameObject*>oChildren;
 };
 
 #endif // !_RENDERMODEL_H_

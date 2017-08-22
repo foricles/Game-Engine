@@ -1,7 +1,7 @@
 #ifndef _UTILS_H_
 #define _UTILS_H_
 
-#include "mesh.h"
+#include "vertexdata.hpp"
 #include "Logger.h"
 
 #include <ASSIMP\Importer.hpp>
@@ -31,9 +31,9 @@ namespace utils
 			return text;
 		}
 
-		inline std::vector<Mesh> loadModel(const char* filename)
+		inline std::vector<MeshData> loadModel(const char* filename)
 		{
-			std::vector<Mesh> oMeshes;
+			std::vector<MeshData> oMeshes;
 			Assimp::Importer importer;
 
 			auto set = aiProcess_Triangulate | aiProcess_CalcTangentSpace | aiProcess_GenNormals;
@@ -45,7 +45,7 @@ namespace utils
 					const aiMesh* paiMesh = scene->mMeshes[i];
 
 					//Load vertexes
-					Mesh mesh;
+					MeshData mesh;
 					for (register size_t j = 0; j < paiMesh->mNumVertices; j++)
 					{
 						const aiVector3D* pPos = &(paiMesh->mVertices[j]);
@@ -53,11 +53,11 @@ namespace utils
 
 						vertex vtx;
 					//set coordinates
-						vtx.pPos = kmu::vec3(pPos->x, pPos->y, pPos->z);
-					//set colors
-						vtx.pCol = kmu::vec4((rand()%100)/100.0, 0.0f, 1.0f, 1.0f);
+						vtx.pPos = Point3f(pPos->x, pPos->y, pPos->z);
 					//set normals
-						vtx.pNor = kmu::vec3(pNor->x, pNor->y, pNor->z);
+						vtx.pNor = Point3f(pNor->x, pNor->y, pNor->z);
+					//set colors
+						vtx.pCol = Point4f(1.0f, 0.0f, 1.0f, 1.0f);
 
 						mesh.oVertexes.push_back(vtx);
 					}

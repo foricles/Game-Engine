@@ -1,22 +1,23 @@
 #ifndef _MESH_H_
 #define _MESH_H_
 
-#include <vectors.h>
+#include "utils.h"
+#include "opengl.h"
 
-#include <vector>
-#include <algorithm>
-
-struct vertex
+class Mesh
 {
-	kmu::vec3 pPos;
-	kmu::vec3 pNor;
-	kmu::vec4 pCol;
-};
+public:
+	Mesh();
+	virtual~Mesh();
 
-struct Mesh
-{
-	std::vector<vertex> oVertexes;
-	std::vector<size_t> oIndexes;
+	void bind();
+	void unbind();
+	void draw();
+	void loadModel(const char* filepath);
+private:
+	GLuint oVBO;
+	GLuint oIBO;
+	size_t oDrawQuant;
 };
 
 #endif // !_MESH_H_

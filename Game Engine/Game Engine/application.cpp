@@ -59,28 +59,31 @@ int Application::run()
 
 void Application::mainLoop()
 {
-
-
 	if (oWasError == 0)
 	{
-		kmu::mat4 world(kmu::mat4::Perspective(45, 400, 300, 0.03, 1000));
-		world *= kmu::mat4::Translation(0, 0, 5);
+		kmu::mat4 world(kmu::mat4::Perspective(65, 800, 600, 0.03, 1000));
+		world *= kmu::mat4::Translation(0, 0, 1);
+
+
 		GameObject cube;
-		cube.loadModel("C:\\Users\\foricles\\Desktop\\cube.fbx");
+		cube.loadModel("D:\\Work\\projects\\cpp\\Game-Engine\\Game Engine\\shader\\cube.fbx");
 		float a(0);
 		prog->bind();
-		/* Loop until the user closes the window */
+		
+		double t;
+
 		while (!oWindow->closed() && (oWasError == 0))
 		{
-			/* Render here */
 			oWindow->clear();
 
-			a = (a >= (MY_PI*12)) ? 0 : a + 0.002;
-			cube.transform().rotation(kmu::quaternion::euler(a, 1, 0, 1));
+			a += 0.002;
+			//cube.transform().rotation(kmu::quaternion::euler(MY_PI/12, a, a, a));
 			cube.transform().position(cos(a)*2, sin(a)*2, 0);
 
-			glUniformMatrix4fv(prog->getUniform("worldMatrix"), 1, GL_TRUE, &world.element(0,0));
-			glUniformMatrix4fv(prog->getUniform("selfMatrix"), 1, GL_TRUE, &cube.transMatrix().element(0, 0));
+			cube.transform().rotation( kmu::quaternion::euler(a, VEC3_FRONT));
+
+			glUniformMatrix4fv(prog->getUniform("worldMatrix"), 1, GL_TRUE, &world.at(0,0));
+			glUniformMatrix4fv(prog->getUniform("selfMatrix"), 1, GL_TRUE, &cube.transMatrix().at(0, 0));
 			glUniform1f(prog->getUniform("time"), a);
 			cube.draw();
 

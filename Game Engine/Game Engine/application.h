@@ -8,6 +8,7 @@
 
 #include "Logger.h"
 #include "window.h"
+#include <time.h>
 
 class Application
 {

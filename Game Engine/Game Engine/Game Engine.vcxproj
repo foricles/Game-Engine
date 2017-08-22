@@ -72,16 +72,16 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)Game Engine\algebra;$(SolutionDir)deps\Assimp\include;$(SolutionDir)deps\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)deps\ASSIMP;$(SolutionDir)deps\GLEW;$(SolutionDir)deps\GLFW;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)deps\Assimp\include;$(SolutionDir)deps\;$(SolutionDir)Linear math\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Debug;$(SolutionDir)deps\ASSIMP;$(SolutionDir)deps\GLEW;$(SolutionDir)deps\GLFW;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)Game Engine\algebra;$(SolutionDir)deps\Assimp\include;$(SolutionDir)deps\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)deps\ASSIMP;$(SolutionDir)deps\GLEW;$(SolutionDir)deps\GLFW;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)deps\Assimp\include;$(SolutionDir)deps\;$(SolutionDir)Linear math\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Release;$(SolutionDir)deps\ASSIMP;$(SolutionDir)deps\GLEW;$(SolutionDir)deps\GLFW;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -96,7 +96,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>linearmath.lib;glew32s.lib;glfw3.lib;opengl32.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -125,7 +125,7 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>linearmath.lib;glew32s.lib;glfw3.lib;opengl32.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -145,30 +145,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="algebra\matrices.cpp" />
-    <ClCompile Include="algebra\vectors.cpp" />
     <ClCompile Include="application.cpp" />
     <ClCompile Include="gameobject.cpp" />
     <ClCompile Include="glprogram.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mesh.cpp" />
+    <ClCompile Include="objectmanager.cpp" />
     <ClCompile Include="transform.cpp" />
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="algebra\definedtype.h" />
-    <ClInclude Include="algebra\matrices.h" />
-    <ClInclude Include="algebra\vectors.h" />
     <ClInclude Include="application.h" />
     <ClInclude Include="gameobject.h" />
     <ClInclude Include="glprogram.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="mesh.h" />
+    <ClInclude Include="objectmanager.hpp" />
     <ClInclude Include="opengl.h" />
     <ClInclude Include="transform.h" />
     <ClInclude Include="utils.h" />
+    <ClInclude Include="vertexdata.hpp" />
     <ClInclude Include="window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

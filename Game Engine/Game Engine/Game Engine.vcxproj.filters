@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\includers">
+      <UniqueIdentifier>{4c67db64-6fa4-400f-901f-89cc6910214c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gameobject.cpp">
@@ -39,11 +42,8 @@
     <ClCompile Include="application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="algebra\matrices.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="algebra\vectors.cpp">
-      <Filter>Resource Files</Filter>
+    <ClCompile Include="objectmanager.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -65,26 +65,23 @@
     <ClInclude Include="mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="opengl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="transform.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="algebra\vectors.h">
-      <Filter>Resource Files</Filter>
+    <ClInclude Include="opengl.h">
+      <Filter>Header Files\includers</Filter>
     </ClInclude>
-    <ClInclude Include="algebra\definedtype.h">
-      <Filter>Resource Files</Filter>
+    <ClInclude Include="utils.h">
+      <Filter>Header Files\includers</Filter>
     </ClInclude>
-    <ClInclude Include="algebra\matrices.h">
-      <Filter>Resource Files</Filter>
+    <ClInclude Include="vertexdata.hpp">
+      <Filter>Header Files\includers</Filter>
+    </ClInclude>
+    <ClInclude Include="objectmanager.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

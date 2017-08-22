@@ -1,0 +1,7 @@
+﻿  main.cpp
+  matrices.cpp
+  quaternion.cpp
+  vec2.cpp
+  vec3.cpp
+  vec4.cpp
+  Linear math.vcxproj -> D:\Work\projects\cpp\Game-Engine\Game Engine\Release\linearmath.lib

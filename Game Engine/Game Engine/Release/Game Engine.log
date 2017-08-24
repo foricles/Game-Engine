@@ -3,8 +3,9 @@ C:\Program Files (x86)\Windows Kits\10\Include\10.0.15063.0\shared\minwindef.h(1
   D:\Work\projects\cpp\Game-Engine\Game Engine\deps\GLFW\glfw3.h(98): note: see previous definition of 'APIENTRY'
 d:\work\projects\cpp\game-engine\game engine\game engine\utils.h(18): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   C:\Program Files (x86)\Windows Kits\10\Include\10.0.15063.0\ucrt\stdio.h(207): note: see declaration of 'fopen'
-application.cpp(79): warning C4305: '+=': truncation from 'double' to 'float'
-application.cpp(73): warning C4101: 't': unreferenced local variable
+application.cpp(63): warning C4305: 'argument': truncation from 'double' to 'float'
+application.cpp(80): warning C4305: '+=': truncation from 'double' to 'float'
+application.cpp(74): warning C4101: 't': unreferenced local variable
   gameobject.cpp
 d:\work\projects\cpp\game-engine\game engine\game engine\utils.h(18): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   C:\Program Files (x86)\Windows Kits\10\Include\10.0.15063.0\ucrt\stdio.h(207): note: see declaration of 'fopen'
@@ -18,11 +19,16 @@ C:\Program Files (x86)\Windows Kits\10\Include\10.0.15063.0\shared\minwindef.h(1
 d:\work\projects\cpp\game-engine\game engine\game engine\utils.h(18): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   C:\Program Files (x86)\Windows Kits\10\Include\10.0.15063.0\ucrt\stdio.h(207): note: see declaration of 'fopen'
   mesh.cpp
+d:\work\projects\cpp\game-engine\game engine\game engine\utils.h(18): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.15063.0\ucrt\stdio.h(207): note: see declaration of 'fopen'
+  objectmanager.cpp
+d:\work\projects\cpp\game-engine\game engine\game engine\utils.h(18): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.15063.0\ucrt\stdio.h(207): note: see declaration of 'fopen'
   transform.cpp
   window.cpp
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
   Generating code
-  All 642 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  All 719 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Finished generating code
 glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'D:\Work\projects\cpp\Game-Engine\Game Engine\Release\vc120.pdb'; linking object as if no debug info
   Game Engine.vcxproj -> D:\Work\projects\cpp\Game-Engine\Game Engine\Release\Game Engine.exe

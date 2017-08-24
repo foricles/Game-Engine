@@ -22,6 +22,7 @@ Application::Application(int argc, char ** argv)
 		oWasError = 2;
 	}
 
+	//glewExperimental = true;
 	auto err = glewInit();
 	if (err != GLEW_OK)
 	{
@@ -29,7 +30,6 @@ Application::Application(int argc, char ** argv)
 		Logger::Pause();
 		oWasError = 3;
 	}
-
 	Logger::Log("OpenGL " + std::string((char*)glGetString(GL_VERSION)), LogType::INF);
 }
 
@@ -41,8 +41,7 @@ Application::~Application()
 int Application::run()
 {
 	////C:\\Users\\foricles\\Desktop\\Cathedral.fbx
-	//church = new GameObject();
-	//church->setData(*utils::file::loadModel("C:\\Users\\foricles\\Desktop\\Cathedral.fbx")[1]);
+	////C:\\Users\\foricles\\Desktop\\man.fbx
 
 	prog = new GLProgram();
 	prog->begin();
@@ -61,12 +60,18 @@ void Application::mainLoop()
 {
 	if (oWasError == 0)
 	{
-		kmu::mat4 world(kmu::mat4::Perspective(65, 800, 600, 0.03, 1000));
-		world *= kmu::mat4::Translation(0, 0, 1);
+		kmu::mat4 world(kmu::mat4::Perspective(90, 800, 600, 0.03, 1000));
+		world *= kmu::mat4::Translation(0, 0, 50);
 
 
-		GameObject cube;
-		cube.loadModel("D:\\Work\\projects\\cpp\\Game-Engine\\Game Engine\\shader\\cube.fbx");
+		GameObject man1;
+		man1.getMesh().loadModel("C:\\Users\\foricles\\Desktop\\man.fbx");
+		GameObject man2;
+		man2.getMesh().loadModel("C:\\Users\\foricles\\Desktop\\man.fbx");
+		GameObject man3;
+		man3.getMesh().loadModel("C:\\Users\\foricles\\Desktop\\man.fbx");
+		GameObject man4;
+		man4.getMesh().loadModel("C:\\Users\\foricles\\Desktop\\man.fbx");
 		float a(0);
 		prog->bind();
 		
@@ -78,14 +83,30 @@ void Application::mainLoop()
 
 			a += 0.002;
 			//cube.transform().rotation(kmu::quaternion::euler(MY_PI/12, a, a, a));
-			cube.transform().position(cos(a)*2, sin(a)*2, 0);
+			man1.transform().position(-60, 0, 0);
+			man2.transform().position( 60, 0, 0);
+			man3.transform().position(  0, 60, 0);
+			man4.transform().position(  0,-60, 0);
 
-			cube.transform().rotation( kmu::quaternion::euler(a, VEC3_FRONT));
+			man1.transform().rotation(kmu::quaternion::euler(+a, VEC3_FRONT));
+			man2.transform().rotation(kmu::quaternion::euler(-a, VEC3_FRONT));
+			man3.transform().rotation(kmu::quaternion::euler(+a, VEC3_FRONT));
+			man4.transform().rotation(kmu::quaternion::euler(-a, VEC3_FRONT));
 
 			glUniformMatrix4fv(prog->getUniform("worldMatrix"), 1, GL_TRUE, &world.at(0,0));
-			glUniformMatrix4fv(prog->getUniform("selfMatrix"), 1, GL_TRUE, &cube.transMatrix().at(0, 0));
 			glUniform1f(prog->getUniform("time"), a);
-			cube.draw();
+
+			glUniformMatrix4fv(prog->getUniform("selfMatrix"), 1, GL_TRUE, &man1.transMatrix().at(0, 0));
+			man1.getMesh().draw();
+
+			glUniformMatrix4fv(prog->getUniform("selfMatrix"), 1, GL_TRUE, &man2.transMatrix().at(0, 0));
+			man2.getMesh().draw();
+
+			glUniformMatrix4fv(prog->getUniform("selfMatrix"), 1, GL_TRUE, &man3.transMatrix().at(0, 0));
+			man3.getMesh().draw();
+
+			glUniformMatrix4fv(prog->getUniform("selfMatrix"), 1, GL_TRUE, &man4.transMatrix().at(0, 0));
+			man4.getMesh().draw();
 
 			/* Swap front and back buffers */
 			oWindow->update();

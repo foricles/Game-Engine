@@ -10,7 +10,9 @@ ObjectManager::ObjectManager()
 ObjectManager::~ObjectManager()
 {
 	for (auto i{ oAllObjects.begin() }; i != oAllObjects.end(); ++i)
+	{
 		delete *i;
+	}
 }
 
 GameObject *ObjectManager::getObject()

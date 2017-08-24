@@ -4,22 +4,29 @@
 Mesh::Mesh()
 	: oVBO(0)
 	, oIBO(0)
+	, oVAO(0)
 {
+	glGenVertexArrays(1, &oVAO);
 	glGenBuffers(1, &oVBO);
 	glGenBuffers(1, &oIBO);
+
+	//for VAO
+	//glEnableVertexAttribArray
+	//glDisableVertexAttribArray
+	//glVertexAttribPointer
 }
 
 Mesh::~Mesh()
 {
+	glDeleteVertexArrays(1, &oVAO);
 	glDeleteBuffers(1, &oVBO);
 	glDeleteBuffers(1, &oIBO);
 }
 
 void Mesh::loadModel(const char* filepath)
 {
-	std::vector<Mesh> pModel = utils::file::loadModel(filepath);
+	std::vector<MeshData> pModel = utils::file::loadModel(filepath);
 	bool isSingle{ pModel.size() == 1 };
-	Mesh singleModel;
 
 	if (!isSingle)
 	{
@@ -27,54 +34,54 @@ void Mesh::loadModel(const char* filepath)
 	}
 	else
 	{
-		singleModel = pModel[0];
+		oMeshData = pModel[0];
+		oDrawQuant = pModel[0].oIndexes.size();
 	}
-	oDrawQuant = singleModel.oIndexes.size();
+
+	this->bindModel();
+}
+
+void Mesh::bindModel()
+{
+	glBindVertexArray(oVAO);
 
 	glBindBuffer(GL_ARRAY_BUFFER, oVBO);
+	glBufferData(GL_ARRAY_BUFFER,
+					sizeof(vertex)*oMeshData.oVertexes.size(),
+					oMeshData.oVertexes.begin()._Ptr,
+					GL_STATIC_DRAW);
+
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, oIBO);
-
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertex)*singleModel.oVertexes.size(), &singleModel.oVertexes[0], GL_STATIC_DRAW);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(size_t)*singleModel.oIndexes.size(), &singleModel.oIndexes[0], GL_STATIC_DRAW);
-
-	glEnableVertexAttribArray(0);
-	glEnableVertexAttribArray(1);
-	glEnableVertexAttribArray(2);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER,
+					sizeof(size_t)*oMeshData.oIndexes.size(),
+					oMeshData.oIndexes.begin()._Ptr,
+					GL_STATIC_DRAW);
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)offsetof(vertex, pPos));
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)offsetof(vertex, pNor));
 	glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(vertex), (void*)offsetof(vertex, pCol));
 
-	glDisableVertexAttribArray(2);
-	glDisableVertexAttribArray(1);
-	glDisableVertexAttribArray(0);
+	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(1);
+	glEnableVertexAttribArray(2);
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	glBindVertexArray(0);
 }
 
 void Mesh::bind()
 {
-	glBindBuffer(GL_ARRAY_BUFFER, oVBO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, oIBO);
-
-	glEnableVertexAttribArray(0);
-	glEnableVertexAttribArray(1);
-	glEnableVertexAttribArray(2);
+	glBindVertexArray(oVAO);
 }
 void Mesh::unbind()
 {
-	glDisableVertexAttribArray(2);
-	glDisableVertexAttribArray(1);
-	glDisableVertexAttribArray(0);
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
 }
 
 void Mesh::draw()
 {
-	bind();
+	this->bind();
 	glDrawElements(GL_TRIANGLES, oDrawQuant, GL_UNSIGNED_INT, nullptr);
-	unbind();
+	this->unbind();
 }

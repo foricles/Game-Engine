@@ -17,7 +17,12 @@ public:
 private:
 	GLuint oVBO;
 	GLuint oIBO;
+	GLuint oVAO;
+
 	size_t oDrawQuant;
+	MeshData oMeshData;
+private:
+	void bindModel();
 };
 
 #endif // !_MESH_H_

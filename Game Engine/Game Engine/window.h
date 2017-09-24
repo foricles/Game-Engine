@@ -7,7 +7,7 @@
 class Window
 {
 public:
-	Window(size_t W = 860, size_t H = 640);
+	Window(size_t W = 640, size_t H = 480);
 	virtual ~Window();
 
 	bool create();

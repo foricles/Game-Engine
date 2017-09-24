@@ -43,10 +43,10 @@ namespace kmu
 		virtual inline vec2 &operator*=(float n);
 		virtual inline vec2 &operator/=(float n);
 
-		friend inline vec2 operator+(const vec2 &v, const vec2 &vec);
-		friend inline vec2 operator-(const vec2 &v, const vec2 &vec);
-		friend inline vec2 operator*(const vec2 &v, float n);
-		friend inline vec2 operator/(const vec2 &v, float n);
+		extern friend vec2 operator+(const vec2 &v, const vec2 &vec);
+		extern friend vec2 operator-(const vec2 &v, const vec2 &vec);
+		extern friend vec2 operator*(const vec2 &v, float n);
+		extern friend vec2 operator/(const vec2 &v, float n);
 	};
 #define VEC2_RIGHT (kmu::vec2(1.0f, 0.0f))
 #define VEC2_UP    (kmu::vec2(0.0f, 1.0f))

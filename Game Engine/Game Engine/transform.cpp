@@ -141,3 +141,13 @@ const Transform * Transform::getParentTransform() const
 {
 	return oParent;
 }
+
+void Transform::translate(const kmu::vec3 & dir)
+{
+	oPos += dir;
+}
+
+void Transform::translate(float X, float Y, float Z)
+{
+	oPos += kmu::vec3(X, Y, Z);
+}

@@ -16,6 +16,9 @@
     <Filter Include="Header Files\includers">
       <UniqueIdentifier>{4c67db64-6fa4-400f-901f-89cc6910214c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="mygame">
+      <UniqueIdentifier>{e141397e-2d67-4eb2-a473-cd9db255b4d3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gameobject.cpp">
@@ -57,6 +60,9 @@
     <ClCompile Include="inputmanager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application.h">
@@ -69,9 +75,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Logger.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MainGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="mesh.h">
@@ -106,6 +109,12 @@
     </ClInclude>
     <ClInclude Include="inputmanager.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scene.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mygame.hpp">
+      <Filter>mygame</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

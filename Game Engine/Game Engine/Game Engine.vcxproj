@@ -156,6 +156,7 @@
     <ClCompile Include="object.cpp" />
     <ClCompile Include="objectmanager.cpp" />
     <ClCompile Include="render.cpp" />
+    <ClCompile Include="scene.cpp" />
     <ClCompile Include="transform.cpp" />
     <ClCompile Include="window.cpp" />
   </ItemGroup>
@@ -166,12 +167,13 @@
     <ClInclude Include="glprogram.h" />
     <ClInclude Include="inputmanager.hpp" />
     <ClInclude Include="Logger.h" />
-    <ClInclude Include="MainGame.h" />
     <ClInclude Include="mesh.h" />
+    <ClInclude Include="mygame.hpp" />
     <ClInclude Include="object.hpp" />
     <ClInclude Include="objectmanager.hpp" />
     <ClInclude Include="opengl.h" />
     <ClInclude Include="render.hpp" />
+    <ClInclude Include="scene.hpp" />
     <ClInclude Include="transform.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="vertexdata.hpp" />

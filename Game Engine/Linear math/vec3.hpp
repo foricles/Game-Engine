@@ -44,10 +44,10 @@ namespace kmu
 		virtual inline vec3 &operator*=(float n);
 		virtual inline vec3 &operator/=(float n);
 
-		friend inline vec3 operator+(const vec3 &v, const vec3 &vec);
-		friend inline vec3 operator-(const vec3 &v, const vec3 &vec);
-		friend inline vec3 operator*(const vec3 &v, float n);
-		friend inline vec3 operator/(const vec3 &v, float n);
+		extern friend vec3 operator+(const vec3 &v, const vec3 &vec);
+		extern friend vec3 operator-(const vec3 &v, const vec3 &vec);
+		extern friend vec3 operator*(const vec3 &v, float n);
+		extern friend vec3 operator/(const vec3 &v, float n);
 	};
 #define VEC3_RIGHT (kmu::vec3(1.0f, 0.0f, 0.0f))
 #define VEC3_UP    (kmu::vec3(0.0f, 1.0f, 0.0f))

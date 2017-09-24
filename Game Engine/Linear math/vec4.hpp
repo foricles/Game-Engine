@@ -37,10 +37,12 @@ namespace kmu
 
 		virtual inline float &operator[](size_t id);
 		virtual inline const vec4 &operator=(const vec4 &vec);
+
 		virtual inline vec4 &operator+=(const vec4 &vec);
 		virtual inline vec4 &operator-=(const vec4 &vec);
 		virtual inline vec4 &operator*=(float n);
 		virtual inline vec4 &operator/=(float n);
+
 		virtual inline vec4 operator+(const vec4 &vec)const;
 		virtual inline vec4 operator-(const vec4 &vec)const;
 		virtual inline vec4 operator*(float n)const;

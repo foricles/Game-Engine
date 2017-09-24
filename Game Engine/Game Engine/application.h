@@ -2,14 +2,13 @@
 #define _APPLICATION_H_
 
 #include "opengl.h"
-#include "objectmanager.hpp"
 #include "utils.h"
 #include "gameobject.h"
 #include "glprogram.h"
 
 #include "Logger.h"
 #include "window.h"
-#include "render.hpp"
+#include "mygame.hpp"
 #include <time.h>
 
 class Application
@@ -24,10 +23,10 @@ public:
 	int run();
 private:
 	Window *oWindow;
-	//-------------into-one-scene------------------------------------
-	Render *oRender;
-	ObjectManager *oObjectManager;
-	//--------------------------------------
+	InputManager oInputManager;
+	static InputManager *input;
+
+	Scene *oScene;
 
 	int oWasError;
 
@@ -35,8 +34,10 @@ private:
 private:
 	static void windowSizeCallback(GLFWwindow* window, int width, int height);
 	static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
-	static void characterCallback(GLFWwindow* window, unsigned int codepoint);
+	static void charmodsCallback(GLFWwindow* window, unsigned int codepoint, int mods);
 	static void cursorPositionCallback(GLFWwindow* window, double xpos, double ypos);
+	static void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods);
+	static void scrollCallback(GLFWwindow* window, double xoffset, double yoffset);
 };
 
 #endif // !_APPLICATION_H_

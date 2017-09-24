@@ -43,3 +43,8 @@ public:
 	static void Pause();
 };
 
+template<class T>
+std::string conv(T n)
+{
+	return std::to_string(n);
+}

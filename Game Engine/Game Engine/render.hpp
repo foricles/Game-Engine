@@ -10,6 +10,9 @@ public:
 	Render(ObjectManager *manager);
 	~Render();
 	void draw();
+
+	const Camera *getMainCam() const;
+	Camera *getMainCam();
 private:
 	Camera *oMainCamera;
 

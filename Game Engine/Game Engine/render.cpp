@@ -11,7 +11,7 @@ Render::Render(ObjectManager *manager)
 	oDefaultShader->end();
 
 	oProjMatrix = new kmu::mat4(1);
-	*oProjMatrix = kmu::mat4::Perspective(45, 860, 640, 0.03, 1000);
+	*oProjMatrix = kmu::mat4::Perspective(45, 640, 480, 0.03, 1000);
 	//*oWorldMatrix *= kmu::mat4::Translation(0, 0, 3.5);
 
 	oMainCamera = new Camera();
@@ -27,17 +27,13 @@ Render::~Render()
 
 void Render::draw()
 {
-	oMainCamera->rotate(VEC3_RIGHT, 0.00001f);
-
 	RenderData renderData;
 	oManager->getRenderData(&renderData);
 	renderData.SortByMaterial();
 
-	auto matx = oMainCamera->getMatrix();
-
 	oDefaultShader->bind();
 	glUniformMatrix4fv(oDefaultShader->getUniform("worldMatrix"), 1, GL_TRUE, &oProjMatrix->at(0, 0));
-	glUniformMatrix4fv(oDefaultShader->getUniform("camMatrix"),  1, GL_TRUE,  &matx.at(0, 0));
+	glUniformMatrix4fv(oDefaultShader->getUniform("camMatrix"),  1, GL_TRUE,  &oMainCamera->getMatrix().at(0, 0));
 	glUniform1f(oDefaultShader->getUniform("time"), 1); 
 
 	for (register auto obj = renderData.oData.begin(); obj != renderData.oData.end(); ++obj)
@@ -49,4 +45,14 @@ void Render::draw()
 	}
 
 	oDefaultShader->unbind();
+}
+
+const Camera * Render::getMainCam() const
+{
+	return oMainCamera;
+}
+
+Camera * Render::getMainCam()
+{
+	return oMainCamera;
 }

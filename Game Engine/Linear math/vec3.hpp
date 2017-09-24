@@ -32,6 +32,8 @@ namespace kmu
 		virtual inline vec3 normalized()const;
 		virtual inline std::string toString()const;
 
+		virtual inline void set(float X, float Y, float Z);
+
 		virtual inline Point3f point()const;
 		virtual inline operator Point3f()const;
 
@@ -41,10 +43,11 @@ namespace kmu
 		virtual inline vec3 &operator-=(const vec3 &vec);
 		virtual inline vec3 &operator*=(float n);
 		virtual inline vec3 &operator/=(float n);
-		virtual inline vec3 operator+(const vec3 &vec)const;
-		virtual inline vec3 operator-(const vec3 &vec)const;
-		virtual inline vec3 operator*(float n)const;
-		virtual inline vec3 operator/(float n)const;
+
+		friend inline vec3 operator+(const vec3 &v, const vec3 &vec);
+		friend inline vec3 operator-(const vec3 &v, const vec3 &vec);
+		friend inline vec3 operator*(const vec3 &v, float n);
+		friend inline vec3 operator/(const vec3 &v, float n);
 	};
 #define VEC3_RIGHT (kmu::vec3(1.0f, 0.0f, 0.0f))
 #define VEC3_UP    (kmu::vec3(0.0f, 1.0f, 0.0f))

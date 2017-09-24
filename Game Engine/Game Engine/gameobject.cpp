@@ -3,7 +3,8 @@
 
 GameObject::GameObject()
 {
-	
+	oName = "GameObject" + std::to_string(oId);
+	oTransform.attachToObject(this);
 }
 
 GameObject::~GameObject()
@@ -26,12 +27,29 @@ kmu::mat4 GameObject::transMatrix()
 	return oTransform.transMatrix();
 }
 
-void GameObject::update()
+GameObject * GameObject::findObjectInChildren(size_t id)
 {
+	//TODO
+	return nullptr;
 }
 
-void GameObject::notify()
+GameObject * GameObject::findObjectInChildren(const std::string & name)
 {
-	for (auto it{ oChildren.begin() }; it != oChildren.end(); ++it)
-		(*it)->update();
+	//TODO
+	return nullptr;
+}
+
+std::vector<GameObject*> GameObject::findObjectsInChildren(const std::string & name)
+{
+	return std::vector<GameObject*>();
+}
+
+GameObject * GameObject::getParent()
+{
+	//TODO
+	auto pTrans = this->oTransform.getParentTransform();
+
+	//pTrans->
+
+	return nullptr;
 }

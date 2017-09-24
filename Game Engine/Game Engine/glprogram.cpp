@@ -9,9 +9,9 @@ GLProgram::GLProgram()
 
 GLProgram::~GLProgram()
 {
-	for each (Shader var in oShaders)
-		if (var.path != nullptr)
-			delete[] var.path;
+	//for each (Shader var in oShaders)
+	//	if (var.path != nullptr)
+	//		delete[] var.path;
 }
 
 void GLProgram::addShader(SHADER type, const char * path)

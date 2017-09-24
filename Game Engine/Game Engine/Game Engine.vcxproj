@@ -146,24 +146,32 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="application.cpp" />
+    <ClCompile Include="camera.cpp" />
     <ClCompile Include="gameobject.cpp" />
     <ClCompile Include="glprogram.cpp" />
+    <ClCompile Include="inputmanager.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mesh.cpp" />
+    <ClCompile Include="object.cpp" />
     <ClCompile Include="objectmanager.cpp" />
+    <ClCompile Include="render.cpp" />
     <ClCompile Include="transform.cpp" />
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application.h" />
+    <ClInclude Include="camera.hpp" />
     <ClInclude Include="gameobject.h" />
     <ClInclude Include="glprogram.h" />
+    <ClInclude Include="inputmanager.hpp" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="mesh.h" />
+    <ClInclude Include="object.hpp" />
     <ClInclude Include="objectmanager.hpp" />
     <ClInclude Include="opengl.h" />
+    <ClInclude Include="render.hpp" />
     <ClInclude Include="transform.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="vertexdata.hpp" />

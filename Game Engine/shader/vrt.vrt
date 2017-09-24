@@ -7,12 +7,13 @@ out vec2 pixPos;
 out vec4 pixCol;
 
 uniform mat4 selfMatrix;
-//uniform mat4 maincamMatrix;
+uniform mat4 camMatrix;
 uniform mat4 worldMatrix;
+
 
 void main()
 {
-	vec4 np = (/*maincamMatrix * */ worldMatrix * selfMatrix) * vec4(Position, 1.0);
+	vec4 np = (worldMatrix* camMatrix * selfMatrix) * vec4(Position, 1.0);
 	gl_Position = np;
 	pixCol = Color;
 	pixPos = Position.xy;

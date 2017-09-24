@@ -71,6 +71,11 @@ inline std::string kmu::vec2::toString()const
 {
 	return std::string('(' + std::to_string(oData->x) + ", " + std::to_string(oData->y) + ')');
 }
+inline void kmu::vec2::set(float x, float y)
+{
+	oData->x = x;
+	oData->y = y;
+}
 inline float & kmu::vec2::operator[](size_t id)
 {
 	if (id == 1)
@@ -108,23 +113,23 @@ inline kmu::vec2 & kmu::vec2::operator/=(float n)
 	oData->y /= n;
 	return *this;
 }
-inline kmu::vec2 kmu::vec2::operator+(const vec2 & vec)const
+inline kmu::vec2 kmu::operator+(const vec2 & v, const vec2 & vec)
 {
-	return vec2(oData->x + vec.oData->x,
-		oData->y + vec.oData->y);
+	return vec2(v.oData->x + vec.oData->x,
+		v.oData->y + vec.oData->y);
 }
-inline kmu::vec2 kmu::vec2::operator-(const vec2 & vec)const
+inline kmu::vec2 kmu::operator-(const vec2 & v, const vec2 & vec)
 {
-	return vec2(oData->x - vec.oData->x,
-		oData->y - vec.oData->y);
+	return vec2(v.oData->x - vec.oData->x,
+		v.oData->y - vec.oData->y);
 }
-inline kmu::vec2 kmu::vec2::operator*(float n)const
+inline kmu::vec2 kmu::operator*(const vec2 & v, float n)
 {
-	return vec2(oData->x*n, oData->y*n);
+	return vec2(v.oData->x*n, v.oData->y*n);
 }
-inline kmu::vec2 kmu::vec2::operator/(float n)const
+inline kmu::vec2 kmu::operator/(const vec2 & v, float n)
 {
 	if (n == 0)
 		n = 0.000001f;
-	return vec2(oData->x / n, oData->y / n);
+	return vec2(v.oData->x / n, v.oData->y / n);
 }

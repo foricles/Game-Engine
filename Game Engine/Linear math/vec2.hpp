@@ -31,6 +31,8 @@ namespace kmu
 		virtual inline vec2 normalized()const;
 		virtual inline std::string toString()const;
 
+		virtual inline void set(float x, float y);
+
 		virtual inline Point2f point()const;
 		virtual inline operator Point2f()const;
 
@@ -40,10 +42,11 @@ namespace kmu
 		virtual inline vec2 &operator-=(const vec2 &vec);
 		virtual inline vec2 &operator*=(float n);
 		virtual inline vec2 &operator/=(float n);
-		virtual inline vec2 operator+(const vec2 &vec)const;
-		virtual inline vec2 operator-(const vec2 &vec)const;
-		virtual inline vec2 operator*(float n)const;
-		virtual inline vec2 operator/(float n)const;
+
+		friend inline vec2 operator+(const vec2 &v, const vec2 &vec);
+		friend inline vec2 operator-(const vec2 &v, const vec2 &vec);
+		friend inline vec2 operator*(const vec2 &v, float n);
+		friend inline vec2 operator/(const vec2 &v, float n);
 	};
 #define VEC2_RIGHT (kmu::vec2(1.0f, 0.0f))
 #define VEC2_UP    (kmu::vec2(0.0f, 1.0f))

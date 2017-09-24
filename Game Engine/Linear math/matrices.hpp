@@ -28,6 +28,9 @@ namespace kmu
 		virtual inline const mat & operator=(const mat & other);
 		virtual inline mat operator*(const mat & other) const;
 				
+		virtual inline float &operator[](size_t id);
+		virtual inline const float &operator[](size_t id)const;
+
 		virtual inline bool isSquere() const;
 		virtual inline std::string toString() const;
 
@@ -47,14 +50,20 @@ namespace kmu
 
 		virtual inline const mat4 &operator*(const mat4 &right);
 		virtual inline const mat4 & operator=(const mat4 & other);
-		virtual inline const vec4 operator*(const vec4 &right);
 
-		static mat4 mat4::Translation(float x, float y, float z);
-		static mat4 mat4::Rotation(float x, float y, float z);
-		static mat4 mat4::Rotation(const kmu::quaternion &q);
-		static mat4 mat4::Scaling(float x, float y, float z);
-		static mat4 mat4::CameraMatrix(vec3 target, vec3 up);
-		static mat4 mat4::Perspective(float fov, int width, int heigth, float nr, float fr);
+		virtual inline const vec4 operator*(const vec4 &right);
+		virtual inline const vec3 operator*(const vec3 &right);
+
+		static mat4 Translation(float x, float y, float z);
+		static mat4 Translation(const kmu::vec3 &pos);
+
+		static mat4 Rotation(float x, float y, float z);
+		static mat4 Rotation(const kmu::quaternion &q);
+		static mat4 Scaling(float x, float y, float z);
+		static mat4 CameraMatrix(vec3 target, vec3 up);
+		static mat4 Perspective(float fov, int width, int heigth, float nr, float fr);
+
+		static quaternion Quaternion(const kmu::mat4 &mtx);
 	};
 }
 

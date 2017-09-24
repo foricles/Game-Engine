@@ -76,6 +76,12 @@ inline std::string kmu::vec3::toString()const
 {
 	return std::string('(' + std::to_string(oData->x) + ", " + std::to_string(oData->y) + ", " + std::to_string(oData->z) + ')');
 }
+inline void kmu::vec3::set(float X, float Y, float Z)
+{
+	oData->x = X;
+	oData->y = Y;
+	oData->z = Z;
+}
 inline float & kmu::vec3::operator[](size_t id)
 {
 	switch (id)
@@ -119,28 +125,28 @@ inline kmu::vec3 & kmu::vec3::operator/=(float n)
 	oData->z /= n;
 	return *this;
 }
-inline kmu::vec3 kmu::vec3::operator+(const vec3 & vec)const
+inline kmu::vec3 kmu::operator+(const vec3 &v, const vec3 & vec)
 {
-	return vec3(oData->x + vec.oData->x,
-		oData->y + vec.oData->y,
-		oData->z + vec.oData->z);
+	return vec3(v.oData->x + vec.oData->x,
+		v.oData->y + vec.oData->y,
+		v.oData->z + vec.oData->z);
 }
-inline kmu::vec3 kmu::vec3::operator-(const vec3 & vec)const
+inline kmu::vec3 kmu::operator-(const vec3 &v, const vec3 & vec)
 {
-	return vec3(oData->x - vec.oData->x,
-		oData->y - vec.oData->y,
-		oData->z - vec.oData->z);
+	return vec3(v.oData->x - vec.oData->x,
+		v.oData->y - vec.oData->y,
+		v.oData->z - vec.oData->z);
 }
-inline kmu::vec3 kmu::vec3::operator*(float n)const
+inline kmu::vec3 kmu::operator*(const vec3 &v, float n)
 {
-	return vec3(oData->x * n,
-		oData->y * n,
-		oData->z * n);
+	return vec3(v.oData->x * n,
+		v.oData->y * n,
+		v.oData->z * n);
 }
-inline kmu::vec3 kmu::vec3::operator/(float n)const
+inline kmu::vec3 kmu::operator/(const vec3 &v, float n)
 {
 	n = (n == 0) ? 0.000001f : n;
-	return vec3(oData->x / n,
-		oData->y / n,
-		oData->z / n);
+	return vec3(v.oData->x / n,
+		v.oData->y / n,
+		v.oData->z / n);
 }

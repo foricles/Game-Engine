@@ -3,8 +3,34 @@
 
 #include "gameobject.h"
 
+class RenderData
+{
+public:
+	struct Data
+	{
+		GLuint id;
+		GLuint materials;
+		size_t count;
+		kmu::mat4 matrix;
+	};
+	std::vector<Data> oData;
+
+
+
+	inline void SortByMaterial()
+	{
+		std::stable_sort(oData.begin(), oData.end(), cmp);
+	}
+private:
+	inline static bool cmp(const RenderData::Data &d1, const RenderData::Data &d2)
+	{
+		return d1.materials < d2.materials;
+	}
+};
+
 class ObjectManager
 {
+	friend class Render;
   public:
 	ObjectManager();
 	~ObjectManager();
@@ -20,8 +46,9 @@ class ObjectManager
 
 	std::vector<GameObject*> findAllGameObjects(const std::string &name);
 	std::vector<GameObject*> findActiveGameObjects(const std::string &name);
+
+	void getRenderData(RenderData *renderData);
   private:
-	size_t oQuant;
 	std::deque <GameObject*>oPool;
 	std::deque <GameObject*>oAllObjects;
 };

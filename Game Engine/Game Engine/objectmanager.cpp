@@ -3,7 +3,6 @@
 
 
 ObjectManager::ObjectManager()
-	: oQuant(0)
 {
 }
 
@@ -24,7 +23,7 @@ GameObject *ObjectManager::getObject()
 		return obj;
 	}
 	GameObject *gm = new GameObject();
-	gm->oId = oQuant++;
+
 	oAllObjects.push_back(gm);
 	return gm;
 }
@@ -33,4 +32,19 @@ void ObjectManager::retObject(GameObject ** obj)
 {
 	oPool.push_back(*obj);
 	*obj = nullptr;
+}
+
+void ObjectManager::getRenderData(RenderData *renderData)
+{
+	renderData->oData.resize(oAllObjects.size());
+	int i(0);
+	for (register auto obj = oAllObjects.begin(); obj != oAllObjects.end(); obj++)
+	{
+		renderData->oData[i].id			= (*obj)->getMesh().vaoId();
+		renderData->oData[i].count		= (*obj)->getMesh().getIndexCount();
+		renderData->oData[i].matrix		= (*obj)->transMatrix();
+		renderData->oData[i].materials	= 0;
+		i++;
+	}
+	
 }

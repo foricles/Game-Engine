@@ -16,13 +16,17 @@ namespace kmu
 		quaternion(const quaternion &qut);
 		virtual ~quaternion();
 
-		virtual inline quaternion &conjugate();
-		virtual inline quaternion operator*(const quaternion &qut);
-		virtual inline quaternion operator*(const vec3 &vec);
+		virtual inline void conjugate();
+		virtual inline quaternion conjugated() const;
 		virtual inline const quaternion &operator=(const quaternion &qut);
+
+		virtual inline kmu::vec3 rotate(const kmu::vec3 &vect) const;
 
 		static quaternion euler(float angle, float X, float Y, float Z);
 		static quaternion euler(float angle, const vec3 &axes);
+
+		friend inline quaternion operator*(const quaternion &q1, const quaternion &q2);
+		friend inline quaternion operator*(const quaternion &q1, const vec3 &vec);
 	};
 }
 #endif // !_QUATERNION_H_

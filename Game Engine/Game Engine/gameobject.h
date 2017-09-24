@@ -1,12 +1,11 @@
 #ifndef _RENDERMODEL_H_
 #define _RENDERMODEL_H_
 
-#include <deque>
-
+#include "object.hpp"
 #include "mesh.h"
 #include "transform.h"
 
-class GameObject
+class GameObject : public Object
 {
 	friend class ObjectManager;
 public:
@@ -15,6 +14,7 @@ public:
 
 	Transform &transform();
 	Mesh &getMesh();
+
 	kmu::mat4 transMatrix();
 
 	GameObject *findObjectInChildren(size_t id);
@@ -23,18 +23,9 @@ public:
 	std::vector<GameObject*> findObjectsInChildren(const std::string &name);
 
 	GameObject *getParent();
-
-protected:
-	virtual void update();
 private:
-	size_t oId;
 	Transform oTransform;
 	Mesh oMesh;
-
-	GameObject *oParent;
-	std::deque <GameObject*>oChildren;
-private:
-	void notify();
 };
 
 #endif // !_RENDERMODEL_H_

@@ -125,6 +125,22 @@ namespace kmu
 		return (sizeof(float) * oN * oM);
 	}
 
+	inline float & mat::operator[](size_t id)
+	{
+		if ((id <= 0) || (id >= oN*oM))
+			return oData[0];
+		else
+			return oData[id];
+	}
+
+	inline const float & mat::operator[](size_t id) const
+	{
+		if ((id <= 0) || (id >= oN*oM))
+			return oData[0];
+		else
+			return oData[id];
+	}
+
 	inline bool mat::isSquere() const
 	{
 		return oN == oM;
@@ -196,12 +212,29 @@ inline const kmu::vec4 kmu::mat4::operator*(const vec4 & right)
 	return ret;
 }
 
+inline const kmu::vec3 kmu::mat4::operator*(const vec3 & right)
+{
+	kmu::vec3 ret;
+	ret.x = right.x * at(0, 0) + right.y * at(0, 1) + right.x * at(0, 2) + 1 * at(0, 3);
+	ret.y = right.x * at(1, 0) + right.y * at(1, 1) + right.x * at(1, 2) + 1 * at(1, 3);
+	ret.z = right.x * at(2, 0) + right.y * at(2, 1) + right.x * at(2, 2) + 1 * at(2, 3);
+	return ret;
+}
+
 kmu::mat4 kmu::mat4::Translation(float x, float y, float z)
 {
 	mat4 result(1.0f);
 	result.at(0, 3) = x;
 	result.at(1, 3) = y;
 	result.at(2, 3) = z;
+	return result;
+}
+kmu::mat4 kmu::mat4::Translation(const kmu::vec3 & pos)
+{
+	mat4 result(1.0f);
+	result.at(0, 3) = pos.x;
+	result.at(1, 3) = pos.y;
+	result.at(2, 3) = pos.z;
 	return result;
 }
 kmu::mat4 kmu::mat4::Rotation(float x, float y, float z)
@@ -233,14 +266,43 @@ kmu::mat4 kmu::mat4::Rotation(float x, float y, float z)
 
 kmu::mat4 kmu::mat4::Rotation(const kmu::quaternion &q)
 {
-	kmu::mat4 res(1.0f);
+	//kmu::mat4 res(1.0f);
 
-	res.at(0, 0) = powf(q.w, 2) + powf(q.x, 2) - powf(q.y, 2) - powf(q.z, 2);  res.at(0, 1) = 2 * q.x*q.y + 2 * q.w*q.z;  res.at(0, 2) = 2 * q.x*q.z - 2 * q.w*q.y;  res.at(0, 3) = 0;
-	res.at(1, 0) = 2 * q.z*q.y - 2 * q.w*q.z;  res.at(1, 1) = powf(q.w, 2) - powf(q.x, 2) + powf(q.y, 2) - powf(q.z, 2);  res.at(1, 2) = 2 * q.y*q.z + 2 * q.w*q.x;  res.at(1, 3) = 0;
-	res.at(2, 0) = 2 * q.x*q.z + 2 * q.w*q.y;  res.at(2, 1) = 2 * q.y*q.z - 2 * q.w*q.x;  res.at(2, 2) = powf(q.w, 2) - powf(q.x, 2) - powf(q.y, 2) + powf(q.z, 2);  res.at(2, 3) = 0;
-	res.at(3, 0) = 0;  res.at(3, 1) = 0;  res.at(3, 2) = 0;  res.at(3, 3) = powf(q.w, 2) + powf(q.x, 2) + powf(q.y, 2) + powf(q.z, 2);
+	//res.at(0, 0) = powf(q.w, 2) + powf(q.x, 2) - powf(q.y, 2) - powf(q.z, 2);  res.at(0, 1) = 2 * q.x*q.y + 2 * q.w*q.z;  res.at(0, 2) = 2 * q.x*q.z - 2 * q.w*q.y;  res.at(0, 3) = 0;
+	//res.at(1, 0) = 2 * q.z*q.y - 2 * q.w*q.z;  res.at(1, 1) = powf(q.w, 2) - powf(q.x, 2) + powf(q.y, 2) - powf(q.z, 2);  res.at(1, 2) = 2 * q.y*q.z + 2 * q.w*q.x;  res.at(1, 3) = 0;
+	//res.at(2, 0) = 2 * q.x*q.z + 2 * q.w*q.y;  res.at(2, 1) = 2 * q.y*q.z - 2 * q.w*q.x;  res.at(2, 2) = powf(q.w, 2) - powf(q.x, 2) - powf(q.y, 2) + powf(q.z, 2);  res.at(2, 3) = 0;
+	//res.at(3, 0) = 0;  res.at(3, 1) = 0;  res.at(3, 2) = 0;  res.at(3, 3) = powf(q.w, 2) + powf(q.x, 2) + powf(q.y, 2) + powf(q.z, 2);
 
-	return res;
+	//return res;
+
+	kmu::mat4 ret;
+	float xx = q.x * q.x;
+	float xy = q.x * q.y;
+	float xz = q.x * q.z;
+	float xw = q.x * q.w;
+					 
+	float yy = q.y * q.y;
+	float yz = q.y * q.z;
+	float yw = q.y * q.w;
+					 
+	float zz = q.z * q.z;
+	float zw = q.z * q.w;
+
+	ret[0] = 1 - 2 * (yy + zz);
+	ret[1] = 2 * (xy - zw);
+	ret[2] = 2 * (xz + yw);
+	
+	ret[4] = 2 * (xy + zw);
+	ret[5] = 1 - 2 * (xx + zz);
+	ret[6] = 2 * (yz - xw);
+	
+	ret[8] = 2 * (xz - yw);
+	ret[9] = 2 * (yz + xw);
+	ret[10] = 1 - 2 * (xx + yy);
+	//Далее заполняем четвёртый ряд и четвёртый столбец матрицы 4х4:
+	ret[3] = ret[7] = ret[11] = ret[12] = ret[13] = ret[14] = 0;
+	ret[15] = 1;
+	return ret;
 }
 
 kmu::mat4 kmu::mat4::Scaling(float x, float y, float z)
@@ -278,4 +340,55 @@ kmu::mat4 kmu::mat4::Perspective(float fov, int width, int heigth, float nr, flo
 	m.at(2, 3) = 2.0f * fr * nr / range;
 	m.at(3, 2) = 1.0f;
 	return m;
+}
+
+kmu::quaternion kmu::mat4::Quaternion(const kmu::mat4 & mtx)
+{
+	float S;
+	float Qw{ 0 }, Qx{ 0 }, Qy{ 0 }, Qz{ 1 };
+	float T{ mtx.at(0, 0) + mtx.at(1, 1) + mtx.at(2, 2) + 1 };
+
+	if (T > 0)
+	{
+		S = 0.5f / sqrt(T);
+		Qw = 0.25f / S;
+		Qx = (mtx[9] - mtx[6]) * S;
+		Qy = (mtx[2] - mtx[8]) * S;
+		Qz = (mtx[4] - mtx[1]) * S;
+	}
+	else
+	{
+		//Столбец 0:
+		if (0)
+		{
+			S = sqrt(1.0 + mtx[0] - mtx[5] - mtx[10]) * 2;
+
+			Qx = 0.5 / S;
+			Qy = (mtx[1] + mtx[4]) / S;
+			Qz = (mtx[2] + mtx[8]) / S;
+			Qw = (mtx[6] + mtx[9]) / S;
+		}
+		else if (1)
+		{
+			//Столбец 1:
+			S = sqrt(1.0 + mtx[5] - mtx[0] - mtx[10]) * 2;
+
+			Qx = (mtx[1] + mtx[4]) / S;
+			Qy = 0.5 / S;
+			Qz = (mtx[6] + mtx[9]) / S;
+			Qw = (mtx[2] + mtx[8]) / S;
+		}
+		else if (2)
+		{
+			//Столбец 2:
+			S = sqrt(1.0 + mtx[10] - mtx[0] - mtx[5]) * 2;
+
+			Qx = (mtx[2] + mtx[8]) / S;
+			Qy = (mtx[6] + mtx[9]) / S;
+			Qz = 0.5 / S;
+			Qw = (mtx[1] + mtx[4]) / S;
+		}
+	}
+
+	return quaternion(Qx, Qy, Qz, Qw);
 }

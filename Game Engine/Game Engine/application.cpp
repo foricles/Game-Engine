@@ -1,10 +1,14 @@
 #include "application.h"
 
+#define SINGLERENDER  1
+
 Application::Application(int argc, char ** argv)
 	: oArgc(argc)
 	, oArgv(argv)
 	, oWasError(0)
 	, oWindow(nullptr)
+	, oRender(nullptr)
+	, oObjectManager(nullptr)
 {
 	if (!glfwInit())
 	{
@@ -14,6 +18,8 @@ Application::Application(int argc, char ** argv)
 	}
 
 	oWindow = new Window();
+	oObjectManager = new ObjectManager();
+
 	if (!oWindow->create())
 	{
 		Logger::Log("Window can`t be created!", LogType::ERR);
@@ -31,26 +37,28 @@ Application::Application(int argc, char ** argv)
 		oWasError = 3;
 	}
 	Logger::Log("OpenGL " + std::string((char*)glGetString(GL_VERSION)), LogType::INF);
+
+	oRender = new Render(oObjectManager);
 }
 
 Application::~Application()
 {
 	glfwTerminate();
+	delete oRender;
+	delete oWindow;
+	delete oObjectManager;
 }
 
 int Application::run()
 {
 	////C:\\Users\\foricles\\Desktop\\Cathedral.fbx
 	////C:\\Users\\foricles\\Desktop\\man.fbx
-
-	prog = new GLProgram();
-	prog->begin();
-	prog->addShader(SHADER::VERTEX, "D:\\Work\\projects\\cpp\\Game-Engine\\Game Engine\\shader\\vrt.vrt");
-	prog->addShader(SHADER::FRAGMENT, "D:\\Work\\projects\\cpp\\Game-Engine\\Game Engine\\shader\\frg.frg");
-	prog->end();
-
-
-	mainLoop();
+	if (oWasError == 0)
+	{
+		auto heandler = oWindow->getWindowHeandler();
+		glfwSetWindowSizeCallback(heandler, windowSizeCallback);
+		mainLoop();
+	}
 
 	return oWasError;
 }
@@ -60,56 +68,51 @@ void Application::mainLoop()
 {
 	if (oWasError == 0)
 	{
-		kmu::mat4 world(kmu::mat4::Perspective(90, 800, 600, 0.03, 1000));
-		world *= kmu::mat4::Translation(0, 0, 50);
+		GameObject* cube1 = oObjectManager->getObject();
+		cube1->getMesh().loadModel("D:\\Work\\projects\\cpp\\Game-Engine\\Game Engine\\shader\\cube.fbx");
 
+		GameObject* cube2 = oObjectManager->getObject();
+		cube2->getMesh().loadModel("D:\\Work\\projects\\cpp\\Game-Engine\\Game Engine\\shader\\cube.fbx");
 
-		GameObject man1;
-		man1.getMesh().loadModel("C:\\Users\\foricles\\Desktop\\man.fbx");
-		GameObject man2;
-		man2.getMesh().loadModel("C:\\Users\\foricles\\Desktop\\man.fbx");
-		GameObject man3;
-		man3.getMesh().loadModel("C:\\Users\\foricles\\Desktop\\man.fbx");
-		GameObject man4;
-		man4.getMesh().loadModel("C:\\Users\\foricles\\Desktop\\man.fbx");
+		GameObject* cube3 = oObjectManager->getObject();
+		cube3->getMesh().loadModel("D:\\Work\\projects\\cpp\\Game-Engine\\Game Engine\\shader\\cube.fbx");
+
+		cube2->transform().setPosition(-3, 0, 0);
+		cube2->transform().setParent(&cube1->transform());
+
+		cube3->transform().setPosition(-5, 0, 0);
+		cube3->transform().setParent(&cube2->transform());
+
 		float a(0);
-		prog->bind();
-		
+
 		double t;
 
 		while (!oWindow->closed() && (oWasError == 0))
 		{
 			oWindow->clear();
 
-			a += 0.002;
-			//cube.transform().rotation(kmu::quaternion::euler(MY_PI/12, a, a, a));
-			man1.transform().position(-60, 0, 0);
-			man2.transform().position( 60, 0, 0);
-			man3.transform().position(  0, 60, 0);
-			man4.transform().position(  0,-60, 0);
+			a += 0.01;
+			cube1->transform().setRotation(kmu::quaternion::euler(+a, VEC3_FRONT));
+			cube2->transform().setRotation(kmu::quaternion::euler(-a*2, VEC3_FRONT));
 
-			man1.transform().rotation(kmu::quaternion::euler(+a, VEC3_FRONT));
-			man2.transform().rotation(kmu::quaternion::euler(-a, VEC3_FRONT));
-			man3.transform().rotation(kmu::quaternion::euler(+a, VEC3_FRONT));
-			man4.transform().rotation(kmu::quaternion::euler(-a, VEC3_FRONT));
-
-			glUniformMatrix4fv(prog->getUniform("worldMatrix"), 1, GL_TRUE, &world.at(0,0));
-			glUniform1f(prog->getUniform("time"), a);
-
-			glUniformMatrix4fv(prog->getUniform("selfMatrix"), 1, GL_TRUE, &man1.transMatrix().at(0, 0));
-			man1.getMesh().draw();
-
-			glUniformMatrix4fv(prog->getUniform("selfMatrix"), 1, GL_TRUE, &man2.transMatrix().at(0, 0));
-			man2.getMesh().draw();
-
-			glUniformMatrix4fv(prog->getUniform("selfMatrix"), 1, GL_TRUE, &man3.transMatrix().at(0, 0));
-			man3.getMesh().draw();
-
-			glUniformMatrix4fv(prog->getUniform("selfMatrix"), 1, GL_TRUE, &man4.transMatrix().at(0, 0));
-			man4.getMesh().draw();
-
+			oRender->draw();
 			/* Swap front and back buffers */
 			oWindow->update();
 		}
 	}
 }
+
+void Application::windowSizeCallback(GLFWwindow * window, int width, int height)
+{
+	glfwSetWindowSize(window, width, height);
+	Logger::Log(std::to_string(width) + " " + std::to_string(height));
+}
+
+void Application::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{}
+
+void Application::characterCallback(GLFWwindow* window, unsigned int codepoint)
+{}
+
+void Application::cursorPositionCallback(GLFWwindow* window, double xpos, double ypos)
+{}

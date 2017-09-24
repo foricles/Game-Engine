@@ -9,11 +9,6 @@ Mesh::Mesh()
 	glGenVertexArrays(1, &oVAO);
 	glGenBuffers(1, &oVBO);
 	glGenBuffers(1, &oIBO);
-
-	//for VAO
-	//glEnableVertexAttribArray
-	//glDisableVertexAttribArray
-	//glVertexAttribPointer
 }
 
 Mesh::~Mesh()
@@ -39,6 +34,12 @@ void Mesh::loadModel(const char* filepath)
 	}
 
 	this->bindModel();
+}
+
+void Mesh::setMaterial(const char *filepath)
+{
+	std::string vert = std::string(filepath) + "\\vrt.vrt";
+	std::string frag = std::string(filepath) + "\\frg.frg";
 }
 
 void Mesh::bindModel()

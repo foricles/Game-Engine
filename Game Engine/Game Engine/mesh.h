@@ -3,6 +3,9 @@
 
 #include "utils.h"
 #include "opengl.h"
+#include "glprogram.h"
+
+#include <string>
 
 class Mesh
 {
@@ -13,7 +16,15 @@ public:
 	void bind();
 	void unbind();
 	void draw();
+
 	void loadModel(const char* filepath);
+	void setMaterial(const char *filepath);
+
+	inline GLuint vboId(){return oVBO;}
+	inline GLuint iboId(){return oIBO;}
+	inline GLuint vaoId(){return oVAO;}
+
+	inline size_t getIndexCount() { return oDrawQuant; }
 private:
 	GLuint oVBO;
 	GLuint oIBO;

@@ -57,10 +57,22 @@ kmu::quaternion kmu::quaternion::euler(float angle, const vec3 & axes)
 
 inline kmu::quaternion kmu::operator*(const quaternion &q1, const quaternion &q2)
 {
-	float W = q1.oData->w*q2.oData->w - q1.oData->x*q2.oData->x - q1.oData->y*q2.oData->y - q1.oData->z*q2.oData->z;
-	float X = q1.oData->x*q2.oData->w + q1.oData->w*q2.oData->x + q1.oData->y*q2.oData->z - q1.oData->z*q2.oData->y;
-	float Y = q1.oData->y*q2.oData->w + q1.oData->w*q2.oData->y + q1.oData->z*q2.oData->x - q1.oData->z*q2.oData->z;
-	float Z = q1.oData->z*q2.oData->w + q1.oData->w*q2.oData->z + q1.oData->x*q2.oData->y - q1.oData->y*q2.oData->x;
+	float x1 = q1.oData->x;
+	float x2 = q2.oData->x;
+
+	float y1 = q1.oData->y;
+	float y2 = q2.oData->y;
+
+	float z1 = q1.oData->z;
+	float z2 = q2.oData->z;
+
+	float w1 = q1.oData->w;
+	float w2 = q2.oData->w;
+
+	float X = x1*w2 + w1*x2 + y1*z2 - z1*y2;
+	float Y = y1*w2 + w1*y2 + z1*x2 - x1*z2;
+	float Z = z1*w2 + w1*z2 + x1*y2 - y1*x2;
+	float W = w1*w2 - x1*x2 - y1*y2 - z1*z2;
 	return quaternion(X, Y, Z, W);
 }
 inline kmu::quaternion kmu::operator*(const quaternion &q1, const vec3 & vec)

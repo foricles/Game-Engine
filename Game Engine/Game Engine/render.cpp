@@ -4,15 +4,18 @@
 Render::Render(ObjectManager *manager)
 	: oManager(manager)
 {
-	oDefaultShader = new GLProgram();
-	oDefaultShader->begin();
-	oDefaultShader->addShader(SHADER::VERTEX, "D:\\Work\\projects\\cpp\\Game-Engine\\Game Engine\\shader\\vrt.vrt");
-	oDefaultShader->addShader(SHADER::FRAGMENT, "D:\\Work\\projects\\cpp\\Game-Engine\\Game Engine\\shader\\frg.frg");
-	oDefaultShader->end();
+	oDefaultMaterial = new Material();
+	oDefaultMaterial->getProgram().begin();
+	oDefaultMaterial->getProgram().addShader(SHADER::VERTEX, "D:\\Work\\projects\\cpp\\Game-Engine\\Game Engine\\shader\\vrt.vrt");
+	oDefaultMaterial->getProgram().addShader(SHADER::FRAGMENT, "D:\\Work\\projects\\cpp\\Game-Engine\\Game Engine\\shader\\frg.frg");
+	//oDefaultMaterial->getProgram().addShader(SHADER::VERTEX, "resurses\\shader\\vrt.vrt");
+	//oDefaultMaterial->getProgram().addShader(SHADER::FRAGMENT, "resurses\\shader\\frg.frg");
+	oDefaultMaterial->getProgram().end();
+
+	oDefaultMaterial->loadTexture("resurses\\box.png");
 
 	oProjMatrix = new kmu::mat4(1);
 	*oProjMatrix = kmu::mat4::Perspective(45, 640, 480, 0.03, 1000);
-	//*oWorldMatrix *= kmu::mat4::Translation(0, 0, 3.5);
 
 	oMainCamera = new Camera();
 	oMainCamera->translate(0, 0, -20);
@@ -20,31 +23,34 @@ Render::Render(ObjectManager *manager)
 
 Render::~Render()
 {
-	delete oDefaultShader;
+	delete oDefaultMaterial;
 	delete oProjMatrix;
 	delete oMainCamera;
 }
 
 void Render::draw()
 {
+	static float time = 0;
+	time += 0.01;
 	RenderData renderData;
 	oManager->getRenderData(&renderData);
 	renderData.SortByMaterial();
 
-	oDefaultShader->bind();
-	glUniformMatrix4fv(oDefaultShader->getUniform("worldMatrix"), 1, GL_TRUE, &oProjMatrix->at(0, 0));
-	glUniformMatrix4fv(oDefaultShader->getUniform("camMatrix"),  1, GL_TRUE,  &oMainCamera->getMatrix().at(0, 0));
-	glUniform1f(oDefaultShader->getUniform("time"), 1); 
+	oDefaultMaterial->bind();
+	oDefaultMaterial->setParametr("worldMatrix", *oProjMatrix);
+	oDefaultMaterial->setParametr("camMatrix", oMainCamera->getCameraMatrix());
+	oDefaultMaterial->setParametr("gSampler", 0);
 
 	for (register auto obj = renderData.oData.begin(); obj != renderData.oData.end(); ++obj)
 	{
-		glBindVertexArray(obj->id);
-		glUniformMatrix4fv(oDefaultShader->getUniform("selfMatrix"), 1, GL_TRUE, &obj->matrix.at(0, 0));
+		glBindVertexArray(obj->vao);
+		oDefaultMaterial->setParametr("selfMatrix", obj->matrix);
 		glDrawElements(GL_TRIANGLES, obj->count, GL_UNSIGNED_INT, nullptr);
+		//glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
 	}
 
-	oDefaultShader->unbind();
+	oDefaultMaterial->unbind();
 }
 
 const Camera * Render::getMainCam() const

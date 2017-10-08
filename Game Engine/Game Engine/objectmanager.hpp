@@ -8,7 +8,7 @@ class RenderData
 public:
 	struct Data
 	{
-		GLuint id;
+		GLuint vao;
 		GLuint materials;
 		size_t count;
 		kmu::mat4 matrix;

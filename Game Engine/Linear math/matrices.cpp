@@ -288,20 +288,17 @@ kmu::mat4 kmu::mat4::Rotation(const kmu::quaternion &q)
 	float zz = q.z * q.z;
 	float zw = q.z * q.w;
 
-	ret[0] = 1 - 2 * (yy + zz);
-	ret[1] = 2 * (xy - zw);
-	ret[2] = 2 * (xz + yw);
-	
-	ret[4] = 2 * (xy + zw);
-	ret[5] = 1 - 2 * (xx + zz);
-	ret[6] = 2 * (yz - xw);
-	
-	ret[8] = 2 * (xz - yw);
-	ret[9] = 2 * (yz + xw);
-	ret[10] = 1 - 2 * (xx + yy);
-	//Далее заполняем четвёртый ряд и четвёртый столбец матрицы 4х4:
-	ret[3] = ret[7] = ret[11] = ret[12] = ret[13] = ret[14] = 0;
-	ret[15] = 1;
+	ret.at(0, 0) = 1 - 2 * (yy + zz);
+	ret.at(0, 1) = 2 * (xy - zw);
+	ret.at(0, 2) = 2 * (xz + yw);
+
+	ret.at(1, 0) = 2 * (xy + zw);
+	ret.at(1, 1) = 1 - 2 * (xx + zz);
+	ret.at(1, 2) = 2 * (yz - xw);
+
+	ret.at(2, 0) = 2 * (xz - yw);
+	ret.at(2, 1) = 2 * (yz + xw);
+	ret.at(2, 2) = 1 - 2 * (xx + yy);
 	return ret;
 }
 

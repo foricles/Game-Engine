@@ -1,10 +1,12 @@
 #ifndef _INPUTMANAGER_HPP_
 #define _INPUTMANAGER_HPP_
 
-#include <deque>
+#include <map>
 #include "opengl.h"
 #include "Logger.h"
+#include "keycodes.hpp"
 #include <vec2.hpp>
+#include <vec3.hpp>
 
 struct MouseInfo
 {
@@ -26,8 +28,13 @@ public:
 	virtual inline float getMouseDeltaPosY();
 	virtual inline const kmu::vec2 &getMousePos() const;
 	virtual inline const kmu::vec2 &getMouseDeltaPos() const;
+
+	virtual inline bool isKeyDown(KeyCode key);
+	virtual inline bool isKeyPressed(KeyCode key);
 private:
 	MouseInfo *oMouseInfo;
+	kmu::vec3 oMouseButtons;
+	std::map<GLuint, GLuint> oKeys;
 private:
 	void keyCallback(int key, int scancode, int action, int mods);
 	void characterCallback(unsigned int codepoint, int mods);

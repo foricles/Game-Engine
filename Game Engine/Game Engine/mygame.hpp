@@ -10,44 +10,57 @@ private:
 	GameObject* cube2;
 	GameObject* cube3;
 	float angle;
+
+	float xAx;
+	float yAx;
 public:
 	Fly() :Scene("Fly")
 	{
 		angle = 0;
+		xAx = 0;
+		yAx = 0;
 	}
 	virtual ~Fly() {}
 
 	virtual void Start() override
 	{
-		////C:\\Users\\foricles\\Desktop\\Cathedral.fbx
-		////C:\\Users\\foricles\\Desktop\\man.fbx
-		cube1 = oObjectManager->getObject();
-		cube1->getMesh().loadModel("D:\\Work\\projects\\cpp\\Game-Engine\\Game Engine\\shader\\cube.fbx");
-
-		cube2 = oObjectManager->getObject();
-		cube2->getMesh().loadModel("D:\\Work\\projects\\cpp\\Game-Engine\\Game Engine\\shader\\cube.fbx");
-
-		cube3 = oObjectManager->getObject();
-		cube3->getMesh().loadModel("D:\\Work\\projects\\cpp\\Game-Engine\\Game Engine\\shader\\cube.fbx");
-
-		cube2->transform().setPosition(-3, 0, 0);
-		cube2->transform().setParent(&cube1->transform());
-
-		cube3->transform().setPosition(-5, 0, 0);
-		cube3->transform().setParent(&cube2->transform());
+		const char* cube = "resurses\\woodBox.fbx";
+		int s = 20;
+		for (register int i(0); i < 10; i++)
+		{
+			for (register int j(0); j < 10; j++)
+			{
+				for (register int k(0); k < 10; k++)
+				{
+					auto obj = oObjectManager->getObject();
+					obj->getMesh().loadModel(cube);
+					obj->transform().setPosition(i*s, j*s, k*s);
+				}
+			}
+		}
 	}
 
 	virtual void Update() override
 	{
-		float degr = 0.1;
-		angle += utils::math::to_radian(degr);
+		static int c(0);
+		double dt = (*deltaTime);
+		kmu::vec2 mouse = Input->getMouseDeltaPos() * dt;
+		auto axis = VEC3_UP;
 
-		cube1->transform().setRotation(kmu::quaternion::euler(+angle, VEC3_FRONT));
-		cube2->transform().setRotation(kmu::quaternion::euler(-angle * 2, VEC3_FRONT));
+		xAx += mouse.x;
+		yAx += mouse.y;
 
-		auto t = Input->getMouseDeltaPos();
-		getMainCamera()->rotate(VEC3_RIGHT, -(t.y / 480)/10 );
-		getMainCamera()->rotate(VEC3_UP, -(t.x / 640) / 10);
+		getMainCamera()->setRotation(kmu::quaternion::euler(xAx, VEC3_UP) * kmu::quaternion::euler(yAx, VEC3_RIGHT));
+		
+		if (Input->isKeyPressed(KeyCode::W))
+			getMainCamera()->move(0, 0, 5*dt);
+		else if (Input->isKeyPressed(KeyCode::S))
+			getMainCamera()->move(0, 0, -5 * dt);
+
+		if (Input->isKeyPressed(KeyCode::D))
+			getMainCamera()->move(-5*dt, 0, 0);
+		else if (Input->isKeyPressed(KeyCode::A))
+		getMainCamera()->move(5*dt, 0, 0);
 	}
 };
 

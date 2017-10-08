@@ -26,14 +26,12 @@ kmu::mat4 Transform::transMatrix()
 
 kmu::mat4 Transform::selfMatrix()
 {
-	kmu::mat4 trm(kmu::mat4::Translation(oPos[0], oPos[1], oPos[2]));
-	kmu::mat4 slm(kmu::mat4::Scaling(oScl[0], oScl[1], oScl[2]));
+	oRot.normalize();
+	kmu::mat4 trm(kmu::mat4::Translation(oPos.x, oPos.y, oPos.z));
+	kmu::mat4 slm(kmu::mat4::Scaling(oScl.x, oScl.y, oScl.z));
 	kmu::mat4 rtm(kmu::mat4::Rotation(oRot));
 
-	rtm *= slm;
-	trm *= rtm;
-
-	return trm;
+	return trm * (rtm * slm);
 }
 
 void Transform::attachToObject(Object * object)
@@ -150,4 +148,14 @@ void Transform::translate(const kmu::vec3 & dir)
 void Transform::translate(float X, float Y, float Z)
 {
 	oPos += kmu::vec3(X, Y, Z);
+}
+
+void Transform::rotate(float angle, const kmu::vec3 axis)
+{
+	oRot = oRot * kmu::quaternion::euler(angle, axis);
+}
+
+void Transform::rotate(const kmu::quaternion &quat)
+{
+	oRot = oRot * quat;
 }

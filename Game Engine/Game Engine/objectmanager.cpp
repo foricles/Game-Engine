@@ -40,7 +40,7 @@ void ObjectManager::getRenderData(RenderData *renderData)
 	int i(0);
 	for (register auto obj = oAllObjects.begin(); obj != oAllObjects.end(); obj++)
 	{
-		renderData->oData[i].id			= (*obj)->getMesh().vaoId();
+		renderData->oData[i].vao		= (*obj)->getMesh().vaoId();
 		renderData->oData[i].count		= (*obj)->getMesh().getIndexCount();
 		renderData->oData[i].matrix		= (*obj)->transMatrix();
 		renderData->oData[i].materials	= 0;

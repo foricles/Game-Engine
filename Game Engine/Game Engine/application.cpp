@@ -9,6 +9,7 @@ Application::Application(int argc, char ** argv)
 	, oWindow(nullptr)
 	, oScene(nullptr)
 {
+
 	if (!glfwInit())
 	{
 		Logger::Log("GLWF can`t be inicialized!", LogType::ERR);
@@ -34,8 +35,8 @@ Application::Application(int argc, char ** argv)
 		Logger::Pause();
 		oWasError = 3;
 	}
-	Logger::Log("OpenGL " + std::string((char*)glGetString(GL_VERSION)), LogType::INF);
 
+	Logger::Log("OpenGL " + std::string((char*)glGetString(GL_VERSION)), LogType::INF);
 }
 
 Application::~Application()
@@ -55,12 +56,12 @@ int Application::run()
 		glfwSetWindowSizeCallback(heandler, windowSizeCallback);
 		glfwSetKeyCallback(heandler, keyCallback);
 		glfwSetCharModsCallback(heandler, charmodsCallback);
-		glfwSetCursorPosCallback(heandler, cursorPositionCallback);
 		glfwSetMouseButtonCallback(heandler, mouseButtonCallback);
 		glfwSetScrollCallback(heandler, scrollCallback);
 
 		oScene = new Fly();
 		oScene->setInput(input);
+		oScene->deltaTime = &oDeltaTime;
 		mainLoop();
 	}
 
@@ -75,6 +76,8 @@ void Application::mainLoop()
 		oScene->Start();
 		while (!oWindow->closed() && (oWasError == 0))
 		{
+			double t1 = clock();
+			cursorUpdate();
 			oScene->Update();
 
 			oWindow->clear();
@@ -82,9 +85,18 @@ void Application::mainLoop()
 			oWindow->update();
 
 			oScene->LateUpdate();
+			oDeltaTime = (clock() - t1) / CLOCKS_PER_SEC;
 		}
 		oScene->Finish();
 	}
+}
+
+
+void Application::cursorUpdate()
+{
+	double xpos(0), ypos(0);
+	glfwGetCursorPos(oWindow->getWindowHeandler(), &xpos, &ypos);
+	input->cursorPositionCallback(xpos, ypos);
 }
 
 void Application::windowSizeCallback(GLFWwindow * window, int width, int height)
@@ -101,11 +113,6 @@ void Application::keyCallback(GLFWwindow* window, int key, int scancode, int act
 void Application::charmodsCallback(GLFWwindow* window, unsigned int codepoint, int mods)
 {
 	input->characterCallback(codepoint, mods);
-}
-
-void Application::cursorPositionCallback(GLFWwindow* window, double xpos, double ypos)
-{
-	input->cursorPositionCallback(xpos, ypos);
 }
 
 void Application::mouseButtonCallback(GLFWwindow* window, int button, int action, int mods)

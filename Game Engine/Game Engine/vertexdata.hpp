@@ -10,6 +10,7 @@ struct vertex
 	Point3f pPos;
 	Point3f pNor;
 	Point4f pCol;
+	Point2f pUV;
 };
 
 struct MeshData

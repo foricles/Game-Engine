@@ -13,7 +13,10 @@ Camera::Camera(const ProjectionData & data)
 Camera::Camera(float Fov, float Near, float Far, size_t Wight, size_t Height)
 	: oPosition(0, 0, 0)
 	, oRotation(0, 0, 0, 1)
-	, oProjMatrix()
+	, oTransMatrix(new kmu::mat4())
+	, oProjMatrix(new kmu::mat4())
+	, transChange(true)
+	, projChange(true)
 {
 	oProjData.Wight = Wight;
 	oProjData.Height = Height;
@@ -28,14 +31,21 @@ Camera::Camera(float left, float right, float top, float bottom)
 
 Camera::~Camera()
 {
+	delete oTransMatrix;
+	delete oProjMatrix;
 }
 
-kmu::mat4 Camera::getMatrix()
+kmu::mat4 Camera::getCameraMatrix()
 {
 	kmu::vec3 U = oRotation.rotate(VEC3_UP);
 	kmu::vec3 F = oRotation.rotate(VEC3_FRONT);
 
 	return kmu::mat4::CameraMatrix(F, U) * kmu::mat4::Translation(-oPosition.x, -oPosition.y, -oPosition.z);
+}
+
+kmu::mat4 Camera::getProjectionMatrix()
+{
+	return kmu::mat4();
 }
 
 const kmu::quaternion & Camera::getRotation()
@@ -48,6 +58,7 @@ const kmu::quaternion & Camera::getRotation() const
 	return oRotation;
 }
 
+#pragma region setRotation
 void Camera::setRotation(const kmu::quaternion & qua)
 {
 	oRotation = qua;
@@ -61,7 +72,9 @@ void Camera::setRotation(const kmu::vec3 axis, float radAngl)
 void Camera::setRotation(float x, float y, float z)
 {
 }
+#pragma endregion
 
+#pragma region Rotate
 void Camera::rotate(const kmu::quaternion & qua)
 {
 	oRotation = oRotation * qua;
@@ -75,6 +88,7 @@ void Camera::rotate(const kmu::vec3 axis, float radAngl)
 void Camera::rotate(float x, float y, float z)
 {
 }
+#pragma endregion
 
 const kmu::vec3 & Camera::getPosition() const
 {
@@ -96,6 +110,7 @@ void Camera::setPosition(float x, float y, float z)
 	oPosition.set(x, y, z);
 }
 
+#pragma region Translate
 void Camera::translate(const kmu::vec3 & pos)
 {
 	oPosition += pos;
@@ -104,4 +119,41 @@ void Camera::translate(const kmu::vec3 & pos)
 void Camera::translate(float x, float y, float z)
 {
 	oPosition += kmu::vec3(x, y, z);
+}
+
+void Camera::translate(const kmu::vec3 &axis, float len)
+{
+	oPosition += axis * len;
+}
+#pragma endregion
+
+void Camera::move(const kmu::vec3 &vec)
+{
+	kmu::vec3 U = oRotation.rotate(VEC3_UP);
+	kmu::vec3 F = oRotation.rotate(VEC3_FRONT);
+	kmu::vec3 R = F.cross(U);
+
+	kmu::vec3 dr = (U * vec.y) + (F * vec.z) + (R * vec.x);
+	oPosition += dr;
+}
+
+void Camera::move(const kmu::vec3 &axis, float len)
+{
+	kmu::vec3 U = oRotation.rotate(VEC3_UP);
+	kmu::vec3 F = oRotation.rotate(VEC3_FRONT);
+	kmu::vec3 R = F.cross(U);
+
+	auto t = axis * len;
+	kmu::vec3 dr = (U * t.y) + (F * t.z) + (R * t.x);
+	oPosition += dr;
+}
+
+void Camera::move(float X, float Y, float Z)
+{
+	kmu::vec3 U = oRotation.rotate(VEC3_UP);
+	kmu::vec3 F = oRotation.rotate(VEC3_FRONT);
+	kmu::vec3 R = F.cross(U);
+
+	kmu::vec3 dr = (U * Y) + (F * Z) + (R * X);
+	oPosition += dr;
 }

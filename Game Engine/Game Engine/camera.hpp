@@ -37,34 +37,48 @@ public:
 	Camera(float left, float right, float top, float bottom);
 	virtual ~Camera();
 
-	kmu::mat4 getMatrix();
+	kmu::mat4 getCameraMatrix();
+	kmu::mat4 getProjectionMatrix();
 
+public:
 	const kmu::quaternion &getRotation();
 	const kmu::quaternion &getRotation() const;
-
+public:
+	const kmu::vec3 &getPosition();
+	const kmu::vec3 &getPosition() const;
+public:
 	void setRotation(const kmu::quaternion &qua);
 	void setRotation(const kmu::vec3 axis, float radAngl);
 	void setRotation(float x, float y, float z);
-
+public:
 	void rotate(const kmu::quaternion &qua);
 	void rotate(const kmu::vec3 axis, float radAngl);
 	void rotate(float x, float y, float z);
-
-	const kmu::vec3 &getPosition() const;
-	const kmu::vec3 &getPosition();
-
-	void setPosition(const kmu::vec3 &pos);
-	void setPosition(float x, float y, float z);
-
+public:
 	void translate(const kmu::vec3 &pos);
 	void translate(float x, float y, float z);
+	void translate(const kmu::vec3 &axis, float len);
+public:
+	void setPosition(const kmu::vec3 &pos);
+	void setPosition(float x, float y, float z);
+public:
+	void move(const kmu::vec3 &vec);
+	void move(const kmu::vec3 &axis, float len);
+	void move(float X, float Y, float Z);
+
 private:
 	Projection oProjection;
 	ProjectionData oProjData;
 
 	kmu::vec3 oPosition;
 	kmu::quaternion oRotation;
-	kmu::mat4 oProjMatrix;
+
+	kmu::mat4 *oTransMatrix;
+	kmu::mat4 *oProjMatrix;
+
+private:
+	bool transChange;
+	bool projChange;
 };
 
 #endif // !_CAMERA_HPP_

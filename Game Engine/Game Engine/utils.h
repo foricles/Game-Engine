@@ -7,6 +7,7 @@
 #include <ASSIMP\Importer.hpp>
 #include <ASSIMP\postprocess.h>
 #include <ASSIMP\scene.h>
+#include <exception>
 
 namespace utils
 {
@@ -36,7 +37,7 @@ namespace utils
 			std::vector<MeshData> oMeshes;
 			Assimp::Importer importer;
 
-			auto set = aiProcess_Triangulate | aiProcess_CalcTangentSpace | aiProcess_GenNormals;
+			auto set = aiProcess_Triangulate | aiProcess_CalcTangentSpace | aiProcess_GenNormals | aiProcess_GenUVCoords | aiProcess_FlipUVs;
 			register const aiScene *scene = importer.ReadFile(filename, set);
 			if (scene)
 			{
@@ -48,8 +49,10 @@ namespace utils
 					MeshData mesh;
 					for (register size_t j = 0; j < paiMesh->mNumVertices; j++)
 					{
-						const aiVector3D* pPos = &(paiMesh->mVertices[j]);
-						const aiVector3D* pNor = &(paiMesh->mNormals[j]);
+						const aiFace& face     = paiMesh->mFaces[j];
+						const aiVector3D *pPos = &(paiMesh->mVertices[j]);
+						const aiVector3D *pNor = &(paiMesh->mNormals[j]);
+						const aiVector3D* pTexCoord = paiMesh->HasTextureCoords(0) ? &(paiMesh->mTextureCoords[0][j]) : &aiVector3D(0,0,0);
 
 						vertex vtx;
 					//set coordinates
@@ -58,7 +61,8 @@ namespace utils
 						vtx.pNor = Point3f(pNor->x, pNor->y, pNor->z);
 					//set colors
 						vtx.pCol = Point4f(1.0f, 0.0f, 1.0f, 1.0f);
-
+					//set uv
+						vtx.pUV = Point2f(pTexCoord->x, pTexCoord->y);
 						mesh.oVertexes.push_back(vtx);
 					}
 

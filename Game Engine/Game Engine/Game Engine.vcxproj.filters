@@ -48,9 +48,6 @@
     <ClCompile Include="objectmanager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="object.cpp">
-      <Filter>Header Files\includers</Filter>
-    </ClCompile>
     <ClCompile Include="render.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -61,6 +58,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="material.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="object.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -98,9 +101,6 @@
     <ClInclude Include="objectmanager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="object.hpp">
-      <Filter>Header Files\includers</Filter>
-    </ClInclude>
     <ClInclude Include="render.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -115,6 +115,15 @@
     </ClInclude>
     <ClInclude Include="mygame.hpp">
       <Filter>mygame</Filter>
+    </ClInclude>
+    <ClInclude Include="keycodes.hpp">
+      <Filter>Header Files\includers</Filter>
+    </ClInclude>
+    <ClInclude Include="material.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="object.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

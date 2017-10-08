@@ -2,6 +2,7 @@
 #define _RENDER_HPP_
 
 #include "camera.hpp"
+#include "material.hpp"
 #include "objectmanager.hpp"
 
 class Render
@@ -16,7 +17,7 @@ public:
 private:
 	Camera *oMainCamera;
 
-	GLProgram *oDefaultShader;
+	Material *oDefaultMaterial;
 	kmu::mat4 *oProjMatrix;
 	ObjectManager *oManager;
 };

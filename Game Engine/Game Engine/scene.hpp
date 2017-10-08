@@ -21,6 +21,7 @@ public:
 	virtual void LateUpdate();
 	virtual void Finish();
 
+	double *deltaTime;
 	void drawScene();
 	void setInput(InputManager *pInput) { Input = pInput; };
 private:

@@ -10,6 +10,8 @@
 #include <matrices.hpp>
 #include <FreeImage.h>
 
+#define EMPTY_MATERIAL 0xffffff
+
 struct UniformData
 {
 	std::string Name;
@@ -24,13 +26,16 @@ struct UniformData
 
 class Material
 {
+	friend class MaterialManager;
 public:
 	Material();
 	virtual ~Material();
 
 	GLProgram &getProgram();
-	void bind();
-	void unbind();
+	void bind() const;
+	void unbind() const;
+
+	size_t getMaterialId() const;
 
 	void loadTexture(const std::string &path);
 public: 
@@ -40,13 +45,14 @@ public:
 	void setParametr(const std::string &name, kmu::vec3 &value);
 	void setParametr(const std::string &name, kmu::mat4 &value);
 private:
-	GLuint oVAO;
+	size_t oSelfId;
 	GLuint oTextId;
 	GLProgram *oShader;
 
 	std::vector<UniformData*> oUniformValues;
 
 private:
+	void setId(size_t id);
 	void findValue(UniformData **ret, const std::string &name);
 };
 

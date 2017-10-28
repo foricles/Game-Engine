@@ -19,6 +19,9 @@
     <Filter Include="mygame">
       <UniqueIdentifier>{e141397e-2d67-4eb2-a473-cd9db255b4d3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Templates">
+      <UniqueIdentifier>{89192f58-d5b9-43c9-965e-ef011153ce26}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gameobject.cpp">
@@ -64,6 +67,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="object.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="materialmanager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -124,6 +130,18 @@
     </ClInclude>
     <ClInclude Include="object.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="materialmanager.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="objectmanagerbase.hpp">
+      <Filter>Templates</Filter>
+    </ClInclude>
+    <ClInclude Include="managernode.hpp">
+      <Filter>Templates</Filter>
+    </ClInclude>
+    <ClInclude Include="treeobjectmanagerbase.hpp">
+      <Filter>Templates</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

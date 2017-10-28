@@ -1,0 +1,12 @@
+﻿  main.cpp
+  matrices.cpp
+matrices.cpp(130): warning C4018: '>=': signed/unsigned mismatch
+matrices.cpp(138): warning C4018: '>=': signed/unsigned mismatch
+matrices.cpp(363): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+matrices.cpp(374): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+matrices.cpp(385): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  quaternion.cpp
+  vec2.cpp
+  vec3.cpp
+  vec4.cpp
+  Linear math.vcxproj -> D:\Work\projects\cpp\Game-Engine\Game Engine\Release\linearmath.lib

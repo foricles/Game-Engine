@@ -7,6 +7,7 @@ layout (location = 3) in vec2 UV;
 out vec2 pixPos;
 out vec2 uvCoord;
 out vec4 pixCol;
+out vec3 normal;
 
 uniform mat4 selfMatrix;
 uniform mat4 camMatrix;
@@ -21,4 +22,5 @@ void main()
 	pixCol = Color;
 	pixPos = Position.xy;
 	uvCoord = UV;
+	normal = Normal;
 }

@@ -17,6 +17,12 @@ struct MeshData
 {
 	std::vector<vertex> oVertexes;
 	std::vector<size_t> oIndexes;
+
+	inline void clear()
+	{
+		oVertexes.clear();
+		oIndexes.clear();
+	}
 };
 
 #endif // !_VERTEXDATA_HPP_

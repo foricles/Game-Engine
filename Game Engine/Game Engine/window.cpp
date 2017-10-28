@@ -17,6 +17,7 @@ Window::~Window()
 
 bool Window::create()
 {
+	//oWHeandler = glfwCreateWindow(oWeight, oHeight, "Hello World", glfwGetPrimaryMonitor(), NULL);
 	oWHeandler = glfwCreateWindow(oWeight, oHeight, "Hello World", NULL, NULL);
 	glfwMakeContextCurrent(oWHeandler);
 	oMonitor = glfwGetWindowMonitor(oWHeandler);
@@ -38,6 +39,15 @@ void Window::update()
 {
 	glfwPollEvents();
 	glfwSwapBuffers(oWHeandler);
+}
+
+void Window::windowSizeCallback(int width, int height)
+{
+}
+
+void Window::close()
+{
+	glfwSetWindowShouldClose(oWHeandler, 1);
 }
 
 void Window::clear()

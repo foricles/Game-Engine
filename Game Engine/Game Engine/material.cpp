@@ -2,8 +2,8 @@
 
 Material::Material()
 	:oShader(new GLProgram())
-	, oTextId(0)
-	//, oTexture(nullptr)
+	, oTextId(EMPTY_MATERIAL)
+	, oSelfId(EMPTY_MATERIAL)
 {
 }
 
@@ -22,25 +22,25 @@ GLProgram & Material::getProgram()
 	return (*oShader);
 }
 
-void Material::bind()
+void Material::bind() const
 {
 	oShader->bind();
-	if (oTextId != 0)
+	if (oTextId != EMPTY_MATERIAL)
 	{
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, oTextId);
 	}
 }
-void Material::unbind()
+void Material::unbind() const
 {
-	if (oTextId != 0)
+	if (oTextId != EMPTY_MATERIAL)
 		glBindTexture(GL_TEXTURE_2D, 0);
 	oShader->unbind();
 }
 
 void Material::loadTexture(const std::string &path)
 {
-	if (oTextId == 0)
+	if (oTextId == EMPTY_MATERIAL)
 	{
 		FREE_IMAGE_FORMAT fif = FIF_UNKNOWN;
 		FIBITMAP *dib(0);
@@ -65,13 +65,23 @@ void Material::loadTexture(const std::string &path)
 
 		glGenTextures(1, &oTextId);
 		glBindTexture(GL_TEXTURE_2D, oTextId);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, bits);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_BGRA, GL_UNSIGNED_BYTE, bits);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glBindTexture(GL_TEXTURE_2D, 0);
 
 		FreeImage_Unload(dib);
 	}
+}
+
+size_t Material::getMaterialId() const
+{
+	return oSelfId;
+}
+
+void Material::setId(size_t id)
+{
+	oSelfId = id;
 }
 
 void Material::findValue(UniformData **ret, const std::string & name)

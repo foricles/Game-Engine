@@ -86,8 +86,24 @@ namespace utils
 
 	namespace math
 	{
-		inline float to_radian(float x) { return ( x * MY_PI / 180.0f); }
-		inline float to_degree(float x) { return ( x * 180.0f / MY_PI); }
+		inline float to_radian(float x) 
+		{
+			return ( x * MY_PI / 180.0f);
+		}
+		inline float to_degree(float x) 
+		{
+			return ( x * 180.0f / MY_PI);
+		}
+		inline float lerp(float a, float b, float t) 
+		{
+			return (a*t + b *(1.0f - t));
+		}
+		inline float clamp(float x, float l, float r)
+		{
+			if (x < l) return l;
+			if (x > r) return r;
+			return x;
+		}
 	}
 }
 

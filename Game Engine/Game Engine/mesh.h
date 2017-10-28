@@ -4,6 +4,7 @@
 #include "utils.h"
 #include "opengl.h"
 #include "glprogram.h"
+#include "material.hpp"
 
 #include <string>
 
@@ -20,6 +21,9 @@ public:
 	void loadModel(const char* filepath);
 	void setMaterial(const char *filepath);
 
+	void setMaterial(const Material *material);
+	size_t getMaterialId() { return oMaterial; }
+
 	inline GLuint vboId(){return oVBO;}
 	inline GLuint iboId(){return oIBO;}
 	inline GLuint vaoId(){return oVAO;}
@@ -30,9 +34,11 @@ private:
 	GLuint oIBO;
 	GLuint oVAO;
 
+	size_t oMaterial;
+
 	size_t oDrawQuant;
 	MeshData oMeshData;
-private:
+public:
 	void bindModel();
 };
 

@@ -4,11 +4,12 @@
 #include "camera.hpp"
 #include "material.hpp"
 #include "objectmanager.hpp"
+#include "materialmanager.hpp"
 
 class Render
 {
 public:
-	Render(ObjectManager *manager);
+	Render(ObjectManager *manager, MaterialManager *matManager);
 	~Render();
 	void draw();
 
@@ -16,10 +17,10 @@ public:
 	Camera *getMainCam();
 private:
 	Camera *oMainCamera;
-
-	Material *oDefaultMaterial;
-	kmu::mat4 *oProjMatrix;
-	ObjectManager *oManager;
+	ObjectManager &oObjManager;
+	MaterialManager &oMatManager;
+private:
+	int oCurrentMaterial;
 };
 
 #endif //_RENDER_HPP_

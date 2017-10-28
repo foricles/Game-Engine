@@ -5,6 +5,7 @@ Mesh::Mesh()
 	: oVBO(0)
 	, oIBO(0)
 	, oVAO(0)
+	, oMaterial(EMPTY_MATERIAL)
 {
 	glGenVertexArrays(1, &oVAO);
 	glGenBuffers(1, &oVBO);
@@ -32,14 +33,17 @@ void Mesh::loadModel(const char* filepath)
 		oMeshData = pModel[0];
 		oDrawQuant = pModel[0].oIndexes.size();
 	}
-
-	this->bindModel();
 }
 
 void Mesh::setMaterial(const char *filepath)
 {
 	std::string vert = std::string(filepath) + "\\vrt.vrt";
 	std::string frag = std::string(filepath) + "\\frg.frg";
+}
+
+void Mesh::setMaterial(const Material *material)
+{
+	oMaterial = material->getMaterialId();
 }
 
 void Mesh::bindModel()

@@ -61,6 +61,7 @@ int Application::run()
 
 		oScene = new Fly();
 		oScene->setInput(input);
+		oScene->setWindow(oWindow);
 		oScene->deltaTime = &oDeltaTime;
 		mainLoop();
 	}

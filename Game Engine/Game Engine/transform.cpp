@@ -7,7 +7,6 @@ Transform::Transform()
 	, oScl(1, 1, 1)
 	, oRot(0, 0, 0, 1)
 	, oParent(nullptr)
-	, oObject(nullptr)
 {
 }
 
@@ -16,15 +15,15 @@ Transform::~Transform()
 {
 }
 
-kmu::mat4 Transform::transMatrix()
+kmu::mat4 Transform::globalMatrix()
 {
 	if (oParent == nullptr)
-		return selfMatrix();
+		return localMatrix();
 	else
-		return oParent->transMatrix() * selfMatrix();
+		return oParent->globalMatrix() * localMatrix();
 }
 
-kmu::mat4 Transform::selfMatrix()
+kmu::mat4 Transform::localMatrix()
 {
 	oRot.normalize();
 	kmu::mat4 trm(kmu::mat4::Translation(oPos.x, oPos.y, oPos.z));
@@ -32,11 +31,6 @@ kmu::mat4 Transform::selfMatrix()
 	kmu::mat4 rtm(kmu::mat4::Rotation(oRot));
 
 	return trm * (rtm * slm);
-}
-
-void Transform::attachToObject(Object * object)
-{
-	oObject = object;
 }
 
 void Transform::setParent(Transform *parent)
@@ -61,7 +55,7 @@ void Transform::setParent(Transform *parent)
 		}
 		else
 		{
-			Logger::Log("Try to attach self as parent: " + oObject->getName(), LogType::ATTMP);
+			Logger::Log("Try to attach self as parent", LogType::ATTMP);
 		}
 	}
 }
@@ -89,7 +83,7 @@ void Transform::setChild(Transform * child)
 		}
 		else
 		{
-			Logger::Log("Try to attach self as children: " + oObject->getName(), LogType::ATTMP);
+			Logger::Log("Try to attach self as children", LogType::ATTMP);
 		}
 	}
 }

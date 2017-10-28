@@ -4,27 +4,17 @@
 #include "object.hpp"
 #include "mesh.h"
 #include "transform.h"
+#include "managernode.hpp"
 
-class GameObject : public Object
+class GameObject : public Object, public Transform, public Node<GameObject>
 {
 	friend class ObjectManager;
 public:
 	GameObject();
 	virtual ~GameObject();
 
-	Transform &transform();
 	Mesh &getMesh();
-
-	kmu::mat4 transMatrix();
-
-	GameObject *findObjectInChildren(size_t id);
-	GameObject *findObjectInChildren(const std::string &name);
-
-	std::vector<GameObject*> findObjectsInChildren(const std::string &name);
-
-	GameObject *getParent();
 private:
-	Transform oTransform;
 	Mesh oMesh;
 };
 

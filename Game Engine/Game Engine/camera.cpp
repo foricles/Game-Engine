@@ -1,6 +1,6 @@
 #include "camera.hpp"
 
-Camera::Camera() : Camera(65, 0.03f, 1000.0f, 800, 600)
+Camera::Camera() : Camera(45, 0.03f, 1000, 1366, 768)
 {
 
 }
@@ -13,6 +13,7 @@ Camera::Camera(const ProjectionData & data)
 Camera::Camera(float Fov, float Near, float Far, size_t Wight, size_t Height)
 	: oPosition(0, 0, 0)
 	, oRotation(0, 0, 0, 1)
+	, oProjection(Projection::PERSPECTIVE)
 	, oTransMatrix(new kmu::mat4())
 	, oProjMatrix(new kmu::mat4())
 	, transChange(true)
@@ -43,9 +44,25 @@ kmu::mat4 Camera::getCameraMatrix()
 	return kmu::mat4::CameraMatrix(F, U) * kmu::mat4::Translation(-oPosition.x, -oPosition.y, -oPosition.z);
 }
 
-kmu::mat4 Camera::getProjectionMatrix()
+kmu::mat4 &Camera::getProjectionMatrix()
 {
-	return kmu::mat4();
+	switch (oProjection)
+	{
+	case Projection::PERSPECTIVE:
+		if (projChange)
+		{
+			*oProjMatrix = kmu::mat4::Perspective(oProjData.Fov,
+				oProjData.Wight,
+				oProjData.Height,
+				oProjData.Near,
+				oProjData.Far);
+			projChange = false;
+		}
+		break;
+	case Projection::ORTHOGRAPHIC:
+		break;
+	}
+	return *oProjMatrix;
 }
 
 const kmu::quaternion & Camera::getRotation()

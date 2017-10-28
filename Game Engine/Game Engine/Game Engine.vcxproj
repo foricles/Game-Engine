@@ -153,6 +153,7 @@
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="material.cpp" />
+    <ClCompile Include="materialmanager.cpp" />
     <ClCompile Include="mesh.cpp" />
     <ClCompile Include="object.cpp" />
     <ClCompile Include="objectmanager.cpp" />
@@ -169,15 +170,19 @@
     <ClInclude Include="inputmanager.hpp" />
     <ClInclude Include="keycodes.hpp" />
     <ClInclude Include="Logger.h" />
+    <ClInclude Include="managernode.hpp" />
     <ClInclude Include="material.hpp" />
+    <ClInclude Include="materialmanager.hpp" />
     <ClInclude Include="mesh.h" />
     <ClInclude Include="mygame.hpp" />
     <ClInclude Include="object.hpp" />
     <ClInclude Include="objectmanager.hpp" />
+    <ClInclude Include="objectmanagerbase.hpp" />
     <ClInclude Include="opengl.h" />
     <ClInclude Include="render.hpp" />
     <ClInclude Include="scene.hpp" />
     <ClInclude Include="transform.h" />
+    <ClInclude Include="treeobjectmanagerbase.hpp" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="vertexdata.hpp" />
     <ClInclude Include="window.h" />

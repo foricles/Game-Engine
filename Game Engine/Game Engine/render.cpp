@@ -1,56 +1,56 @@
 #include "render.hpp"
 
 
-Render::Render(ObjectManager *manager)
-	: oManager(manager)
+Render::Render(ObjectManager *manager, MaterialManager *matManager)
+	: oMatManager(*matManager)
+	, oObjManager(*manager)
+	, oCurrentMaterial(-1)
 {
-	oDefaultMaterial = new Material();
-	oDefaultMaterial->getProgram().begin();
-	oDefaultMaterial->getProgram().addShader(SHADER::VERTEX, "D:\\Work\\projects\\cpp\\Game-Engine\\Game Engine\\shader\\vrt.vrt");
-	oDefaultMaterial->getProgram().addShader(SHADER::FRAGMENT, "D:\\Work\\projects\\cpp\\Game-Engine\\Game Engine\\shader\\frg.frg");
-	//oDefaultMaterial->getProgram().addShader(SHADER::VERTEX, "resurses\\shader\\vrt.vrt");
-	//oDefaultMaterial->getProgram().addShader(SHADER::FRAGMENT, "resurses\\shader\\frg.frg");
-	oDefaultMaterial->getProgram().end();
-
-	oDefaultMaterial->loadTexture("resurses\\box.png");
-
-	oProjMatrix = new kmu::mat4(1);
-	*oProjMatrix = kmu::mat4::Perspective(45, 640, 480, 0.03, 1000);
-
 	oMainCamera = new Camera();
 	oMainCamera->translate(0, 0, -20);
 }
 
 Render::~Render()
 {
-	delete oDefaultMaterial;
-	delete oProjMatrix;
 	delete oMainCamera;
 }
 
 void Render::draw()
 {
-	static float time = 0;
-	time += 0.01;
 	RenderData renderData;
-	oManager->getRenderData(&renderData);
+	oObjManager.getRenderData(&renderData);
 	renderData.SortByMaterial();
 
-	oDefaultMaterial->bind();
-	oDefaultMaterial->setParametr("worldMatrix", *oProjMatrix);
-	oDefaultMaterial->setParametr("camMatrix", oMainCamera->getCameraMatrix());
-	oDefaultMaterial->setParametr("gSampler", 0);
 
+	auto rendermat = oMatManager.findMaterialById(oCurrentMaterial);
 	for (register auto obj = renderData.oData.begin(); obj != renderData.oData.end(); ++obj)
 	{
+		size_t material = obj->material;
+		if (material == EMPTY_MATERIAL)
+			material = oMatManager.getDefaultMaterial()->getMaterialId();
+
+		if (material != oCurrentMaterial)
+		{
+			if (rendermat)
+			{
+				rendermat->unbind();
+			}
+
+			oCurrentMaterial = material;
+			rendermat = oMatManager.findMaterialById(oCurrentMaterial);
+
+			rendermat->bind();
+		}
+
+		rendermat->setParametr("worldMatrix", oMainCamera->getProjectionMatrix());
+		rendermat->setParametr("camMatrix", oMainCamera->getCameraMatrix());
+		rendermat->setParametr("gSampler", 0);
+
 		glBindVertexArray(obj->vao);
-		oDefaultMaterial->setParametr("selfMatrix", obj->matrix);
+		rendermat->setParametr("selfMatrix", obj->matrix);
 		glDrawElements(GL_TRIANGLES, obj->count, GL_UNSIGNED_INT, nullptr);
-		//glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
 	}
-
-	oDefaultMaterial->unbind();
 }
 
 const Camera * Render::getMainCam() const

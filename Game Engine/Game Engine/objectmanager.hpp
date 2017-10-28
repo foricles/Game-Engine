@@ -9,7 +9,7 @@ public:
 	struct Data
 	{
 		GLuint vao;
-		GLuint materials;
+		GLuint material;
 		size_t count;
 		kmu::mat4 matrix;
 	};
@@ -24,7 +24,7 @@ public:
 private:
 	inline static bool cmp(const RenderData::Data &d1, const RenderData::Data &d2)
 	{
-		return d1.materials < d2.materials;
+		return d1.material < d2.material;
 	}
 };
 

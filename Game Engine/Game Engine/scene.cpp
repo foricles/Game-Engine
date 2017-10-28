@@ -2,15 +2,18 @@
 
 Scene::Scene(const std::string &sceneName)
 	: oSceneName(sceneName)
+	, objectManager(   new ObjectManager()   )
+	, materialManager( new MaterialManager() )
+	, oRender(nullptr)
 {
-	oObjectManager = new ObjectManager();
-	oRender = new Render(oObjectManager);
+	oRender = new Render(objectManager, materialManager);
 }
 
 Scene::~Scene()
 {
 	delete oRender;
-	delete oObjectManager;
+	delete objectManager;
+	delete materialManager;
 }
 
 void Scene::drawScene()

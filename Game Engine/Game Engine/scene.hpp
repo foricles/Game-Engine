@@ -3,17 +3,23 @@
 
 #include "render.hpp"
 #include "objectmanager.hpp"
+#include "materialmanager.hpp"
 #include "inputmanager.hpp"
+#include "window.h"
 
 class Scene
 {
+	friend class Application;
 public:
 	Scene(const std::string &sceneName);
 	virtual ~Scene();
 protected:
 	InputManager *Input;
-	ObjectManager *oObjectManager;
 	Camera *getMainCamera();
+	Window *window;
+protected:
+	ObjectManager *objectManager;
+	MaterialManager *materialManager;
 public:
 	virtual void Start();
 	virtual void Update();
@@ -23,10 +29,11 @@ public:
 
 	double *deltaTime;
 	void drawScene();
+private:
 	void setInput(InputManager *pInput) { Input = pInput; };
+	void setWindow(Window *pWindow) { window = pWindow; };
 private:
 	std::string oSceneName;
-
 	Render *oRender;
 };
 

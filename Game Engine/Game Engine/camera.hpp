@@ -38,7 +38,7 @@ public:
 	virtual ~Camera();
 
 	kmu::mat4 getCameraMatrix();
-	kmu::mat4 getProjectionMatrix();
+	kmu::mat4 &getProjectionMatrix();
 
 public:
 	const kmu::quaternion &getRotation();
@@ -75,7 +75,6 @@ private:
 
 	kmu::mat4 *oTransMatrix;
 	kmu::mat4 *oProjMatrix;
-
 private:
 	bool transChange;
 	bool projChange;

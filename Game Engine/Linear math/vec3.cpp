@@ -150,3 +150,8 @@ inline kmu::vec3 kmu::operator/(const vec3 &v, float n)
 		v.oData->y / n,
 		v.oData->z / n);
 }
+
+kmu::vec3 kmu::lerp(const vec3 & a, const vec3 & b, float t)
+{
+	return a*t - b*(1-t);
+}

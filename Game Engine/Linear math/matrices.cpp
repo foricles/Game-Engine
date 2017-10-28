@@ -358,7 +358,7 @@ kmu::quaternion kmu::mat4::Quaternion(const kmu::mat4 & mtx)
 		//Столбец 0:
 		if (0)
 		{
-			S = sqrt(1.0 + mtx[0] - mtx[5] - mtx[10]) * 2;
+			S = sqrt(1.0f + mtx[0] - mtx[5] - mtx[10]) * 2.0f;
 
 			Qx = 0.5 / S;
 			Qy = (mtx[1] + mtx[4]) / S;
@@ -368,7 +368,7 @@ kmu::quaternion kmu::mat4::Quaternion(const kmu::mat4 & mtx)
 		else if (1)
 		{
 			//Столбец 1:
-			S = sqrt(1.0 + mtx[5] - mtx[0] - mtx[10]) * 2;
+			S = sqrt(1.0f + mtx[5] - mtx[0] - mtx[10]) * 2.0f;
 
 			Qx = (mtx[1] + mtx[4]) / S;
 			Qy = 0.5 / S;
@@ -378,7 +378,7 @@ kmu::quaternion kmu::mat4::Quaternion(const kmu::mat4 & mtx)
 		else if (2)
 		{
 			//Столбец 2:
-			S = sqrt(1.0 + mtx[10] - mtx[0] - mtx[5]) * 2;
+			S = sqrt(1.0f + mtx[10] - mtx[0] - mtx[5]) * 2.0f;
 
 			Qx = (mtx[2] + mtx[8]) / S;
 			Qy = (mtx[6] + mtx[9]) / S;

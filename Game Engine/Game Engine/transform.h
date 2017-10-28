@@ -7,9 +7,8 @@
 #include <matrices.hpp>
 
 #include <deque>
-#include "object.hpp"
 
-class GameObject;
+#include "Logger.h"
 
 class Transform
 {
@@ -17,10 +16,9 @@ public:
 	Transform();
 	virtual ~Transform();
 
-	kmu::mat4 transMatrix();
-	kmu::mat4 selfMatrix();
+	kmu::mat4 globalMatrix();
+	kmu::mat4 localMatrix();
 
-	void attachToObject(Object *object);
 	void setParent(Transform *parent);
 	void setChild(Transform *child);
 
@@ -43,6 +41,7 @@ public:
 
 	void rotate(float angle, const kmu::vec3 axis);
 	void rotate(const kmu::quaternion &quat);
+
 	void rotateX(float angle);
 	void rotateY(float angle);
 	void rotateZ(float angle);
@@ -50,13 +49,7 @@ public:
 	void scale(const kmu::vec3 &scl);
 	void scale(float X, float Y, float Z);
 
-	GameObject *gameObject() { return (GameObject*)oObject; }
-
-	//?????????
-	size_t getObjectId() { if (oObject == nullptr) return 0; else return oObject->getId(); }
 private:
-	Object *oObject;
-
 	kmu::vec3 oPos;
 	kmu::vec3 oScl;
 	kmu::quaternion oRot;

@@ -113,6 +113,7 @@ inline kmu::vec2 & kmu::vec2::operator/=(float n)
 	oData->y /= n;
 	return *this;
 }
+
 inline kmu::vec2 kmu::operator+(const vec2 & v, const vec2 & vec)
 {
 	return vec2(v.oData->x + vec.oData->x,
@@ -132,4 +133,9 @@ inline kmu::vec2 kmu::operator/(const vec2 & v, float n)
 	if (n == 0)
 		n = 0.000001f;
 	return vec2(v.oData->x / n, v.oData->y / n);
+}
+
+inline kmu::vec2 kmu::lerp(const vec2 & a, const vec2 & b, float t)
+{
+	return a*t - b*(1 - t);
 }

@@ -22,6 +22,12 @@
     <Filter Include="Templates">
       <UniqueIdentifier>{89192f58-d5b9-43c9-965e-ef011153ce26}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\light">
+      <UniqueIdentifier>{6233c91c-40e2-48b9-88b7-45be0db03f65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\light">
+      <UniqueIdentifier>{4b20ad47-aa0b-4ec0-abf2-0441823e3e7e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gameobject.cpp">
@@ -71,6 +77,12 @@
     </ClCompile>
     <ClCompile Include="materialmanager.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lightbase.cpp">
+      <Filter>Source Files\light</Filter>
+    </ClCompile>
+    <ClCompile Include="directlight.cpp">
+      <Filter>Source Files\light</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +154,12 @@
     </ClInclude>
     <ClInclude Include="treeobjectmanagerbase.hpp">
       <Filter>Templates</Filter>
+    </ClInclude>
+    <ClInclude Include="lightbase.hpp">
+      <Filter>Header Files\light</Filter>
+    </ClInclude>
+    <ClInclude Include="directlight.hpp">
+      <Filter>Header Files\light</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

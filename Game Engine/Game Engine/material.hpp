@@ -16,12 +16,8 @@ struct UniformData
 {
 	std::string Name;
 	GLuint Location;
-	UniformData() : UniformData("", 0)
-	{}
-	UniformData(const std::string &name, GLuint lok)
-		: Name(name)
-		, Location(lok)
-	{}
+	UniformData() : UniformData("", 0){}
+	UniformData(const std::string &name, GLuint lok): Name(name), Location(lok){}
 };
 
 class Material
@@ -43,6 +39,7 @@ public:
 	void setParametr(const std::string &name, float value);
 	void setParametr(const std::string &name, kmu::vec2 &value);
 	void setParametr(const std::string &name, kmu::vec3 &value);
+	void setParametr(const std::string &name, kmu::vec4 &value);
 	void setParametr(const std::string &name, kmu::mat4 &value);
 private:
 	size_t oSelfId;

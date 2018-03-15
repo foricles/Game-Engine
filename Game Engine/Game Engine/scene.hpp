@@ -6,6 +6,7 @@
 #include "materialmanager.hpp"
 #include "inputmanager.hpp"
 #include "window.h"
+#include "directlight.hpp"
 
 class Scene
 {
@@ -20,6 +21,7 @@ protected:
 protected:
 	ObjectManager *objectManager;
 	MaterialManager *materialManager;
+	DirectionalLight oLight;
 public:
 	virtual void Start();
 	virtual void Update();

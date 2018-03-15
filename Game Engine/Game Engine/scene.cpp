@@ -6,7 +6,7 @@ Scene::Scene(const std::string &sceneName)
 	, materialManager( new MaterialManager() )
 	, oRender(nullptr)
 {
-	oRender = new Render(objectManager, materialManager);
+	oRender = new Render(objectManager, materialManager, &oLight);
 }
 
 Scene::~Scene()

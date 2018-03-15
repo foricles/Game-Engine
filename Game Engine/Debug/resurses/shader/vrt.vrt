@@ -6,19 +6,21 @@ layout (location = 3) in vec2 UV;
 
 out vec2 pixPos;
 out vec2 uvCoord;
+out vec3 normals;
 out vec4 pixCol;
 
 uniform mat4 selfMatrix;
 uniform mat4 camMatrix;
 uniform mat4 worldMatrix;
 
-
 void main()
 {
-	vec4 np = (worldMatrix * camMatrix * selfMatrix) * vec4(Position, 1.0);
+	mat4 mtx = worldMatrix * camMatrix * selfMatrix;
+	vec4 np = mtx * vec4(Position, 1.0);
 	gl_Position = np;
 	
 	pixCol = Color;
 	pixPos = Position.xy;
 	uvCoord = UV;
+	normals = (selfMatrix * vec4(Normal, 0.0)).xyz;
 }

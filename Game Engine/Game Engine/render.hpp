@@ -6,10 +6,14 @@
 #include "objectmanager.hpp"
 #include "materialmanager.hpp"
 
+//TODO: make light manager
+#include "directlight.hpp"
+
 class Render
 {
 public:
-	Render(ObjectManager *manager, MaterialManager *matManager);
+	//TODO: with light manager
+	Render(ObjectManager *manager, MaterialManager *matManager, DirectionalLight *light);
 	~Render();
 	void draw();
 
@@ -19,6 +23,7 @@ private:
 	Camera *oMainCamera;
 	ObjectManager &oObjManager;
 	MaterialManager &oMatManager;
+	DirectionalLight &oLight;
 private:
 	int oCurrentMaterial;
 };

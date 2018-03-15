@@ -17,7 +17,11 @@ Application::Application(int argc, char ** argv)
 		oWasError = 1;
 	}
 
+#ifdef DEBUG
+	oWindow = new Window(800, 600);
+#else
 	oWindow = new Window();
+#endif // DEBUG
 
 	if (!oWindow->create())
 	{

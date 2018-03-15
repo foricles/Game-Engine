@@ -104,6 +104,7 @@ void Camera::rotate(const kmu::vec3 axis, float radAngl)
 
 void Camera::rotate(float x, float y, float z)
 {
+	//oRotation = oRotation * kmu::quaternion::euler(radAngl, axis);
 }
 #pragma endregion
 

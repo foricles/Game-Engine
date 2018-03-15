@@ -147,9 +147,11 @@
   <ItemGroup>
     <ClCompile Include="application.cpp" />
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="directlight.cpp" />
     <ClCompile Include="gameobject.cpp" />
     <ClCompile Include="glprogram.cpp" />
     <ClCompile Include="inputmanager.cpp" />
+    <ClCompile Include="lightbase.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="material.cpp" />
@@ -165,10 +167,12 @@
   <ItemGroup>
     <ClInclude Include="application.h" />
     <ClInclude Include="camera.hpp" />
+    <ClInclude Include="directlight.hpp" />
     <ClInclude Include="gameobject.h" />
     <ClInclude Include="glprogram.h" />
     <ClInclude Include="inputmanager.hpp" />
     <ClInclude Include="keycodes.hpp" />
+    <ClInclude Include="lightbase.hpp" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="managernode.hpp" />
     <ClInclude Include="material.hpp" />

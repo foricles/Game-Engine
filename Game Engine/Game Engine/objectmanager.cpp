@@ -41,6 +41,8 @@ void ObjectManager::getRenderData(RenderData *renderData)
 	for (register auto obj = oAllObjects.begin(); obj != oAllObjects.end(); obj++)
 	{
 		renderData->oData[i].vao		= (*obj)->getMesh().vaoId();
+		renderData->oData[i].vbo		= (*obj)->getMesh().vboId();
+		renderData->oData[i].ibo		= (*obj)->getMesh().iboId();
 		renderData->oData[i].count		= (*obj)->getMesh().getIndexCount();
 		renderData->oData[i].matrix		= (*obj)->globalMatrix();
 		renderData->oData[i].material	= (*obj)->getMesh().getMaterialId();

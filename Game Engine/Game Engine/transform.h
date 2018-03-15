@@ -49,11 +49,12 @@ public:
 	void scale(const kmu::vec3 &scl);
 	void scale(float X, float Y, float Z);
 
-private:
+	kmu::vec3 transformDirection(const kmu::vec3 &dir);
+protected:
 	kmu::vec3 oPos;
 	kmu::vec3 oScl;
 	kmu::quaternion oRot;
-
+private:
 	Transform *oParent;
 	std::deque <Transform*>oChildren;
 

@@ -9,6 +9,8 @@ public:
 	struct Data
 	{
 		GLuint vao;
+		GLuint vbo;
+		GLuint ibo;
 		GLuint material;
 		size_t count;
 		kmu::mat4 matrix;

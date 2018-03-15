@@ -17,8 +17,11 @@ Window::~Window()
 
 bool Window::create()
 {
-	//oWHeandler = glfwCreateWindow(oWeight, oHeight, "Hello World", glfwGetPrimaryMonitor(), NULL);
+#ifdef DEBUG
 	oWHeandler = glfwCreateWindow(oWeight, oHeight, "Hello World", NULL, NULL);
+#else
+	oWHeandler = glfwCreateWindow(oWeight, oHeight, "Hello World", glfwGetPrimaryMonitor(), NULL);
+#endif // DEBUG
 	glfwMakeContextCurrent(oWHeandler);
 	oMonitor = glfwGetWindowMonitor(oWHeandler);
 

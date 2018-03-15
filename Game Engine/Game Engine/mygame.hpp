@@ -12,51 +12,75 @@ private:
 	GameObject* cube1;
 	GameObject* cube2;
 	GameObject* cube3;
+	GameObject* plane;
 	float angle;
 
 	float xAx;
 	float yAx;
+
+	float lAx;
 public:
 	Fly() :Scene("Fly")
 	{
 		angle = 0;
 		xAx = 0;
 		yAx = 0;
+
+		lAx = 0;
 	}
 	virtual ~Fly() {}
 
 	virtual void Start() override
 	{
+		std::string modelPath("resurses\\models\\obj\\");
+		std::string textrPath("resurses\\textures\\");
+
 		auto textrRock = materialManager->New();
 		textrRock->getProgram().begin();
 		textrRock->getProgram().addShader(SHADER::VERTEX, "resurses\\shader\\vrt.vrt");
 		textrRock->getProgram().addShader(SHADER::FRAGMENT, "resurses\\shader\\frg.frg");
-		textrRock->loadTexture("resurses\\textures\\BrickJapanese0123.jpeg");
+		textrRock->loadTexture(textrPath + "Floor.png");
 		textrRock->getProgram().end();
 
-		std::string modelPath("resurses\\models\\");
-		std::string textrPath("resurses\\textures\\");
 
 		auto obj = objectManager->getObject();
-		obj->getMesh().loadModel((modelPath + "Terrain.fbx").c_str());
-		obj->setPosition(100,0,0);
+		obj->getMesh().loadModel((modelPath + "terra.obj").c_str());
+		obj->setPosition(0, 0, 0);
 		obj->getMesh().bindModel();
 
 		obj = objectManager->getObject();
-		obj->getMesh().loadModel((modelPath + "Colons.fbx").c_str());
+		obj->getMesh().loadModel((modelPath + "columns.obj").c_str());
 		obj->setPosition(0, 0, 0);
 		obj->getMesh().setMaterial(textrRock);
 		obj->getMesh().bindModel();
 
 		obj = objectManager->getObject();
-		obj->getMesh().loadModel((modelPath + "Stones.fbx").c_str());
+		obj->getMesh().loadModel((modelPath + "stones.obj").c_str());
 		obj->setPosition(0, 0, 0);
+		obj->getMesh().setMaterial(textrRock);
 		obj->getMesh().bindModel();
 
 		obj = objectManager->getObject();
-		obj->getMesh().loadModel((modelPath + "Place.fbx").c_str());
+		obj->getMesh().loadModel((modelPath + "stairs.obj").c_str());
 		obj->setPosition(0, 0, 0);
+		obj->getMesh().setMaterial(textrRock);
 		obj->getMesh().bindModel();
+
+		auto yaktxt = materialManager->New();
+		yaktxt->getProgram().begin();
+		yaktxt->getProgram().addShader(SHADER::VERTEX, "resurses\\shader\\vrt.vrt");
+		yaktxt->getProgram().addShader(SHADER::FRAGMENT, "resurses\\shader\\frg.frg");
+		yaktxt->loadTexture(textrPath + "YAK3.png");
+		yaktxt->getProgram().end();
+
+		plane = objectManager->getObject();
+		plane->getMesh().loadModel((modelPath + "YAK3.obj").c_str());
+		plane->setPosition(0, 0, 0);
+		plane->getMesh().setMaterial(yaktxt);
+		plane->getMesh().bindModel();
+
+		getMainCamera()->setRotation(kmu::quaternion::euler(MY_PI/2, VEC3_UP));
+		//plane->rotate(quaternion::euler(MY_PI / 4, VEC3_UP));
 
 		/*const char* cube = "resurses\\woodBox.fbx";
 		int s = 25;
@@ -89,19 +113,37 @@ public:
 		xAx = math::lerp(xAx, mouse.x + xAx, 0.1f);
 		yAx = math::lerp(yAx, mouse.y + yAx, 0.1f);
 
-		getMainCamera()->setRotation(kmu::quaternion::euler(xAx, VEC3_FRONT) * kmu::quaternion::euler(yAx, VEC3_RIGHT));
+		getMainCamera()->setRotation(kmu::quaternion::euler(xAx, VEC3_UP));
 		
 		float speed = 30 * dt;
 
+		if (Input->isKeyPressed(KeyCode::L))
+		{
+			lAx += dt;
+			oLight.setRotation(kmu::quaternion::euler(lAx, VEC3_RIGHT));
+		}
+		else if (Input->isKeyPressed(KeyCode::K))
+		{
+			lAx -= dt;
+			oLight.setRotation(kmu::quaternion::euler(lAx, VEC3_RIGHT));
+		}
+
 		if (Input->isKeyPressed(KeyCode::W))
-			getMainCamera()->move(0, 0, speed);
+			plane->translate(0, speed, 0);
 		else if (Input->isKeyPressed(KeyCode::S))
-			getMainCamera()->move(0, 0, -speed);
+			plane->translate(0, -speed, 0);
 
 		if (Input->isKeyPressed(KeyCode::D))
-			getMainCamera()->move(-speed, 0, 0);
+			plane->rotate(0.01f, VEC3_UP);
 		else if (Input->isKeyPressed(KeyCode::A))
-		getMainCamera()->move(speed, 0, 0);
+			plane->rotate(-0.01f, VEC3_UP);
+
+		vec3 dir = ((VEC3_UP * -1) + VEC3_RIGHT) * -70 + VEC3_FRONT * 10;
+		dir = plane->transformDirection(dir);
+		getMainCamera()->setPosition(plane->getPosition() + dir);
+		
+
+		plane->translate(plane->transformDirection(VEC3_RIGHT) * 15 * dt);
 	}
 };
 

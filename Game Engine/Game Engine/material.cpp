@@ -35,6 +35,11 @@ void Material::unbind() const
 {
 	if (oTextId != EMPTY_MATERIAL)
 		glBindTexture(GL_TEXTURE_2D, 0);
+
+	glDisableVertexAttribArray(0);
+	glDisableVertexAttribArray(1);
+	glDisableVertexAttribArray(2);
+	glDisableVertexAttribArray(3);
 	oShader->unbind();
 }
 
@@ -132,6 +137,13 @@ void Material::setParametr(const std::string &name, kmu::vec3 &value)
 	UniformData * uni = nullptr;
 	findValue(&uni, name);
 	glUniform3f(uni->Location, value.x, value.y, value.z);
+}
+
+void Material::setParametr(const std::string & name, kmu::vec4 & value)
+{
+	UniformData * uni = nullptr;
+	findValue(&uni, name);
+	glUniform4f(uni->Location, value.x, value.y, value.z, value.w);
 }
 
 void Material::setParametr(const std::string &name, kmu::mat4 &value)

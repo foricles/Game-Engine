@@ -153,3 +153,8 @@ void Transform::rotate(const kmu::quaternion &quat)
 {
 	oRot = oRot * quat;
 }
+
+kmu::vec3 Transform::transformDirection(const kmu::vec3 & dir)
+{
+	return oRot.rotate(dir);
+}

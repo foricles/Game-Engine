@@ -13,6 +13,7 @@ private:
 	GameObject* cube2;
 	GameObject* cube3;
 	GameObject* plane;
+	GameObject* wint;
 	float angle;
 
 	float xAx;
@@ -74,10 +75,18 @@ public:
 		yaktxt->getProgram().end();
 
 		plane = objectManager->getObject();
-		plane->getMesh().loadModel((modelPath + "YAK3.obj").c_str());
+		plane->getMesh().loadModel((modelPath + "PlaneBody.obj").c_str());
 		plane->setPosition(0, 0, 0);
+		plane->setScaling(0.2f, 0.2f, 0.2f);
 		plane->getMesh().setMaterial(yaktxt);
 		plane->getMesh().bindModel();
+
+		wint = objectManager->getObject();
+		wint->getMesh().loadModel((modelPath + "PlaneWint.obj").c_str());
+		wint->setParent(plane);
+		wint->setPosition(0, 0, 0);
+		wint->getMesh().setMaterial(yaktxt);
+		wint->getMesh().bindModel();
 
 		getMainCamera()->setRotation(kmu::quaternion::euler(MY_PI/2, VEC3_UP));
 		//plane->rotate(quaternion::euler(MY_PI / 4, VEC3_UP));
@@ -138,12 +147,16 @@ public:
 		else if (Input->isKeyPressed(KeyCode::A))
 			plane->rotate(-0.01f, VEC3_UP);
 
-		vec3 dir = ((VEC3_UP * -1) + VEC3_RIGHT) * -70 + VEC3_FRONT * 10;
+		vec3 dir = vec3(0, 30, -150);
 		dir = plane->transformDirection(dir);
 		getMainCamera()->setPosition(plane->getPosition() + dir);
+		getMainCamera()->setRotation(plane->getRotation());
 		
+		static float wintAng = 0;
+		wint->setRotation(kmu::quaternion::euler(wintAng, VEC3_FRONT));
+		wintAng += 0.06f;
 
-		plane->translate(plane->transformDirection(VEC3_RIGHT) * 15 * dt);
+		plane->translate(plane->transformDirection(VEC3_FRONT) * 15 * dt);
 	}
 };
 

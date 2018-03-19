@@ -1,6 +1,6 @@
 #include "camera.hpp"
 
-Camera::Camera() : Camera(45, 0.03f, 1000, 1366, 768)
+Camera::Camera() : Camera(89.0f, 0.03f, 1000, 1366, 768)
 {
 
 }

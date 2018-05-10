@@ -2,8 +2,8 @@
 
 Scene::Scene(const std::string &sceneName)
 	: oSceneName(sceneName)
-	, objectManager(   new ObjectManager()   )
 	, materialManager( new MaterialManager() )
+	, objectManager(   new ObjectManager()   )
 	, oRender(nullptr)
 {
 	oRender = new Render(objectManager, materialManager, &oLight);
@@ -24,6 +24,11 @@ void Scene::drawScene()
 Camera * Scene::getMainCamera()
 {
 	return oRender->getMainCam();
+}
+
+void Scene::setSkybox(SkyBox * skyBox)
+{
+	oRender->setSkybox(skyBox);
 }
 
 void Scene::Start()

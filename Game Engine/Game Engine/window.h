@@ -8,7 +8,7 @@ class Window
 {
 	friend class Application;
 public:
-	Window(size_t W = 1366, size_t H = 768);
+	Window(size_t W = 1920, size_t H = 1080);
 	virtual ~Window();
 
 	bool create();

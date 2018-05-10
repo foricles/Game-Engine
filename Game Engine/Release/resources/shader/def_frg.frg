@@ -1,0 +1,18 @@
+#version 330
+
+in vec2 pixPos;
+in vec2 uvCoord;
+in vec4 pixCol;
+in vec3 normals;
+
+out vec4 Color;
+
+uniform vec3 lightDirection;
+
+void main()
+{
+	vec3 light = normalize(lightDirection);
+	vec3 norml = normalize(normals);
+	float mul = ((dot(light, norml) + 1.0) / 2.0) + 0.01;
+	Color = vec4(1.0, 0.0, 1.0, 1.0);
+}

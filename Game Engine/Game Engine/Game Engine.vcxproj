@@ -23,7 +23,7 @@
     <ProjectGuid>{3375F870-1A70-418E-9A11-4FCA6F3B3516}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>GameEngine</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -147,6 +147,7 @@
   <ItemGroup>
     <ClCompile Include="application.cpp" />
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="cubemap.cpp" />
     <ClCompile Include="directlight.cpp" />
     <ClCompile Include="gameobject.cpp" />
     <ClCompile Include="glprogram.cpp" />
@@ -161,12 +162,16 @@
     <ClCompile Include="objectmanager.cpp" />
     <ClCompile Include="render.cpp" />
     <ClCompile Include="scene.cpp" />
+    <ClCompile Include="skybox.cpp" />
+    <ClCompile Include="texture2d.cpp" />
+    <ClCompile Include="texturebase.cpp" />
     <ClCompile Include="transform.cpp" />
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application.h" />
     <ClInclude Include="camera.hpp" />
+    <ClInclude Include="cubemap.hpp" />
     <ClInclude Include="directlight.hpp" />
     <ClInclude Include="gameobject.h" />
     <ClInclude Include="glprogram.h" />
@@ -185,6 +190,10 @@
     <ClInclude Include="opengl.h" />
     <ClInclude Include="render.hpp" />
     <ClInclude Include="scene.hpp" />
+    <ClInclude Include="skybox.hpp" />
+    <ClInclude Include="texture2d.hpp" />
+    <ClInclude Include="texturebase.hpp" />
+    <ClInclude Include="textureprops.hpp" />
     <ClInclude Include="transform.h" />
     <ClInclude Include="treeobjectmanagerbase.hpp" />
     <ClInclude Include="utils.h" />

@@ -1,11 +1,12 @@
 #include "render.hpp"
 
 
-Render::Render(ObjectManager *manager, MaterialManager *matManager, DirectionalLight *light)
+Render::Render(ObjectManager *manager, MaterialManager *matManager, DirectionalLight *light, SkyBox *skybox)
 	: oMatManager(*matManager)
 	, oObjManager(*manager)
 	, oCurrentMaterial(-1)
 	, oLight(*light)
+	, oSkybox(skybox)
 {
 	oMainCamera = new Camera();
 	oMainCamera->translate(0, 0, -20);
@@ -25,7 +26,7 @@ void Render::draw()
 	auto rendermat = oMatManager.findMaterialById(oCurrentMaterial);
 	for (register auto obj = renderData.oData.begin(); obj != renderData.oData.end(); ++obj)
 	{
-		size_t material = obj->material;
+		unin material = obj->material;
 		if (material == EMPTY_MATERIAL)
 			material = oMatManager.getDefaultMaterial()->getMaterialId();
 
@@ -38,19 +39,23 @@ void Render::draw()
 
 			oCurrentMaterial = material;
 			rendermat = oMatManager.findMaterialById(oCurrentMaterial);
-
 			rendermat->bind();
 		}
-
 		rendermat->setParametr("worldMatrix", oMainCamera->getProjectionMatrix());
 		rendermat->setParametr("camMatrix", oMainCamera->getCameraMatrix());
 		rendermat->setParametr("lightDirection", oLight.getLightDirection());
-		rendermat->setParametr("gSampler", 0);
+		rendermat->setParametr("selfMatrix", obj->matrix);
+		rendermat->setTexturesSamples();
 
 		glBindVertexArray(obj->vao);
-		rendermat->setParametr("selfMatrix", obj->matrix);
 		glDrawElements(GL_TRIANGLES, obj->count, GL_UNSIGNED_INT, nullptr);
 		glBindVertexArray(0);
+	}
+	rendermat->unbind();
+
+	if (oSkybox != nullptr)
+	{
+		oSkybox->drawSky(oMainCamera->getCameraMatrix(), oMainCamera->getProjectionMatrix());
 	}
 }
 
@@ -62,4 +67,9 @@ const Camera * Render::getMainCam() const
 Camera * Render::getMainCam()
 {
 	return oMainCamera;
+}
+
+void Render::setSkybox(SkyBox * skyBox)
+{
+	oSkybox = skyBox;
 }

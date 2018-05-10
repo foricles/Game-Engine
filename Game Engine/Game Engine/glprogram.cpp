@@ -23,56 +23,65 @@ void GLProgram::begin()
 {
 	if(oProgramId == 0)
 		oProgramId = glCreateProgram();
+	Logger::CheckGLErrors("GLProgram::begin()");
 }
 
 void GLProgram::end()
 {
-	for each (Shader var in oShaders)
+	Logger::CheckGLErrors("start GLProgram::end()");
+	for(auto var = oShaders.begin(); var != oShaders.end(); ++var)
 	{
-		switch (var.type)
+		switch (var->type)
 		{
-		case SHADER::VERTEX:   var.id = glCreateShader(GL_VERTEX_SHADER);   break;
-		case SHADER::GEOMETRY: var.id = glCreateShader(GL_GEOMETRY_SHADER); break;
-		case SHADER::FRAGMENT: var.id = glCreateShader(GL_FRAGMENT_SHADER); break;
+			case SHADER::VERTEX:   var->id = glCreateShader(GL_VERTEX_SHADER);   break;
+			case SHADER::GEOMETRY: var->id = glCreateShader(GL_GEOMETRY_SHADER); break;
+			case SHADER::FRAGMENT: var->id = glCreateShader(GL_FRAGMENT_SHADER); break;
 		}
+
+		Logger::CheckGLErrors("glCreateShader GLProgram::end()");
 
 		const GLchar *src[1];
 		GLint lng[1];
-		src[0] = utils::file::load_file(var.path);
+		src[0] = utils::file::load_file(var->path);
 
 		if(src[0] == nullptr)
 			Logger::FatalError("Failed to create vertex shader");
 
 		lng[0] = strlen(src[0]);
-		glShaderSource(var.id, 1, src, lng);
+		glShaderSource(var->id, 1, src, lng);
+		Logger::CheckGLErrors("glShaderSource GLProgram::end()");
 
-		glCompileShader(var.id);
-		if (var.id == 0)
+		glCompileShader(var->id);
+		Logger::CheckGLErrors("glCompileShader GLProgram::end()");
+
+		if (var->id == 0)
 			Logger::FatalError("Failed to create vertex shader");
 
 		//check to compile success
 		GLint success = 0;
-		glGetShaderiv(var.id, GL_COMPILE_STATUS, &success);
+		glGetShaderiv(var->id, GL_COMPILE_STATUS, &success);
 		if (success == GL_FALSE)
 		{
 			GLint length = 0;
-			glGetShaderiv(var.id, GL_INFO_LOG_LENGTH, &length);
+			glGetShaderiv(var->id, GL_INFO_LOG_LENGTH, &length);
 
 			std::vector<char> errors(length);
-			glGetShaderInfoLog(var.id, length, &length, &errors[0]);
+			glGetShaderInfoLog(var->id, length, &length, &errors[0]);
 
-			glDeleteShader(var.id);
+			glDeleteShader(var->id);
 
-			Logger::Log(std::string(var.path), LogType::ERR);
+			Logger::Log(std::string(var->path), LogType::ERR);
 			std::printf("%s", &errors[0]);
 			Logger::FatalError("Shader compile failed!");
 		}
 
 		(src[0] != nullptr) ? delete[] src[0] : src[0] = src[0];
-		glAttachShader(oProgramId, var.id);
+		glAttachShader(oProgramId, var->id);
+		Logger::CheckGLErrors("glAttachShader GLProgram::end()");
 	}
 
 	glLinkProgram(oProgramId);
+	Logger::CheckGLErrors("glLinkProgram GLProgram::end()");
 
 	//success checked
 	GLint isLinked = 0;
@@ -85,7 +94,7 @@ void GLProgram::end()
 		std::vector<char> infoLog(maxLength);
 		glGetProgramInfoLog(oProgramId, maxLength, &maxLength, &infoLog[0]);
 
-		for each (Shader var in oShaders)
+		for each (auto &var in oShaders)
 			glDeleteShader(var.id);
 		glDeleteProgram(oProgramId);
 
@@ -94,13 +103,18 @@ void GLProgram::end()
 	}
 
 	glValidateProgram(oProgramId);
+	Logger::CheckGLErrors("glValidateProgram GLProgram::end()");
 
 	//Always detach shaders after a successful link.
-	for each (Shader var in oShaders)
+	for each (auto& var in oShaders)
 	{
-		glDetachShader(oProgramId, var.id);
-		glDeleteShader(var.id);
+		if (var.id > 0)
+		{
+			glDetachShader(oProgramId, var.id);
+			glDeleteShader(var.id);
+		}
 	}
+	Logger::CheckGLErrors("finish GLProgram::end()");
 }
 
 void GLProgram::bind()

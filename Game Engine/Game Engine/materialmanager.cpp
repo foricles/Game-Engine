@@ -4,14 +4,17 @@
 MaterialManager::MaterialManager()
 	: pDefaultMaterial(nullptr)
 {
-	pDefaultMaterial = this->New();
-	pDefaultMaterial->getProgram().begin();
-	//oDefaultMaterial->getProgram().addShader(SHADER::VERTEX, "D:\\Work\\projects\\cpp\\Game-Engine\\Game Engine\\shader\\vrt.vrt");
-	//oDefaultMaterial->getProgram().addShader(SHADER::FRAGMENT, "D:\\Work\\projects\\cpp\\Game-Engine\\Game Engine\\shader\\frg.frg");
-	pDefaultMaterial->getProgram().addShader(SHADER::VERTEX, "resurses\\shader\\vrt.vrt");
-	pDefaultMaterial->getProgram().addShader(SHADER::FRAGMENT, "resurses\\shader\\frg.frg");
-	pDefaultMaterial->loadTexture("resurses\\textures\\Grass1.png");
-	pDefaultMaterial->getProgram().end();
+	if (pDefaultMaterial == nullptr)
+	{
+		pDefaultMaterial = this->New();
+		pDefaultMaterial->getProgram().begin();
+		//oDefaultMaterial->getProgram().addShader(SHADER::VERTEX, "D:\\Work\\projects\\cpp\\Game-Engine\\Game Engine\\shader\\vrt.vrt");
+		//oDefaultMaterial->getProgram().addShader(SHADER::FRAGMENT, "D:\\Work\\projects\\cpp\\Game-Engine\\Game Engine\\shader\\frg.frg");
+		pDefaultMaterial->getProgram().addShader(SHADER::VERTEX, "resources\\shader\\vrt.vrt");
+		pDefaultMaterial->getProgram().addShader(SHADER::FRAGMENT, "resources\\shader\\def_frg.frg");
+		pDefaultMaterial->getProgram().end();
+		Logger::CheckGLErrors("MaterialManager::MaterialManager()");
+	}
 }
 
 MaterialManager::~MaterialManager()

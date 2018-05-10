@@ -1,0 +1,19 @@
+#version 330
+layout (location = 0) in vec3 Position;
+
+out vec3 pixPos;
+
+uniform mat4 camMatrix;
+uniform mat4 worldMatrix;
+
+void main()
+{
+	pixPos = Position;
+	mat4 proj = camMatrix;
+	proj[3][0] = 0.0;
+	proj[3][1] = 0.0;
+	proj[3][2] = 0.0;
+	vec4 nPos = worldMatrix * proj * vec4(Position, 1.0);
+	
+	gl_Position = nPos.xyww;
+}

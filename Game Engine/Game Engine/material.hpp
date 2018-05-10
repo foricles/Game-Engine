@@ -1,16 +1,18 @@
 #ifndef _MATERIAL_HPP_
 #define _MATERIAL_HPP_
 
-#include "opengl.h"
-#include "glprogram.h"
 #include <algorithm>
 #include <vec2.hpp>
 #include <vec3.hpp>
 #include <vec4.hpp>
 #include <matrices.hpp>
-#include <FreeImage.h>
+
+#include "glprogram.h"
+#include "texturebase.hpp"
+
 
 #define EMPTY_MATERIAL 0xffffff
+typedef unsigned int unin;
 
 struct UniformData
 {
@@ -31,9 +33,8 @@ public:
 	void bind() const;
 	void unbind() const;
 
-	size_t getMaterialId() const;
-
-	void loadTexture(const std::string &path);
+	unin getMaterialId() const;
+	void addTextureAsParametr(Texture *txtr);
 public: 
 	void setParametr(const std::string &name, int value);
 	void setParametr(const std::string &name, float value);
@@ -41,15 +42,16 @@ public:
 	void setParametr(const std::string &name, kmu::vec3 &value);
 	void setParametr(const std::string &name, kmu::vec4 &value);
 	void setParametr(const std::string &name, kmu::mat4 &value);
+	void setTexturesSamples();
 private:
-	size_t oSelfId;
-	GLuint oTextId;
+	unin oSelfId;
 	GLProgram *oShader;
 
+	std::vector<Texture*> oTextures;
 	std::vector<UniformData*> oUniformValues;
 
 private:
-	void setId(size_t id);
+	void setId(unin id);
 	void findValue(UniformData **ret, const std::string &name);
 };
 

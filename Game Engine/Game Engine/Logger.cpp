@@ -1,5 +1,24 @@
 #include "Logger.h"
+#include "opengl.h"
 
+void Logger::CheckGLErrors(std::string pref)
+{
+	GLenum error;
+	std::string mess;
+	if ((error = glGetError()) != GL_NO_ERROR)
+	{
+		switch (error)
+		{
+		case GL_INVALID_ENUM: mess = "GL_INVALID_ENUM"; break;
+		case GL_INVALID_OPERATION: mess = "GL_INVALID_OPERATION"; break;
+		case GL_INVALID_VALUE: mess = "GL_INVALID_VALUE"; break;
+		case GL_OUT_OF_MEMORY: mess = "GL_OUT_OF_MEMORY"; break;
+		case GL_INVALID_FRAMEBUFFER_OPERATION: mess = "GL_INVALID_FRAMEBUFFER_OPERATION"; break;
+		default: mess = "undef";  break;
+		}
+		Logger::Log("Was Error at " + pref + " :" + mess + ": " + conv<GLenum>(error), LogType::ERR);
+	}
+}
 
 void Logger::Log(const std::string & message, LogType logType)
 {

@@ -18,9 +18,11 @@ protected:
 	InputManager *Input;
 	Camera *getMainCamera();
 	Window *window;
+
+	void setSkybox(SkyBox *skyBox);
 protected:
-	ObjectManager *objectManager;
 	MaterialManager *materialManager;
+	ObjectManager *objectManager;
 	DirectionalLight oLight;
 public:
 	virtual void Start();

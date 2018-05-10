@@ -28,6 +28,12 @@
     <Filter Include="Source Files\light">
       <UniqueIdentifier>{4b20ad47-aa0b-4ec0-abf2-0441823e3e7e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="textures">
+      <UniqueIdentifier>{3651d6a4-fe5a-4b24-9afc-ac46cbdc69df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="skybox">
+      <UniqueIdentifier>{98959293-4866-48a2-962d-47c1fe934acb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gameobject.cpp">
@@ -83,6 +89,18 @@
     </ClCompile>
     <ClCompile Include="directlight.cpp">
       <Filter>Source Files\light</Filter>
+    </ClCompile>
+    <ClCompile Include="texture2d.cpp">
+      <Filter>textures</Filter>
+    </ClCompile>
+    <ClCompile Include="texturebase.cpp">
+      <Filter>textures</Filter>
+    </ClCompile>
+    <ClCompile Include="cubemap.cpp">
+      <Filter>textures</Filter>
+    </ClCompile>
+    <ClCompile Include="skybox.cpp">
+      <Filter>skybox</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +178,21 @@
     </ClInclude>
     <ClInclude Include="directlight.hpp">
       <Filter>Header Files\light</Filter>
+    </ClInclude>
+    <ClInclude Include="textureprops.hpp">
+      <Filter>Header Files\includers</Filter>
+    </ClInclude>
+    <ClInclude Include="texturebase.hpp">
+      <Filter>textures</Filter>
+    </ClInclude>
+    <ClInclude Include="texture2d.hpp">
+      <Filter>textures</Filter>
+    </ClInclude>
+    <ClInclude Include="cubemap.hpp">
+      <Filter>textures</Filter>
+    </ClInclude>
+    <ClInclude Include="skybox.hpp">
+      <Filter>skybox</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

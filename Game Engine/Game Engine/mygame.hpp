@@ -2,6 +2,7 @@
 #define _MYGAME_HPP_
 
 #include "scene.hpp"
+#include "texture2d.hpp"
 
 using namespace kmu;
 using namespace utils;
@@ -33,20 +34,42 @@ public:
 
 	virtual void Start() override
 	{
-		std::string modelPath("resurses\\models\\obj\\");
-		std::string textrPath("resurses\\textures\\");
+		std::string modelPath("resources\\models\\obj\\");
+		std::string textrPath("resources\\textures\\");
+
+		Texture2D *floor = new Texture2D;
+		floor->loadTexture(textrPath + "Floor.png");
+		floor->settings().filter = TextrFilter::LINEAR;
+		floor->settings().wrapMode = TextrWrapMode::REPEAT;
+		floor->setSampleName("gSampler");
+		floor->applySettings();
+
+		Texture2D *yak = new Texture2D;
+		yak->loadTexture(textrPath + "YAK3.png");
+		yak->settings().filter = TextrFilter::LINEAR;
+		yak->settings().wrapMode = TextrWrapMode::REPEAT;
+		yak->setSampleName("gSampler");
+		yak->applySettings();
+
+		Texture2D *grass = new Texture2D;
+		grass->loadTexture(textrPath + "YAK3.png");
+		grass->settings().filter = TextrFilter::LINEAR;
+		grass->settings().wrapMode = TextrWrapMode::REPEAT;
+		grass->setSampleName("gSampler");
+		grass->applySettings();
 
 		auto textrRock = materialManager->New();
 		textrRock->getProgram().begin();
-		textrRock->getProgram().addShader(SHADER::VERTEX, "resurses\\shader\\vrt.vrt");
-		textrRock->getProgram().addShader(SHADER::FRAGMENT, "resurses\\shader\\frg.frg");
-		textrRock->loadTexture(textrPath + "Floor.png");
+		textrRock->getProgram().addShader(SHADER::VERTEX, "resources\\shader\\vrt.vrt");
+		textrRock->getProgram().addShader(SHADER::FRAGMENT, "resources\\shader\\frg.frg");
+		textrRock->addTextureAsParametr(floor);
 		textrRock->getProgram().end();
 
 
 		auto obj = objectManager->getObject();
 		obj->getMesh().loadModel((modelPath + "terra.obj").c_str());
 		obj->setPosition(0, 0, 0);
+		obj->getMesh().setMaterial(textrRock);
 		obj->getMesh().bindModel();
 
 		obj = objectManager->getObject();
@@ -69,9 +92,9 @@ public:
 
 		auto yaktxt = materialManager->New();
 		yaktxt->getProgram().begin();
-		yaktxt->getProgram().addShader(SHADER::VERTEX, "resurses\\shader\\vrt.vrt");
-		yaktxt->getProgram().addShader(SHADER::FRAGMENT, "resurses\\shader\\frg.frg");
-		yaktxt->loadTexture(textrPath + "YAK3.png");
+		yaktxt->getProgram().addShader(SHADER::VERTEX, "resources\\shader\\vrt.vrt");
+		yaktxt->getProgram().addShader(SHADER::FRAGMENT, "resources\\shader\\frg.frg");
+		yaktxt->addTextureAsParametr(yak);
 		yaktxt->getProgram().end();
 
 		plane = objectManager->getObject();
@@ -89,23 +112,29 @@ public:
 		wint->getMesh().bindModel();
 
 		getMainCamera()->setRotation(kmu::quaternion::euler(MY_PI/2, VEC3_UP));
-		//plane->rotate(quaternion::euler(MY_PI / 4, VEC3_UP));
 
-		/*const char* cube = "resurses\\woodBox.fbx";
-		int s = 25;
-		for (register int i(0); i < 10; i++)
-		{
-			for (register int j(0); j < 10; j++)
-			{
-				for (register int k(0); k < 10; k++)
-				{
-					auto obj = objectManager->getObject();
-					obj->getMesh().loadModel(cube);
-					obj->setPosition(i*s, j*s, k*s);
-				}
-			}
-		}
-		*/
+		CubeMap *cubeMap = new CubeMap;
+		cubeMap->settings().wrapMode = TextrWrapMode::EDGE_CLAMP;
+		cubeMap->settings().filter = TextrFilter::LINEAR;
+		cubeMap->applySettings();
+
+		cubeMap->begin();
+		cubeMap->loadPosiX(textrPath + "skybox\\posX.png");
+		cubeMap->loadNegaX(textrPath + "skybox\\negX.png");
+	
+		cubeMap->loadPosiY(textrPath + "skybox\\posY.png");
+		cubeMap->loadNegaY(textrPath + "skybox\\negY.png");
+	
+		cubeMap->loadPosiZ(textrPath + "skybox\\posZ.png");
+		cubeMap->loadNegaZ(textrPath + "skybox\\negZ.png");
+		cubeMap->end();
+
+
+
+		SkyBox *skyBox = new SkyBox;
+		skyBox->setSkyCubemap(cubeMap);
+
+		setSkybox(skyBox);
 	}
 
 	virtual void Update() override
@@ -143,9 +172,9 @@ public:
 			plane->translate(0, -speed, 0);
 
 		if (Input->isKeyPressed(KeyCode::D))
-			plane->rotate(0.01f, VEC3_UP);
+			plane->rotate(0.001f, VEC3_UP);
 		else if (Input->isKeyPressed(KeyCode::A))
-			plane->rotate(-0.01f, VEC3_UP);
+			plane->rotate(-0.001f, VEC3_UP);
 
 		vec3 dir = vec3(0, 30, -150);
 		dir = plane->transformDirection(dir);
@@ -156,7 +185,7 @@ public:
 		wint->setRotation(kmu::quaternion::euler(wintAng, VEC3_FRONT));
 		wintAng += 0.06f;
 
-		plane->translate(plane->transformDirection(VEC3_FRONT) * 15 * dt);
+		plane->translate(plane->transformDirection(VEC3_FRONT) * 45 * dt);
 	}
 };
 

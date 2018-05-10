@@ -48,6 +48,7 @@ void Mesh::setMaterial(const Material *material)
 
 void Mesh::bindModel()
 {
+	//Logger::CheckGLErrors("Mesh::bindModel");
 	glBindVertexArray(oVAO);
 
 	glBindBuffer(GL_ARRAY_BUFFER, oVBO);
@@ -71,8 +72,6 @@ void Mesh::bindModel()
 	glEnableVertexAttribArray(1);
 	glEnableVertexAttribArray(2);
 	glEnableVertexAttribArray(3);
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 	glBindVertexArray(0);
 }

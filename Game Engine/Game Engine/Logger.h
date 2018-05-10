@@ -6,7 +6,6 @@
 #include <cstdlib>
 #include <conio.h>
 
-
 enum ConsoleColor 
 {
 	Black = 0,
@@ -38,6 +37,7 @@ enum class LogType
 class Logger
 {
 public:
+	static void CheckGLErrors(std::string pref = "");
 	static void Log(const std::string &message, LogType logType = LogType::INF);
 	static void FatalError(const std::string &message);
 	static void Pause();

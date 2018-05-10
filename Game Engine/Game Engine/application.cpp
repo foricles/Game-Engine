@@ -1,5 +1,7 @@
 #include "application.h"
 
+//#define DEBUG
+
 InputManager *Application::input = nullptr;
 
 Application::Application(int argc, char ** argv)
@@ -40,7 +42,10 @@ Application::Application(int argc, char ** argv)
 		oWasError = 3;
 	}
 
-	Logger::Log("OpenGL " + std::string((char*)glGetString(GL_VERSION)), LogType::INF);
+	Logger::Log("OpenGL version: " + std::string((char*)glGetString(GL_VERSION)), LogType::INF);
+	int w;
+	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &w);
+	Logger::Log("Max texture size: " + conv<int>(w));
 }
 
 Application::~Application()
@@ -62,7 +67,7 @@ int Application::run()
 		glfwSetCharModsCallback(heandler, charmodsCallback);
 		glfwSetMouseButtonCallback(heandler, mouseButtonCallback);
 		glfwSetScrollCallback(heandler, scrollCallback);
-
+		
 		oScene = new Fly();
 		oScene->setInput(input);
 		oScene->setWindow(oWindow);

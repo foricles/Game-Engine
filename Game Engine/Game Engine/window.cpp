@@ -1,6 +1,6 @@
 #include "window.h"
 
-//#define DEBUG
+#define DEBUG
 
 Window::Window(size_t W, size_t H)
 	: oWeight(W)

@@ -1,6 +1,6 @@
 #include "application.h"
 
-//#define DEBUG
+#define DEBUG
 
 InputManager *Application::input = nullptr;
 
@@ -112,6 +112,7 @@ void Application::cursorUpdate()
 void Application::windowSizeCallback(GLFWwindow * window, int width, int height)
 {
 	glfwSetWindowSize(window, width, height);
+	glViewport(0, 0, width, height);
 	Logger::Log(conv(width) + " " + conv(height));
 }
 

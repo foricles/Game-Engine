@@ -1,6 +1,5 @@
+#include <time.h>
 #include "application.h"
-
-#define DEBUG
 
 InputManager *Application::input = nullptr;
 
@@ -19,7 +18,7 @@ Application::Application(int argc, char ** argv)
 		oWasError = 1;
 	}
 
-#ifdef DEBUG
+#ifdef _DEBUG
 	oWindow = new Window(800, 600);
 #else
 	oWindow = new Window();
@@ -71,7 +70,7 @@ int Application::run()
 		oScene = new Fly();
 		oScene->setInput(input);
 		oScene->setWindow(oWindow);
-		oScene->deltaTime = &oDeltaTime;
+		//oScene->deltaTime = &oDeltaTime;
 		mainLoop();
 	}
 
@@ -95,7 +94,7 @@ void Application::mainLoop()
 			oWindow->update();
 
 			oScene->LateUpdate();
-			oDeltaTime = (clock() - t1) / CLOCKS_PER_SEC;
+			oScene->deltaTime = (clock() - t1) / CLOCKS_PER_SEC;
 		}
 		oScene->Finish();
 	}

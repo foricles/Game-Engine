@@ -92,7 +92,7 @@ void Transform::setPosition(const kmu::vec3 &pos)
 {
 	oPos = pos;
 }
-void Transform::setScaling(const kmu::vec3 &scl)
+void Transform::setScale(const kmu::vec3 &scl)
 {
 	oScl = scl;
 }
@@ -106,7 +106,7 @@ void Transform::setPosition(float X, float Y, float Z)
 {
 	oPos = kmu::vec3(X, Y, Z);
 }
-void Transform::setScaling(float X, float Y, float Z) 
+void Transform::setScale(float X, float Y, float Z) 
 {
 	oScl = kmu::vec3(X, Y, Z);
 }
@@ -122,16 +122,6 @@ const kmu::vec3 & Transform::getScaling() const
 const kmu::quaternion &Transform::getRotation() const
 {
 	return oRot;
-}
-
-const Transform * Transform::getParentTransform()
-{
-	return oParent;
-}
-
-const Transform * Transform::getParentTransform() const
-{
-	return oParent;
 }
 
 void Transform::translate(const kmu::vec3 & dir)

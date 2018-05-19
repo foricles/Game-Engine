@@ -31,14 +31,12 @@ void Mesh::loadModel(const char* filepath)
 	else
 	{
 		oMeshData = pModel[0];
-		oDrawQuant = pModel[0].oIndexes.size();
 	}
 }
 
-void Mesh::setMaterial(const char *filepath)
+void Mesh::loadModel(const MeshData &meshData)
 {
-	std::string vert = std::string(filepath) + "\\vrt.vrt";
-	std::string frag = std::string(filepath) + "\\frg.frg";
+	oMeshData = meshData;
 }
 
 void Mesh::setMaterial(const Material *material)
@@ -76,20 +74,10 @@ void Mesh::bindModel()
 	Logger::CheckGLErrors("Mesh::bindModel");
 }
 
-void Mesh::bind()
-{
-	glBindVertexArray(oVAO);
-	Logger::CheckGLErrors("Mesh::bind");
-}
-void Mesh::unbind()
-{
-	glBindVertexArray(0);
-	Logger::CheckGLErrors("Mesh::unbind");
-}
-
 void Mesh::draw()
 {
-	this->bind();
-	glDrawElements(GL_TRIANGLES, oDrawQuant, GL_UNSIGNED_INT, nullptr);
-	this->unbind();
+	glBindVertexArray(oVAO);
+	glDrawElements(GL_TRIANGLES, getIndexCount(), GL_UNSIGNED_INT, nullptr);
+	glBindVertexArray(0);
+	Logger::CheckGLErrors("Mesh::draw");
 }

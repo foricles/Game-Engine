@@ -19,7 +19,7 @@ protected:
 	Camera *getMainCamera();
 	Window *window;
 
-	void setSkybox(SkyBox *skyBox);
+	SkyBox *customizeSkybox();
 protected:
 	MaterialManager *materialManager;
 	ObjectManager *objectManager;
@@ -31,7 +31,7 @@ public:
 	virtual void LateUpdate();
 	virtual void Finish();
 
-	double *deltaTime;
+	double deltaTime;
 	void drawScene();
 private:
 	void setInput(InputManager *pInput) { Input = pInput; };

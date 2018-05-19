@@ -19,14 +19,16 @@ Render::~Render()
 
 void Render::draw()
 {
-	RenderData renderData;
-	oObjManager.getRenderData(&renderData);
-	renderData.SortByMaterial();
+	auto renderData = oObjManager.getRenderObjects();
+	std::stable_sort(renderData.begin(), renderData.end(), [](GameObject* a, GameObject* b) {return a->getMesh()->getMaterialId() > b->getMesh()->getMaterialId(); });
+	
 
-	auto rendermat = oMatManager.findMaterialById(oCurrentMaterial);
-	for (register auto obj = renderData.oData.begin(); obj != renderData.oData.end(); ++obj)
+	oCurrentMaterial = -1;
+	Material *rendermat = nullptr;
+	for (register auto obj = renderData.begin(); obj != renderData.end(); ++obj)
 	{
-		unin material = obj->material;
+		Mesh *mesh = (*obj)->getMesh();
+		unin material = mesh->getMaterialId();
 		if (material == EMPTY_MATERIAL)
 			material = oMatManager.getDefaultMaterial()->getMaterialId();
 
@@ -44,14 +46,13 @@ void Render::draw()
 		rendermat->setParametr("worldMatrix", oMainCamera->getProjectionMatrix());
 		rendermat->setParametr("camMatrix", oMainCamera->getCameraMatrix());
 		rendermat->setParametr("lightDirection", oLight.getLightDirection());
-		rendermat->setParametr("selfMatrix", obj->matrix);
+		rendermat->setParametr("selfMatrix", (*obj)->globalMatrix());
 		rendermat->setTexturesSamples();
 
-		glBindVertexArray(obj->vao);
-		glDrawElements(GL_TRIANGLES, obj->count, GL_UNSIGNED_INT, nullptr);
-		glBindVertexArray(0);
+		mesh->draw();
 	}
-	rendermat->unbind();
+	if (rendermat != nullptr)
+		rendermat->unbind();
 
 	if (oSkybox != nullptr)
 	{
@@ -69,7 +70,11 @@ Camera * Render::getMainCam()
 	return oMainCamera;
 }
 
-void Render::setSkybox(SkyBox * skyBox)
+SkyBox * Render::customizeSkybox()
 {
-	oSkybox = skyBox;
+	if (oSkybox != nullptr)
+		delete oSkybox;
+	oSkybox = new SkyBox();
+	return oSkybox;
 }
+

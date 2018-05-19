@@ -11,7 +11,7 @@ GameObject::~GameObject()
 	
 }
 
-Mesh & GameObject::getMesh()
+Mesh *GameObject::getMesh()
 {
-	return oMesh;
+	return &oMesh;
 }

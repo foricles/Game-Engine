@@ -2,10 +2,13 @@
 
 Scene::Scene(const std::string &sceneName)
 	: oSceneName(sceneName)
-	, materialManager( new MaterialManager() )
-	, objectManager(   new ObjectManager()   )
+	, materialManager(nullptr)
+	, objectManager(nullptr)
 	, oRender(nullptr)
+	, deltaTime(1)
 {
+	materialManager = new MaterialManager();
+	objectManager = new ObjectManager();
 	oRender = new Render(objectManager, materialManager, &oLight);
 }
 
@@ -26,9 +29,9 @@ Camera * Scene::getMainCamera()
 	return oRender->getMainCam();
 }
 
-void Scene::setSkybox(SkyBox * skyBox)
+SkyBox *Scene::customizeSkybox()
 {
-	oRender->setSkybox(skyBox);
+	return oRender->customizeSkybox();
 }
 
 void Scene::Start()

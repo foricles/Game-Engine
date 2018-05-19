@@ -1,7 +1,5 @@
 #include "window.h"
 
-#define DEBUG
-
 Window::Window(size_t W, size_t H)
 	: oWeight(W)
 	, oHeight(H)
@@ -17,7 +15,7 @@ Window::~Window()
 
 bool Window::create()
 {
-#ifdef DEBUG
+#ifdef _DEBUG
 	oWHeandler = glfwCreateWindow(oWeight, oHeight, "Hello World", NULL, NULL);
 #else
 	oWHeandler = glfwCreateWindow(oWeight, oHeight, "Hello World", glfwGetPrimaryMonitor(), NULL);

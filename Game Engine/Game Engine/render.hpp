@@ -20,7 +20,8 @@ public:
 
 	const Camera *getMainCam() const;
 	Camera *getMainCam();
-	void setSkybox(SkyBox * skyBox);
+
+	SkyBox *customizeSkybox();
 private:
 	Camera *oMainCamera;
 	ObjectManager &oObjManager;

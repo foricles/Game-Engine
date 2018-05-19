@@ -13,7 +13,7 @@ public:
 	GameObject();
 	virtual ~GameObject();
 
-	Mesh &getMesh();
+	Mesh *getMesh();
 private:
 	Mesh oMesh;
 };

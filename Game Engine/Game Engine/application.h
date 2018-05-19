@@ -2,14 +2,12 @@
 #define _APPLICATION_H_
 
 #include "opengl.h"
-#include "utils.h"
-#include "gameobject.h"
 #include "glprogram.h"
-
+#include "utils.h"
 #include "Logger.h"
+#include "gameobject.h"
 #include "window.h"
 #include "mygame.hpp"
-#include <time.h>
 
 class Application
 {

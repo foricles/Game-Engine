@@ -39,18 +39,18 @@ void Transform::setParent(Transform *parent)
 	{
 		if (parent != this)
 		{
-			std::deque<Transform*> & pChildren = parent->oChildren;
+			std::deque<Transform*> * pChildren = &parent->oChildren;
 
-			for (auto it = pChildren.begin(); it != pChildren.end(); ++it)
+			for (auto it = pChildren->begin(); it != pChildren->end(); ++it)
 			{
 				if (parent == (*it))
 				{
-					pChildren.erase(it);
+					pChildren->erase(it);
 					break;
 				}
 			}
 
-			pChildren.push_back(this);
+			pChildren->push_back(this);
 			oParent = parent;
 		}
 		else
@@ -111,15 +111,37 @@ void Transform::setScale(float X, float Y, float Z)
 	oScl = kmu::vec3(X, Y, Z);
 }
 
-const kmu::vec3 & Transform::getPosition() const
+const kmu::vec3 & Transform::getLocalPosition() const
 {
 	return oPos;
+}
+const kmu::vec3 Transform::getGlobalPosition() const
+{
+	if (oParent == nullptr)
+	{
+		return oPos;
+	}
+	else
+	{
+		return oParent->globalMatrix() * oPos;
+	}
+}
+const kmu::quaternion Transform::getGlobalRotation() const
+{
+	if (oParent == nullptr)
+	{
+		return oRot;
+	}
+	else
+	{
+		return oRot * oParent->getGlobalRotation();
+	}
 }
 const kmu::vec3 & Transform::getScaling() const
 {
 	return oScl;
 }
-const kmu::quaternion &Transform::getRotation() const
+const kmu::quaternion &Transform::getLocalRotation() const
 {
 	return oRot;
 }
@@ -136,7 +158,7 @@ void Transform::translate(float X, float Y, float Z)
 
 void Transform::rotate(float angle, const kmu::vec3 axis)
 {
-	oRot = oRot * kmu::quaternion::euler(angle, axis);
+	oRot = oRot * kmu::quaternion::angleAxis(angle, axis);
 }
 
 void Transform::rotate(const kmu::quaternion &quat)

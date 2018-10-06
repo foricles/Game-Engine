@@ -41,11 +41,15 @@ inline kmu::vec3 kmu::quaternion::rotate(const kmu::vec3 & vect) const
 	return kmu::vec3(temp.x, temp.y, temp.z);
 }
 
-kmu::quaternion kmu::quaternion::euler(float angle, float X, float Y, float Z)
+kmu::quaternion kmu::quaternion::euler(float X, float Y, float Z)
 {
-	return quaternion::euler(angle, kmu::vec3(X, Y, Z));
+	auto x = angleAxis(X, VEC3_RIGHT);
+	auto y = angleAxis(Y, VEC3_UP);
+	auto z = angleAxis(Z, VEC3_FRONT);
+
+	return x * y * z;
 }
-kmu::quaternion kmu::quaternion::euler(float angle, const vec3 & axes)
+kmu::quaternion kmu::quaternion::angleAxis(float angle, const vec3 & axes)
 {
 	float hs = sinf(angle / 2.0f);
 	float hc = cosf(angle / 2.0f);

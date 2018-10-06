@@ -14,7 +14,7 @@ void main()
 {
 	vec3 light = normalize(lightDirection);
 	vec3 norml = normalize(normals);
-	float mul = ((dot(light, norml) + 1.0) / 2.0) + 0.01;
+	float mul = ((dot(light, norml) + 1.0) / 2.0) * 0.75 + 0.25;
 
 	Color = texture2D(gSampler, uvCoord.st) * mul;
 }

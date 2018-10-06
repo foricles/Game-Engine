@@ -1,0 +1,13 @@
+﻿  application.cpp
+c:\program files (x86)\windows kits\10\include\10.0.16299.0\shared\minwindef.h(130): warning C4005: APIENTRY: изменение макроопределения
+  c:\projects\cpp\game-engine\game engine\deps\glfw\glfw3.h(98): note: см. предыдущее определение "APIENTRY"
+c:\projects\cpp\game-engine\game engine\game engine\utils.h(19): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(207): note:  см. объявление "fopen"
+c:\projects\cpp\game-engine\game engine\game engine\mygame.hpp(84): warning C4305: аргумент: усечение из "double" в "float"
+c:\projects\cpp\game-engine\game engine\game engine\mygame.hpp(93): warning C4305: аргумент: усечение из "double" в "float"
+c:\projects\cpp\game-engine\game engine\game engine\mygame.hpp(171): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+c:\projects\cpp\game-engine\game engine\game engine\mygame.hpp(214): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+c:\projects\cpp\game-engine\game engine\game engine\mygame.hpp(216): warning C4305: аргумент: усечение из "double" в "float"
+c:\projects\cpp\game-engine\game engine\game engine\mygame.hpp(218): warning C4305: аргумент: усечение из "double" в "float"
+c:\projects\cpp\game-engine\game engine\game engine\mygame.hpp(226): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+  Game Engine.vcxproj -> C:\projects\cpp\Game-Engine\Game Engine\Debug\Game Engine.exe

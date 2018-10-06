@@ -37,7 +37,7 @@ namespace utils
 			std::vector<MeshData> oMeshes;
 			Assimp::Importer importer;
 
-			auto set = aiProcess_Triangulate | aiProcess_CalcTangentSpace | aiProcess_GenNormals | aiProcess_GenUVCoords | aiProcess_FlipUVs;
+			auto set = aiProcess_Triangulate | aiProcess_CalcTangentSpace | aiProcess_GenNormals | aiProcess_GenUVCoords;
 			register const aiScene *scene = importer.ReadFile(filename, set);
 			if (scene)
 			{
@@ -62,6 +62,7 @@ namespace utils
 					//set colors
 						vtx.pCol = Point4f(1.0f, 0.0f, 1.0f, 1.0f);
 					//set uv
+						//Logger::Log(conv(pTexCoord->x) + " : " + conv(pTexCoord->y) + " : " + conv(pTexCoord->z));
 						vtx.pUV = Point2f(pTexCoord->x, pTexCoord->y);
 						mesh.oVertexes.push_back(vtx);
 					}

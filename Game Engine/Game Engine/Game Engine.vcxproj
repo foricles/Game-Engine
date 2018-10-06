@@ -166,6 +166,9 @@
     <ClCompile Include="texture2d.cpp" />
     <ClCompile Include="texturebase.cpp" />
     <ClCompile Include="transform.cpp" />
+    <ClCompile Include="uimanager.cpp" />
+    <ClCompile Include="uiobject.cpp" />
+    <ClCompile Include="uitransform.cpp" />
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -196,9 +199,15 @@
     <ClInclude Include="textureprops.hpp" />
     <ClInclude Include="transform.h" />
     <ClInclude Include="treeobjectmanagerbase.hpp" />
+    <ClInclude Include="uimanager.hpp" />
+    <ClInclude Include="uiobject.hpp" />
+    <ClInclude Include="uitransform.hpp" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="vertexdata.hpp" />
     <ClInclude Include="window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

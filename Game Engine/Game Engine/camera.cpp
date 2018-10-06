@@ -1,6 +1,6 @@
 #include "camera.hpp"
 
-Camera::Camera() : Camera(MY_PI/4, 0.03f, 1000, 1920, 1080)
+Camera::Camera() : Camera(MY_PI / 4, 0.03f, 5000, 1920, 1080)
 {
 
 }
@@ -37,10 +37,13 @@ Camera::~Camera()
 
 kmu::mat4 Camera::getCameraMatrix()
 {
-	kmu::vec3 U = oRot.rotate(VEC3_UP);
-	kmu::vec3 F = oRot.rotate(VEC3_FRONT);
+	kmu::vec3 pos = getGlobalPosition();
+	kmu::quaternion rot = getGlobalRotation();
 
-	return kmu::mat4::CameraMatrix(F, U) * kmu::mat4::Translation(-oPos.x, -oPos.y, -oPos.z);
+	kmu::vec3 U = rot.rotate(VEC3_UP);
+	kmu::vec3 F = rot.rotate(VEC3_FRONT);
+
+	return kmu::mat4::CameraMatrix(F, U) * kmu::mat4::Translation(-pos.x, -pos.y, -pos.z);
 }
 
 kmu::mat4 &Camera::getProjectionMatrix()

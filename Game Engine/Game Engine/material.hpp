@@ -6,6 +6,7 @@
 #include <vec3.hpp>
 #include <vec4.hpp>
 #include <matrices.hpp>
+#include <map>
 
 #include "glprogram.h"
 #include "texturebase.hpp"
@@ -13,14 +14,6 @@
 
 #define EMPTY_MATERIAL 0xffffff
 typedef unsigned int unin;
-
-struct UniformData
-{
-	std::string Name;
-	GLuint Location;
-	UniformData() : UniformData("", 0){}
-	UniformData(const std::string &name, GLuint lok): Name(name), Location(lok){}
-};
 
 class Material
 {
@@ -48,11 +41,11 @@ private:
 	GLProgram *oShader;
 
 	std::vector<Texture*> oTextures;
-	std::vector<UniformData*> oUniformValues;
+	std::map<std::string, GLuint> uniformValues;
 
 private:
 	void setId(unin id);
-	void findValue(UniformData **ret, const std::string &name);
+	int findUniformValue(const std::string &value);
 };
 
 #endif // !_MATERIAL_HPP_

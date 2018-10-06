@@ -28,11 +28,14 @@
     <Filter Include="Source Files\light">
       <UniqueIdentifier>{4b20ad47-aa0b-4ec0-abf2-0441823e3e7e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="textures">
+    <Filter Include="Skybox">
+      <UniqueIdentifier>{98959293-4866-48a2-962d-47c1fe934acb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Textures">
       <UniqueIdentifier>{3651d6a4-fe5a-4b24-9afc-ac46cbdc69df}</UniqueIdentifier>
     </Filter>
-    <Filter Include="skybox">
-      <UniqueIdentifier>{98959293-4866-48a2-962d-47c1fe934acb}</UniqueIdentifier>
+    <Filter Include="GUI">
+      <UniqueIdentifier>{9113c459-1653-47f0-a176-a22bc73daf24}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -91,16 +94,25 @@
       <Filter>Source Files\light</Filter>
     </ClCompile>
     <ClCompile Include="texture2d.cpp">
-      <Filter>textures</Filter>
+      <Filter>Textures</Filter>
     </ClCompile>
     <ClCompile Include="texturebase.cpp">
-      <Filter>textures</Filter>
+      <Filter>Textures</Filter>
     </ClCompile>
     <ClCompile Include="cubemap.cpp">
-      <Filter>textures</Filter>
+      <Filter>Textures</Filter>
     </ClCompile>
     <ClCompile Include="skybox.cpp">
-      <Filter>skybox</Filter>
+      <Filter>Skybox</Filter>
+    </ClCompile>
+    <ClCompile Include="uiobject.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="uitransform.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="uimanager.cpp">
+      <Filter>GUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -183,16 +195,28 @@
       <Filter>Header Files\includers</Filter>
     </ClInclude>
     <ClInclude Include="texturebase.hpp">
-      <Filter>textures</Filter>
+      <Filter>Textures</Filter>
     </ClInclude>
     <ClInclude Include="texture2d.hpp">
-      <Filter>textures</Filter>
+      <Filter>Textures</Filter>
     </ClInclude>
     <ClInclude Include="cubemap.hpp">
-      <Filter>textures</Filter>
+      <Filter>Textures</Filter>
     </ClInclude>
     <ClInclude Include="skybox.hpp">
-      <Filter>skybox</Filter>
+      <Filter>Skybox</Filter>
     </ClInclude>
+    <ClInclude Include="uiobject.hpp">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="uitransform.hpp">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="uimanager.hpp">
+      <Filter>GUI</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

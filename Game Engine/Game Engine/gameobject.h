@@ -15,7 +15,7 @@ public:
 
 	Mesh *getMesh();
 private:
-	Mesh oMesh;
+	Mesh *oMesh;
 };
 
 #endif // !_RENDERMODEL_H_

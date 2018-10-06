@@ -30,9 +30,13 @@ public:
 
 	void setRotation(const kmu::quaternion &rot);
 	
-	const kmu::vec3 & getPosition() const;
+	const kmu::vec3 & getLocalPosition() const;
+	const kmu::quaternion &getLocalRotation() const;
+
+	const kmu::vec3 getGlobalPosition() const;
+	const kmu::quaternion getGlobalRotation() const;
+
 	const kmu::vec3 & getScaling() const;
-	const kmu::quaternion &getRotation() const;
 
 	void translate(const kmu::vec3 &dir);
 	void translate(float X, float Y, float Z);

@@ -9,11 +9,6 @@ Material::Material()
 Material::~Material()
 {
 	delete oShader;
-
-	for (register int i(0); i < oUniformValues.size(); ++i)
-		if (oUniformValues[i] != nullptr)
-			delete oUniformValues[i];
-	oUniformValues.clear();
 }
 
 GLProgram & Material::getProgram()
@@ -63,68 +58,75 @@ void Material::setId(unin id)
 	oSelfId = id;
 }
 
-void Material::findValue(UniformData **ret, const std::string & name)
+int Material::findUniformValue(const std::string & value)
 {
-	*ret = nullptr;
-	for (register int i(0); i < oUniformValues.size(); ++i)
+	if (uniformValues.find(value) != uniformValues.end())
 	{
-		if (oUniformValues[i]->Name._Equal(name))
-		{
-			*ret = oUniformValues[i];
-			break;
-		}
+		return uniformValues[value];
 	}
-
-	if (*ret == nullptr)
+	int id = oShader->getUniform(value.c_str());
+	if (id > 0)
 	{
-		GLuint id = oShader->getUniform(name.c_str());
-		*ret = new UniformData(name, id);
-		oUniformValues.push_back(*ret);
+		uniformValues.insert(std::pair<std::string, GLuint>(value, id));
 	}
+	return id;
 }
+
 
 #pragma region setters
 
 void Material::setParametr(const std::string &name, int value)
 {
-	UniformData * uni = nullptr;
-	findValue(&uni, name);
-	glUniform1i(uni->Location, value);
+	int location = findUniformValue(name);
+	if (location > 0)
+	{
+		glUniform1i(location, value);
+	}
 }
 
 void Material::setParametr(const std::string &name, float value)
 {
-	UniformData * uni = nullptr;
-	findValue(&uni, name);
-	glUniform1f(uni->Location, value);
+	int location = findUniformValue(name);
+	if (location > 0)
+	{
+		glUniform1f(location, value);
+	}
 }
 
 void Material::setParametr(const std::string &name, kmu::vec2 &value)
 {
-	UniformData * uni = nullptr;
-	findValue(&uni, name);
-	glUniform2f(uni->Location, value.x, value.y);
+	int location = findUniformValue(name);
+	if (location > 0)
+	{
+		glUniform2f(location, value.x, value.y);
+	}
 }
 
 void Material::setParametr(const std::string &name, kmu::vec3 &value)
 {
-	UniformData * uni = nullptr;
-	findValue(&uni, name);
-	glUniform3f(uni->Location, value.x, value.y, value.z);
+	int location = findUniformValue(name);
+	if (location > 0)
+	{
+		glUniform3f(location, value.x, value.y, value.z);
+	}
 }
 
 void Material::setParametr(const std::string & name, kmu::vec4 & value)
 {
-	UniformData * uni = nullptr;
-	findValue(&uni, name);
-	glUniform4f(uni->Location, value.x, value.y, value.z, value.w);
+	int location = findUniformValue(name);
+	if (location > 0)
+	{
+		glUniform4f(location, value.x, value.y, value.z, value.w);
+	}
 }
 
 void Material::setParametr(const std::string &name, kmu::mat4 &value)
 {
-	UniformData * uni = nullptr;
-	findValue(&uni, name);
-	glUniformMatrix4fv(uni->Location, 1, GL_TRUE, &value.at(0,0));
+	int location = findUniformValue(name);
+	if (location > 0)
+	{
+		glUniformMatrix4fv(location, 1, GL_TRUE, &value.at(0, 0));
+	}
 }
 
 void Material::setTexturesSamples()

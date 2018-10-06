@@ -28,28 +28,31 @@ void Render::draw()
 	for (register auto obj = renderData.begin(); obj != renderData.end(); ++obj)
 	{
 		Mesh *mesh = (*obj)->getMesh();
-		unin material = mesh->getMaterialId();
-		if (material == EMPTY_MATERIAL)
-			material = oMatManager.getDefaultMaterial()->getMaterialId();
-
-		if (material != oCurrentMaterial)
+		if (mesh)
 		{
-			if (rendermat)
+			unin material = mesh->getMaterialId();
+			if (material == EMPTY_MATERIAL)
+				material = oMatManager.getDefaultMaterial()->getMaterialId();
+
+			if (material != oCurrentMaterial)
 			{
-				rendermat->unbind();
+				if (rendermat)
+				{
+					rendermat->unbind();
+				}
+
+				oCurrentMaterial = material;
+				rendermat = oMatManager.findMaterialById(oCurrentMaterial);
+				rendermat->bind();
 			}
+			rendermat->setParametr("worldMatrix", oMainCamera->getProjectionMatrix());
+			rendermat->setParametr("camMatrix", oMainCamera->getCameraMatrix());
+			rendermat->setParametr("lightDirection", oLight.getLightDirection());
+			rendermat->setParametr("selfMatrix", (*obj)->globalMatrix());
+			rendermat->setTexturesSamples();
 
-			oCurrentMaterial = material;
-			rendermat = oMatManager.findMaterialById(oCurrentMaterial);
-			rendermat->bind();
+			mesh->draw();
 		}
-		rendermat->setParametr("worldMatrix", oMainCamera->getProjectionMatrix());
-		rendermat->setParametr("camMatrix", oMainCamera->getCameraMatrix());
-		rendermat->setParametr("lightDirection", oLight.getLightDirection());
-		rendermat->setParametr("selfMatrix", (*obj)->globalMatrix());
-		rendermat->setTexturesSamples();
-
-		mesh->draw();
 	}
 	if (rendermat != nullptr)
 		rendermat->unbind();

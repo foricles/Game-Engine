@@ -1,0 +1,84 @@
+﻿  Logger.cpp
+  application.cpp
+c:\program files (x86)\windows kits\10\include\10.0.16299.0\shared\minwindef.h(130): warning C4005: APIENTRY: изменение макроопределения
+  c:\projects\cpp\game-engine\game engine\deps\glfw\glfw3.h(98): note: см. предыдущее определение "APIENTRY"
+c:\projects\cpp\game-engine\game engine\game engine\utils.h(19): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(207): note:  см. объявление "fopen"
+c:\projects\cpp\game-engine\game engine\game engine\mygame.hpp(84): warning C4305: аргумент: усечение из "double" в "float"
+c:\projects\cpp\game-engine\game engine\game engine\mygame.hpp(93): warning C4305: аргумент: усечение из "double" в "float"
+c:\projects\cpp\game-engine\game engine\game engine\mygame.hpp(171): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+c:\projects\cpp\game-engine\game engine\game engine\mygame.hpp(214): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+c:\projects\cpp\game-engine\game engine\game engine\mygame.hpp(216): warning C4305: аргумент: усечение из "double" в "float"
+c:\projects\cpp\game-engine\game engine\game engine\mygame.hpp(218): warning C4305: аргумент: усечение из "double" в "float"
+c:\projects\cpp\game-engine\game engine\game engine\mygame.hpp(226): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+  camera.cpp
+  cubemap.cpp
+  directlight.cpp
+  gameobject.cpp
+c:\projects\cpp\game-engine\game engine\game engine\utils.h(19): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(207): note:  см. объявление "fopen"
+  glprogram.cpp
+c:\projects\cpp\game-engine\game engine\game engine\utils.h(19): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(207): note:  см. объявление "fopen"
+  inputmanager.cpp
+c:\program files (x86)\windows kits\10\include\10.0.16299.0\shared\minwindef.h(130): warning C4005: APIENTRY: изменение макроопределения
+  c:\projects\cpp\game-engine\game engine\deps\glfw\glfw3.h(98): note: см. предыдущее определение "APIENTRY"
+c:\projects\cpp\game-engine\game engine\game engine\inputmanager.cpp(86): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+c:\projects\cpp\game-engine\game engine\game engine\inputmanager.cpp(96): warning C4553: "==": результат выражения не используется; вы хотели использовать "="?
+  lightbase.cpp
+  main.cpp
+c:\program files (x86)\windows kits\10\include\10.0.16299.0\shared\minwindef.h(130): warning C4005: APIENTRY: изменение макроопределения
+  c:\projects\cpp\game-engine\game engine\deps\glfw\glfw3.h(98): note: см. предыдущее определение "APIENTRY"
+c:\projects\cpp\game-engine\game engine\game engine\utils.h(19): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(207): note:  см. объявление "fopen"
+c:\projects\cpp\game-engine\game engine\game engine\mygame.hpp(84): warning C4305: аргумент: усечение из "double" в "float"
+c:\projects\cpp\game-engine\game engine\game engine\mygame.hpp(93): warning C4305: аргумент: усечение из "double" в "float"
+c:\projects\cpp\game-engine\game engine\game engine\mygame.hpp(171): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+c:\projects\cpp\game-engine\game engine\game engine\mygame.hpp(214): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+c:\projects\cpp\game-engine\game engine\game engine\mygame.hpp(216): warning C4305: аргумент: усечение из "double" в "float"
+c:\projects\cpp\game-engine\game engine\game engine\mygame.hpp(218): warning C4305: аргумент: усечение из "double" в "float"
+c:\projects\cpp\game-engine\game engine\game engine\mygame.hpp(226): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+  material.cpp
+c:\projects\cpp\game-engine\game engine\game engine\utils.h(19): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(207): note:  см. объявление "fopen"
+  materialmanager.cpp
+c:\projects\cpp\game-engine\game engine\game engine\utils.h(19): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(207): note:  см. объявление "fopen"
+  mesh.cpp
+c:\projects\cpp\game-engine\game engine\game engine\utils.h(19): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(207): note:  см. объявление "fopen"
+  object.cpp
+  objectmanager.cpp
+c:\projects\cpp\game-engine\game engine\game engine\utils.h(19): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(207): note:  см. объявление "fopen"
+  render.cpp
+c:\projects\cpp\game-engine\game engine\game engine\utils.h(19): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(207): note:  см. объявление "fopen"
+  scene.cpp
+c:\projects\cpp\game-engine\game engine\game engine\utils.h(19): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(207): note:  см. объявление "fopen"
+  skybox.cpp
+c:\projects\cpp\game-engine\game engine\game engine\utils.h(19): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(207): note:  см. объявление "fopen"
+  texture2d.cpp
+  texturebase.cpp
+c:\projects\cpp\game-engine\game engine\game engine\texturebase.cpp(99): warning C4244: аргумент: преобразование "GLuint" в "GLfloat", возможна потеря данных
+c:\projects\cpp\game-engine\game engine\game engine\texturebase.cpp(100): warning C4244: аргумент: преобразование "GLuint" в "GLfloat", возможна потеря данных
+  Компиляция...
+  transform.cpp
+  uimanager.cpp
+c:\projects\cpp\game-engine\game engine\game engine\uimanager.cpp(34): error C3867: "std::deque<UIObject *,std::allocator<_Ty>>::size": нестандартный синтаксис; используйте "&", чтобы создать указатель на член
+          with
+          [
+              _Ty=UIObject *
+          ]
+c:\projects\cpp\game-engine\game engine\game engine\uimanager.cpp(34): error C2296: *: недопустимо, левый операнд имеет тип "unsigned int (__thiscall std::deque<UIObject *,std::allocator<_Ty>>::* )(void) noexcept const"
+          with
+          [
+              _Ty=UIObject *
+          ]
+  uiobject.cpp
+  uitransform.cpp
+  window.cpp
+c:\program files (x86)\windows kits\10\include\10.0.16299.0\shared\minwindef.h(130): warning C4005: APIENTRY: изменение макроопределения
+  c:\projects\cpp\game-engine\game engine\deps\glfw\glfw3.h(98): note: см. предыдущее определение "APIENTRY"

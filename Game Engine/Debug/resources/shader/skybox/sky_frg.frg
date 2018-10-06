@@ -8,5 +8,5 @@ uniform samplerCube gSkySampler;
 
 void main()
 {
-	Color = texture(gSkySampler, pixPos) + vec4(0.0, 0.0, 0.0, 1.0);
+	Color = texture(gSkySampler, normalize(pixPos)) + vec4(0.0, 0.0, 0.0, 1.0);
 }

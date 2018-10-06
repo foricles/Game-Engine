@@ -1,4 +1,5 @@
 #include <time.h>
+#include <thread>
 #include "application.h"
 
 InputManager *Application::input = nullptr;
@@ -95,6 +96,8 @@ void Application::mainLoop()
 
 			oScene->LateUpdate();
 			oScene->deltaTime = (clock() - t1) / CLOCKS_PER_SEC;
+			if (oScene->deltaTime > 60)
+				std::this_thread::sleep_for(std::chrono::milliseconds(1));
 		}
 		oScene->Finish();
 	}

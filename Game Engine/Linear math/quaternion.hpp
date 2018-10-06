@@ -22,8 +22,8 @@ namespace kmu
 
 		virtual inline kmu::vec3 rotate(const kmu::vec3 &vect) const;
 
-		static quaternion euler(float angle, float X, float Y, float Z);
-		static quaternion euler(float angle, const vec3 &axes);
+		static quaternion euler(float X, float Y, float Z);
+		static quaternion angleAxis(float angle, const vec3 &axes);
 
 		friend inline quaternion operator*(const quaternion &q1, const quaternion &q2);
 		friend inline quaternion operator*(const quaternion &q1, const vec3 &vec);
